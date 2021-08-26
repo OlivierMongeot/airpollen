@@ -46,10 +46,10 @@ class pollen extends eqLogic
                         config::save('cron_pollen_minute', $minutePollen, 'pollen');
                     }
                     $crontabPollen = $minutePollen . " * * * *";
-                    log::add('pollen', 'debug', 'Cron pollen current : ' . $crontabPollen);
+                    // log::add('pollen', 'debug', 'Cron pollen current : ' . $crontabPollen);
                     $c = new Cron\CronExpression($crontabPollen, new Cron\FieldFactory);
                     if ($c->isDue()) {
-                        $pollen->updatePollen();
+                        // $pollen->updatePollen();
                     }
                 } catch (Exception $e) {
                     log::add('pollen', 'debug', __('Expression cron non valide pour update Pollen', __FILE__) . $pollen->getHumanName() . ' : ' . json_encode($e));
@@ -76,7 +76,7 @@ class pollen extends eqLogic
                             try {
                                 $refresh = $pollen->getCmd(null, 'refresh_pollen_forecast');
                                 if (is_object($refresh)) {
-                                    $refresh->execCmd();
+                                    // $refresh->execCmd();
                                 } else {
                                     log::add('pollen', 'debug', 'Impossible de trouver la commande refresh pour ' . $pollen->getHumanName());
                                 }
@@ -193,11 +193,11 @@ class pollen extends eqLogic
             if (is_object($cmdXCheckNull) && $cmdXCheckNull->execCmd() == null) {
                 $cmd = $this->getCmd(null, 'refresh');
                 if (is_object($cmd)) {
-                    $cmd->execCmd();
+                    // $cmd->execCmd();
                 }
                 $cmd = $this->getCmd(null, 'refresh_pollen_forecast');
                 if (is_object($cmd)) {
-                    $cmd->execCmd();
+                    // $cmd->execCmd();
                 }
             }
         }
@@ -285,12 +285,12 @@ class pollen extends eqLogic
         // $this->emptyCacheWidget(); //vide le cache
         $version = jeedom::versionAlias($_version);
         $activePollenCounter = 0;
-        $display = new DisplayInfo;
+        $display = new DisplayInfoPollen;
         $tabUnitReplace = [];
     
 
         // Pollen ---------------
-        if ($this->getConfiguration('elements') == 'pollen') {
+   
             $tabHeader = [];
             $counterMain = 0;
             $elementTemplate = getTemplate('core', $version, 'elementPollen', 'pollen');
@@ -298,11 +298,6 @@ class pollen extends eqLogic
 
             foreach ($this->getCmd('info') as $cmd) {
                 $nameCmd = $cmd->getLogicalId();
-                $nameIcon = '#icone_' . $nameCmd . '#';
-                $commandValue =  '#' . $nameCmd . '#';
-                $commandNameId =  '#' . $nameCmd . 'id#';
-                $commandName = '#' . $nameCmd . '_name#';
-                $info = '#' . $nameCmd . 'info#';
                 $isObjet = is_object($cmd);
                 $iconePollen = new IconesPollen;
 
@@ -459,7 +454,6 @@ class pollen extends eqLogic
             $tabUnityHtml = array_column($tabUnitReplace, 0);
             array_multisort($tabUnityValue, SORT_DESC, $tabUnityHtml);
 
-
             $counterPollenZero = 0;
             if (isset($tabZero)) {
                 if ($this->getConfiguration('data_forecast') != 'disable') {
@@ -507,9 +501,9 @@ class pollen extends eqLogic
                 array_pop($tabHtml);
             }
             $replace['#header#'] = implode('', $tabHtml);
-            $elementHtml = new CreateHtmlAqi($tabUnityHtml, $this->getId(), 1, $version, $this->getConfiguration('elements'), $counterPollenZero);
-        }
-
+            $elementHtml = new CreateHtmlPollen($tabUnityHtml, $this->getId(), 1, $version, $counterPollenZero);
+        // }
+    
         // Global  ----------------
         if ($this->getConfiguration('searchMode') == 'follow_me') {
             [$lon, $lat] = $this->getCurrentLonLat();
@@ -628,7 +622,7 @@ class pollen extends eqLogic
      */
     private function getApiData(string $apiName)
     {
-        $api = new ApiAqi();
+        $api = new ApiPollen();
         $city = $this->getCurrentCityName();
         [$lon, $lat] = $this->getCurrentLonLat();
         log::add('pollen', 'debug', $this->getHumanName() . ' -> Start API ' . $apiName . ' Calling for City : ' . $city . ' - Long :' . $lon . ' Lat :' . $lat);
@@ -641,7 +635,7 @@ class pollen extends eqLogic
      */
     public static function getCityName($longitude, $latitude, $save = false)
     {
-        $api = new ApiAqi;
+        $api = new ApiPollen;
         $city  = $api->callApiReverseGeoLoc($longitude, $latitude);
         if ($save) {
             log::add('pollen', 'debug', 'Save City : ' . $city . ' en config general');
@@ -656,7 +650,7 @@ class pollen extends eqLogic
      */
     public static function getCoordinates($city, $country_code, $state_code = null)
     {
-        $api = new ApiAqi;
+        $api = new ApiPollen;
         log::add('pollen', 'debug', 'Get new Coordinate Ajax for config -By City- or -Follow Me-');
         return $api->callApiGeoLoc($city, $country_code, $state_code = null);
     }
@@ -748,7 +742,7 @@ class pollen extends eqLogic
                 $this->checkAndUpdateCmd('others', isset($dataPollen[0]->Species->Others) ? $dataPollen[0]->Species->Others : '');
                 $this->checkAndUpdateCmd('updatedAt', $dataPollen[0]->updatedAt);
                 $paramAlertPollen = $this->getParamAlertPollen();
-                $display = new DisplayInfo;
+                $display = new DisplayInfoPollen;
                 $city = $this->getCurrentCityName();
                 log::add('pollen', 'debug', 'City For Pollen Message : ' . $city);
                 $messagesPollens =  $display->getAllMessagesPollen($oldData, $dataPollen, $paramAlertPollen, $city);

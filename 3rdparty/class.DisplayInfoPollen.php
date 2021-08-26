@@ -1,6 +1,6 @@
 <?php
 
-class DisplayInfo
+class DisplayInfoPollen
 {
 
     public function formatValueForDisplay($value, $style = 'normal', $decimal = null)
@@ -67,8 +67,12 @@ class DisplayInfo
                 return __("Risque bas", __FILE__);
             case 'Very High':
                 return __("Risque très haut", __FILE__);
+            default:
+                return __("Risque inconnu", __FILE__);
         }
     }
+
+
 
     public function getListPollen($category)
     {

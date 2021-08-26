@@ -1,6 +1,6 @@
 <?php
 
-class CreateHtmlAqi
+class CreateHtmlPollen
 {
     private $itemByCell ;
     private $countElements;
@@ -8,10 +8,10 @@ class CreateHtmlAqi
     private $countCell ;
     private $id;
     private $version;
-    private $gender;
+   
     private $slidesAtZero;
  
-    public function __construct($slides = [], $id, $itemByCell = 1, $version, $gender, $slidesAtZero)
+    public function __construct($slides = [], $id, $itemByCell = 1, $version, $slidesAtZero)
     {
         $this->id = $id;
         $this->countElements = count($slides);
@@ -19,7 +19,6 @@ class CreateHtmlAqi
         $this->itemByCell = $itemByCell;
         $this->countCell = ceil($this->countElements/$this->itemByCell);
         $this->version = $version;
-        $this->gender = $gender;
         $this->slidesAtZero = $slidesAtZero;
     }
 
@@ -39,9 +38,9 @@ class CreateHtmlAqi
         }
         
         if (empty($html)){
-            $type = str_replace('polution', 'pollution', $this->gender);
+         
             $html[] = '<div disable class="" style="margin-top:20px;color:#00AEEC;display:flex;justify-content:center;align-item:center;flex-direction:column;height:auto;font-size:110%">';
-            $html[] = '<div style="display:flex;justify-content:center;height:35px;align-items: center">Détails de '.$type.' indisponibles</div><br>';
+            $html[] = '<div style="display:flex;justify-content:center;height:35px;align-items: center">Détails de pollen indisponibles</div><br>';
             $html[] = '<div style="display:flex;justify-content:center;height:35px;align-items: center"><i class="far fa-times-circle fa-2x"></i></div><br>';
             $html[] = '<div style="display:flex;justify-content:center;height:35px;align-items: center">pour cette configuration</div><br>';
             $html[] =  '</div>';

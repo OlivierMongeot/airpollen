@@ -26,17 +26,17 @@ require_once __DIR__  . '/../../../../core/php/core.inc.php';
 if (!class_exists('Setup')){
     require_once dirname(__FILE__) . '/../../3rdparty/class.Setup.php';
 }
-if (!class_exists('ApiAqi')){
-    require_once dirname(__FILE__) . '/../../3rdparty/class.ApiAqi.php';
+if (!class_exists('ApiPollen')){
+    require_once dirname(__FILE__) . '/../../3rdparty/class.ApiPollen.php';
 }
-if (!class_exists('CreateHtmlAqi')){
-    require_once dirname(__FILE__) . '/../../3rdparty/class.CreateHtmlAqi.php';
+if (!class_exists('CreateHtmlPollen')){
+    require_once dirname(__FILE__) . '/../../3rdparty/class.CreateHtmlPollen.php';
 }
 if (!class_exists('IconesPollen')){
     require_once dirname(__FILE__) . '/../../3rdparty/class.IconesPollen.php';
 }
-if (!class_exists('DisplayInfo')){
-    require_once dirname(__FILE__) . '/../../3rdparty/class.DisplayInfo.php';
+if (!class_exists('DisplayInfoPollen')){
+    require_once dirname(__FILE__) . '/../../3rdparty/class.DisplayInfoPollen.php';
 }
 
 
