@@ -1,0 +1,116 @@
+[
+    {
+        "id": "25",
+        "name": null,
+        "type": "action",
+        "options": [],
+        "order": "0",
+        "subElements": [
+            {
+                "id": "61",
+                "name": null,
+                "scenarioElement_id": "25",
+                "type": "action",
+                "subtype": "action",
+                "options": {
+                    "collapse": "0",
+                    "enable": "1"
+                },
+                "order": "0",
+                "expressions": [
+                    {
+                        "id": "76",
+                        "scenarioSubElement_id": "61",
+                        "type": "action",
+                        "subtype": "",
+                        "expression": "variable",
+                        "options": {
+                            "enable": "1",
+                            "background": "0",
+                            "name": "messageAqi",
+                            "value": "#[Home][airQuality][Alerte Pollution]#"
+                        },
+                        "order": "0"
+                    },
+                    {
+                        "id": "81",
+                        "scenarioSubElement_id": "61",
+                        "type": "element",
+                        "subtype": null,
+                        "expression": "26",
+                        "options": [],
+                        "order": "1",
+                        "element": {
+                            "id": "26",
+                            "name": null,
+                            "type": "if",
+                            "options": [],
+                            "order": "0",
+                            "subElements": [
+                                {
+                                    "id": "62",
+                                    "name": null,
+                                    "scenarioElement_id": "26",
+                                    "type": "if",
+                                    "subtype": "condition",
+                                    "options": {
+                                        "collapse": "0",
+                                        "enable": "1",
+                                        "allowRepeatCondition": "0"
+                                    },
+                                    "order": "0",
+                                    "expressions": [
+                                        {
+                                            "id": "79",
+                                            "scenarioSubElement_id": "62",
+                                            "type": "condition",
+                                            "subtype": null,
+                                            "expression": "#[Home][airQuality][Alerte Pollution]# !=''",
+                                            "options": [],
+                                            "order": "0"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "63",
+                                    "name": null,
+                                    "scenarioElement_id": "26",
+                                    "type": "then",
+                                    "subtype": "action",
+                                    "options": [],
+                                    "order": "1",
+                                    "expressions": [
+                                        {
+                                            "id": "80",
+                                            "scenarioSubElement_id": "63",
+                                            "type": "action",
+                                            "subtype": "",
+                                            "expression": "#[Home][Monbot][Olivrius - 181568122]#",
+                                            "options": {
+                                                "enable": "1",
+                                                "background": "0",
+                                                "title": "",
+                                                "message": "#[Home][airQuality][Telegram Pollution]#"
+                                            },
+                                            "order": "0"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "id": "64",
+                                    "name": null,
+                                    "scenarioElement_id": "26",
+                                    "type": "else",
+                                    "subtype": "action",
+                                    "options": [],
+                                    "order": "2",
+                                    "expressions": []
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]

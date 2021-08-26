@@ -1,0 +1,211 @@
+<div class="eqLogic eqLogic-widget allowResize allowReorderCmd col2" style="border:#border#;border-radius:#border-radius#;
+background-color: #background-color#; color: #color#; width: #width#;  #style#; height: auto;"
+data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#" data-category="#category#" data-tags="#tags#">
+<span class="statusCmd"></span>
+<span class="cmd refresh pull-right cursor" data-cmd_id="#refresh_id#"><i class="fas fa-sync"></i></span>
+<span class="cmd cmd-widget" data-cmd_id="#refresh_id#" style="display:none;"></span>
+<center class="widget-name"><strong><a href="#eqLink#" style="font-size : 1.1em;#hideEqLogicName#">#name_display# <span style="font-size: 0.85em;position: relative;top:-2px;" hidden>#object_name#</span></a></strong></center>
+<!-- Pollen Mobile -->
+<style>
+       .aqi-#id#-row {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        .aqi-#id#-particule {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .aqi-#id#-label {
+            font-weight:400;
+            font-size: 120%;
+            text-align: center;
+        }
+
+        .aqi-#id#-space {
+            margin-top: 10px;
+       }
+
+        .header-#id#-mini, .aqi-#id#-label-header{
+            display: flex;
+            vertical-align: middle;
+            justify-content:center;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .header-#id#-container{
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            justify-content: space-around;
+            vertical-align: middle;
+        }
+
+        .active-pollen-#id#{
+            margin-top:20px;
+            font-size: 110%;
+        }
+
+        .space-aqi-#id#{
+              margin-top:5px
+        }
+
+        .slider-#id#-aqi {
+            width: auto;
+            height: auto;
+            margin-top: 25px ;
+            overflow: hidden;
+            background-color:transparent;
+        }
+
+        .slides-#id#-aqi {
+            display: flex;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-points-x: repeat(100%);
+            scroll-snap-type: mandatory;
+            width: auto;
+            height: 100%;
+
+        }
+
+        .slides-#id#-aqi::-webkit-scrollbar {
+            width: 10px;
+            height: 4px;
+        }
+        
+        .slides-#id#-aqi::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .slides-#id#-aqi>div {
+            scroll-snap-align: start;
+            flex-shrink: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(238, 238, 238, 0);
+            transform-origin: center center;
+            transform: scale(1);
+            transition: transform 0.8s;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slides-#id#-aqi>div:target {
+            transform: scale(0.8);
+        }
+      
+</style>
+    <div class="aqi-#id#-container">
+        <div class="header-#id#-container">
+            #header#
+        </div>
+        <div class="space-aqi-#id#"></div>
+        #message_alert#
+        <div class="slider-#id#-aqi ">
+            <div class="slides-#id#-aqi">
+                #mini_slide#
+            </div>
+        </div>
+    </div>
+    <footer style='position: relative; bottom: 0; left: 0; right: 0;font-size:80;'>
+        <div class="label" id="lon_lat_refresh#id#" style="#height_footer#; padding:#padding#; display:flex; flex-direction:column; width:100%; align-items: center;justify-content: space-around">
+        <div style='font-size:small ;'> #button#</div>  
+        <div>#long_lat#</div> 
+       </div>
+    </footer>
+<script>
+
+    $('.eqLogic[data-eqLogic_uid=#uid#] .cmd').on('click', function () {
+        jeedom.cmd.execute({
+            id: $(this).data('cmd_id')
+        });
+    });
+
+    function waitForFiveSeconds() {
+    var startTime = new Date();
+    while (new Date() - startTime < 5000) {}
+}
+
+  
+  $('#lon_lat_refresh#id#').on('click', function handler() {
+        // setLocation(5.2219,43.1742) //marseille
+        // setLocation(-99.133178,19.43263) //mexico
+       
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(maPositionPollenMobile, noLocationPollenMobile, { timeout: 10000, enableHighAccuracy: true });
+        }
+
+        function maPositionPollenMobile(position) {
+
+            setLocationPollenMobile(position.coords.longitude, position.coords.latitude)
+            console.log('Get Location from browser : latitude : ' + position.coords.latitude + ' longitude : ' + position.coords.longitude);
+        }
+     
+     
+        function noLocationPollenMobile() {
+            console.log("Could not find location");
+        }
+
+        function setLocationPollenMobile(longitude, latitude) {
+
+            $.ajax({
+                type: "POST",
+                url: "plugins/airquality/core/ajax/airquality.ajax.php",
+                data: { action: "setDynGeoloc", longitude: longitude, latitude: latitude },
+                dataType: 'json',
+                error: function (request, status, error) { handleAjaxError(request, status, error); },
+                success: function (data) {
+                    console.log('setLocation() success mobile : data = ' + data.result)
+                    // AJAX IN AJAX
+                    $.ajax({
+                        type: "POST",
+                        url: "plugins/airquality/core/ajax/airquality.ajax.php",
+                        data: { action: "getcity", longitude: longitude, latitude: latitude, save: true },
+                        dataType: 'json',
+                        error: function (request, status, error) { handleAjaxError(request, status, error); },
+                        success: function (data) {
+                            console.log('Requete succes : Ville trouvée mode Mobile et enregsitrement de : ' + data.result)
+                            // Lancer refresh du widget
+                            let cmdRefresh = $('.cmd-widget[data-cmd_id=#refresh_id#]')
+                            let id = cmdRefresh.data('cmd_id')
+                            jeedom.cmd.execute({ id: id });
+                            if (data.state != 'ok') {
+                                console.log('erreur AJAX : ' + data.result);
+                            }
+                        }
+                    });
+
+                    // AJAX IN first AJAX END
+                    if (data.state != 'ok') {
+                        console.log('erreur AJAX : ' + data.result);
+                    }
+                }
+            });
+        }
+
+
+    });
+
+     $('#lon_lat_refresh#id#').off('click', function handler() {
+         console.log('Click refresh OFF!');
+        }
+         );
+        
+
+</script>
+</div>

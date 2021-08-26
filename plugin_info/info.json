@@ -1,0 +1,16 @@
+{
+	"id" : "pollen",
+	"name" : "Pollen",
+	"description" : {
+		"fr_FR": "Ce plugin affiche les concentrations de pollens, il indique également les prévisons sur 48h pour les pollens ainsi que des alertes",
+		"en_US": "This plugin displays the concentrations of pollens, it also shows the forecasts: 48h for pollens and give alerts"
+	},
+	"licence" : "AGPL",
+	"author" : "Olivrius",
+	"require" : "4.1.0",
+	"category" : "weather",
+	"changelog" : "https://github.com/OlivierMongeot/pollen/blob/Master/docs/changelog.md",
+	"documentation" : "https://github.com/OlivierMongeot/pollen/blob/Master/docs/index.md",
+	"language" : ["fr_FR","en_US"],
+	"compatibility" : ["miniplus","smart","rpi","docker","diy","mobile","v4"]
+}

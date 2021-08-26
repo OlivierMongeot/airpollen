@@ -1,0 +1,1694 @@
+[
+    {
+        "Count": {
+            "grass_pollen": 22,
+            "tree_pollen": 0,
+            "weed_pollen": 55
+        },
+        "Risk": {
+            "grass_pollen": "Low",
+            "tree_pollen": "Low",
+            "weed_pollen": "Moderate"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 22
+            },
+            "Others": 2,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 1,
+                "Nettle": 255,
+                "Ragweed": 2
+            }
+        },
+        "time": 1627221600
+    },
+    {
+        "Count": {
+            "grass_pollen": 25,
+            "tree_pollen": 0,
+            "weed_pollen": 67
+        },
+        "Risk": {
+            "grass_pollen": "Low",
+            "tree_pollen": "Low",
+            "weed_pollen": "Moderate"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 25
+            },
+            "Others": 3,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 0,
+                "Nettle": 62,
+                "Ragweed": 2
+            }
+        },
+        "time": 1627225200
+    },
+    {
+        "Count": {
+            "grass_pollen": 27,
+            "tree_pollen": 0,
+            "weed_pollen": 75
+        },
+        "Risk": {
+            "grass_pollen": "Low",
+            "tree_pollen": "Low",
+            "weed_pollen": "Moderate"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 27
+            },
+            "Others": 2,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 1,
+                "Nettle": 69,
+                "Ragweed": 3
+            }
+        },
+        "time": 1627228800
+    },
+    {
+        "Count": {
+            "grass_pollen": 22,
+            "tree_pollen": 0,
+            "weed_pollen": 61
+        },
+        "Risk": {
+            "grass_pollen": "Low",
+            "tree_pollen": "Low",
+            "weed_pollen": "Moderate"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 22
+            },
+            "Others": 3,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 0,
+                "Nettle": 56,
+                "Ragweed": 2
+            }
+        },
+        "time": 1627232400
+    },
+    {
+        "Count": {
+            "grass_pollen": 24,
+            "tree_pollen": 0,
+            "weed_pollen": 63
+        },
+        "Risk": {
+            "grass_pollen": "Low",
+            "tree_pollen": "Low",
+            "weed_pollen": "Moderate"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 24
+            },
+            "Others": 2,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 1,
+                "Nettle": 57,
+                "Ragweed": 3
+            }
+        },
+        "time": 1627236000
+    },
+    {
+        "Count": {
+            "grass_pollen": 39,
+            "tree_pollen": 0,
+            "weed_pollen": 95
+        },
+        "Risk": {
+            "grass_pollen": "Moderate",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 39
+            },
+            "Others": 4,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 0,
+                "Nettle": 88,
+                "Ragweed": 3
+            }
+        },
+        "time": 1627239600
+    },
+    {
+        "Count": {
+            "grass_pollen": 45,
+            "tree_pollen": 0,
+            "weed_pollen": 114
+        },
+        "Risk": {
+            "grass_pollen": "Moderate",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 45
+            },
+            "Others": 2,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 1,
+                "Mugwort": 1,
+                "Nettle": 106,
+                "Ragweed": 4
+            }
+        },
+        "time": 1627243200
+    },
+    {
+        "Count": {
+            "grass_pollen": 35,
+            "tree_pollen": 0,
+            "weed_pollen": 86
+        },
+        "Risk": {
+            "grass_pollen": "Moderate",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 35
+            },
+            "Others": 2,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 1,
+                "Nettle": 79,
+                "Ragweed": 4
+            }
+        },
+        "time": 1627246800
+    },
+    {
+        "Count": {
+            "grass_pollen": 27,
+            "tree_pollen": 0,
+            "weed_pollen": 73
+        },
+        "Risk": {
+            "grass_pollen": "Low",
+            "tree_pollen": "Low",
+            "weed_pollen": "Moderate"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 27
+            },
+            "Others": 4,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 0,
+                "Nettle": 67,
+                "Ragweed": 2
+            }
+        },
+        "time": 1627250400
+    },
+    {
+        "Count": {
+            "grass_pollen": 47,
+            "tree_pollen": 0,
+            "weed_pollen": 130
+        },
+        "Risk": {
+            "grass_pollen": "Moderate",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 47
+            },
+            "Others": 3,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 2,
+                "Nettle": 119,
+                "Ragweed": 6
+            }
+        },
+        "time": 1627254000
+    },
+    {
+        "Count": {
+            "grass_pollen": 18,
+            "tree_pollen": 0,
+            "weed_pollen": 49
+        },
+        "Risk": {
+            "grass_pollen": "Low",
+            "tree_pollen": "Low",
+            "weed_pollen": "Moderate"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 18
+            },
+            "Others": 3,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 0,
+                "Nettle": 45,
+                "Ragweed": 1
+            }
+        },
+        "time": 1627257600
+    },
+    {
+        "Count": {
+            "grass_pollen": 23,
+            "tree_pollen": 0,
+            "weed_pollen": 65
+        },
+        "Risk": {
+            "grass_pollen": "Low",
+            "tree_pollen": "Low",
+            "weed_pollen": "Moderate"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 23
+            },
+            "Others": 2,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 1,
+                "Nettle": 59,
+                "Ragweed": 3
+            }
+        },
+        "time": 1627261200
+    },
+    {
+        "Count": {
+            "grass_pollen": 44,
+            "tree_pollen": 0,
+            "weed_pollen": 121
+        },
+        "Risk": {
+            "grass_pollen": "Moderate",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 44
+            },
+            "Others": 3,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 1,
+                "Mugwort": 1,
+                "Nettle": 112,
+                "Ragweed": 4
+            }
+        },
+        "time": 1627264800
+    },
+    {
+        "Count": {
+            "grass_pollen": 23,
+            "tree_pollen": 0,
+            "weed_pollen": 62
+        },
+        "Risk": {
+            "grass_pollen": "Low",
+            "tree_pollen": "Low",
+            "weed_pollen": "Moderate"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 23
+            },
+            "Others": 1,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 1,
+                "Nettle": 57,
+                "Ragweed": 3
+            }
+        },
+        "time": 1627268400
+    },
+    {
+        "Count": {
+            "grass_pollen": 39,
+            "tree_pollen": 0,
+            "weed_pollen": 96
+        },
+        "Risk": {
+            "grass_pollen": "Moderate",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 39
+            },
+            "Others": 4,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 0,
+                "Nettle": 89,
+                "Ragweed": 3
+            }
+        },
+        "time": 1627272000
+    },
+    {
+        "Count": {
+            "grass_pollen": 45,
+            "tree_pollen": 0,
+            "weed_pollen": 113
+        },
+        "Risk": {
+            "grass_pollen": "Moderate",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 45
+            },
+            "Others": 2,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 1,
+                "Mugwort": 1,
+                "Nettle": 105,
+                "Ragweed": 4
+            }
+        },
+        "time": 1627275600
+    },
+    {
+        "Count": {
+            "grass_pollen": 18,
+            "tree_pollen": 0,
+            "weed_pollen": 44
+        },
+        "Risk": {
+            "grass_pollen": "Low",
+            "tree_pollen": "Low",
+            "weed_pollen": "Moderate"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 18
+            },
+            "Others": 2,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 0,
+                "Nettle": 40,
+                "Ragweed": 2
+            }
+        },
+        "time": 1627279200
+    },
+    {
+        "Count": {
+            "grass_pollen": 52,
+            "tree_pollen": 0,
+            "weed_pollen": 137
+        },
+        "Risk": {
+            "grass_pollen": "Moderate",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 52
+            },
+            "Others": 3,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 1,
+                "Mugwort": 1,
+                "Nettle": 127,
+                "Ragweed": 5
+            }
+        },
+        "time": 1627282800
+    },
+    {
+        "Count": {
+            "grass_pollen": 18,
+            "tree_pollen": 0,
+            "weed_pollen": 51
+        },
+        "Risk": {
+            "grass_pollen": "Low",
+            "tree_pollen": "Low",
+            "weed_pollen": "Moderate"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 18
+            },
+            "Others": 2,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 1,
+                "Nettle": 46,
+                "Ragweed": 2
+            }
+        },
+        "time": 1627286400
+    },
+    {
+        "Count": {
+            "grass_pollen": 18,
+            "tree_pollen": 0,
+            "weed_pollen": 52
+        },
+        "Risk": {
+            "grass_pollen": "Low",
+            "tree_pollen": "Low",
+            "weed_pollen": "Moderate"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 18
+            },
+            "Others": 2,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 0,
+                "Nettle": 48,
+                "Ragweed": 2
+            }
+        },
+        "time": 1627290000
+    },
+    {
+        "Count": {
+            "grass_pollen": 37,
+            "tree_pollen": 0,
+            "weed_pollen": 97
+        },
+        "Risk": {
+            "grass_pollen": "Moderate",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 37
+            },
+            "Others": 3,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 1,
+                "Nettle": 89,
+                "Ragweed": 4
+            }
+        },
+        "time": 1627293600
+    },
+    {
+        "Count": {
+            "grass_pollen": 49,
+            "tree_pollen": 0,
+            "weed_pollen": 121
+        },
+        "Risk": {
+            "grass_pollen": "Moderate",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 49
+            },
+            "Others": 3,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 1,
+                "Mugwort": 1,
+                "Nettle": 112,
+                "Ragweed": 4
+            }
+        },
+        "time": 1627297200
+    },
+    {
+        "Count": {
+            "grass_pollen": 35,
+            "tree_pollen": 0,
+            "weed_pollen": 88
+        },
+        "Risk": {
+            "grass_pollen": "Moderate",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 35
+            },
+            "Others": 4,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 0,
+                "Nettle": 81,
+                "Ragweed": 3
+            }
+        },
+        "time": 1627300800
+    },
+    {
+        "Count": {
+            "grass_pollen": 34,
+            "tree_pollen": 0,
+            "weed_pollen": 83
+        },
+        "Risk": {
+            "grass_pollen": "Moderate",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 34
+            },
+            "Others": 2,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 1,
+                "Nettle": 76,
+                "Ragweed": 4
+            }
+        },
+        "time": 1627304400
+    },
+    {
+        "Count": {
+            "grass_pollen": 22,
+            "tree_pollen": 0,
+            "weed_pollen": 58
+        },
+        "Risk": {
+            "grass_pollen": "Low",
+            "tree_pollen": "Low",
+            "weed_pollen": "Moderate"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 22
+            },
+            "Others": 3,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 0,
+                "Nettle": 53,
+                "Ragweed": 2
+            }
+        },
+        "time": 1627308000
+    },
+    {
+        "Count": {
+            "grass_pollen": 17,
+            "tree_pollen": 0,
+            "weed_pollen": 48
+        },
+        "Risk": {
+            "grass_pollen": "Low",
+            "tree_pollen": "Low",
+            "weed_pollen": "Moderate"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 17
+            },
+            "Others": 2,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 0,
+                "Nettle": 44,
+                "Ragweed": 2
+            }
+        },
+        "time": 1627311600
+    },
+    {
+        "Count": {
+            "grass_pollen": 76,
+            "tree_pollen": 0,
+            "weed_pollen": 209
+        },
+        "Risk": {
+            "grass_pollen": "High",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 76
+            },
+            "Others": 3,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 2,
+                "Mugwort": 2,
+                "Nettle": 194,
+                "Ragweed": 8
+            }
+        },
+        "time": 1627315200
+    },
+    {
+        "Count": {
+            "grass_pollen": 34,
+            "tree_pollen": 0,
+            "weed_pollen": 89
+        },
+        "Risk": {
+            "grass_pollen": "Moderate",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 34
+            },
+            "Others": 3,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 1,
+                "Nettle": 81,
+                "Ragweed": 4
+            }
+        },
+        "time": 1627318800
+    },
+    {
+        "Count": {
+            "grass_pollen": 57,
+            "tree_pollen": 0,
+            "weed_pollen": 141
+        },
+        "Risk": {
+            "grass_pollen": "Moderate",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 57
+            },
+            "Others": 3,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 1,
+                "Mugwort": 1,
+                "Nettle": 131,
+                "Ragweed": 5
+            }
+        },
+        "time": 1627322400
+    },
+    {
+        "Count": {
+            "grass_pollen": 44,
+            "tree_pollen": 0,
+            "weed_pollen": 110
+        },
+        "Risk": {
+            "grass_pollen": "Moderate",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 44
+            },
+            "Others": 2,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 1,
+                "Mugwort": 1,
+                "Nettle": 102,
+                "Ragweed": 4
+            }
+        },
+        "time": 1627326000
+    },
+    {
+        "Count": {
+            "grass_pollen": 42,
+            "tree_pollen": 0,
+            "weed_pollen": 103
+        },
+        "Risk": {
+            "grass_pollen": "Moderate",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 42
+            },
+            "Others": 2,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 2,
+                "Nettle": 94,
+                "Ragweed": 5
+            }
+        },
+        "time": 1627329600
+    },
+    {
+        "Count": {
+            "grass_pollen": 30,
+            "tree_pollen": 0,
+            "weed_pollen": 80
+        },
+        "Risk": {
+            "grass_pollen": "Moderate",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 30
+            },
+            "Others": 3,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 0,
+                "Nettle": 74,
+                "Ragweed": 3
+            }
+        },
+        "time": 1627333200
+    },
+    {
+        "Count": {
+            "grass_pollen": 24,
+            "tree_pollen": 0,
+            "weed_pollen": 68
+        },
+        "Risk": {
+            "grass_pollen": "Low",
+            "tree_pollen": "Low",
+            "weed_pollen": "Moderate"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 24
+            },
+            "Others": 2,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 1,
+                "Nettle": 62,
+                "Ragweed": 3
+            }
+        },
+        "time": 1627336800
+    },
+    {
+        "Count": {
+            "grass_pollen": 36,
+            "tree_pollen": 0,
+            "weed_pollen": 99
+        },
+        "Risk": {
+            "grass_pollen": "Moderate",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 36
+            },
+            "Others": 4,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 0,
+                "Nettle": 92,
+                "Ragweed": 3
+            }
+        },
+        "time": 1627340400
+    },
+    {
+        "Count": {
+            "grass_pollen": 27,
+            "tree_pollen": 0,
+            "weed_pollen": 75
+        },
+        "Risk": {
+            "grass_pollen": "Low",
+            "tree_pollen": "Low",
+            "weed_pollen": "Moderate"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 27
+            },
+            "Others": 2,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 1,
+                "Nettle": 69,
+                "Ragweed": 3
+            }
+        },
+        "time": 1627344000
+    },
+    {
+        "Count": {
+            "grass_pollen": 24,
+            "tree_pollen": 0,
+            "weed_pollen": 66
+        },
+        "Risk": {
+            "grass_pollen": "Low",
+            "tree_pollen": "Low",
+            "weed_pollen": "Moderate"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 24
+            },
+            "Others": 3,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 0,
+                "Nettle": 61,
+                "Ragweed": 2
+            }
+        },
+        "time": 1627347600
+    },
+    {
+        "Count": {
+            "grass_pollen": 26,
+            "tree_pollen": 0,
+            "weed_pollen": 69
+        },
+        "Risk": {
+            "grass_pollen": "Low",
+            "tree_pollen": "Low",
+            "weed_pollen": "Moderate"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 26
+            },
+            "Others": 2,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 1,
+                "Nettle": 63,
+                "Ragweed": 3
+            }
+        },
+        "time": 1627351200
+    },
+    {
+        "Count": {
+            "grass_pollen": 33,
+            "tree_pollen": 0,
+            "weed_pollen": 82
+        },
+        "Risk": {
+            "grass_pollen": "Moderate",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 33
+            },
+            "Others": 3,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 0,
+                "Nettle": 76,
+                "Ragweed": 3
+            }
+        },
+        "time": 1627354800
+    },
+    {
+        "Count": {
+            "grass_pollen": 28,
+            "tree_pollen": 0,
+            "weed_pollen": 70
+        },
+        "Risk": {
+            "grass_pollen": "Low",
+            "tree_pollen": "Low",
+            "weed_pollen": "Moderate"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 28
+            },
+            "Others": 3,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 0,
+                "Nettle": 65,
+                "Ragweed": 2
+            }
+        },
+        "time": 1627358400
+    },
+    {
+        "Count": {
+            "grass_pollen": 29,
+            "tree_pollen": 0,
+            "weed_pollen": 71
+        },
+        "Risk": {
+            "grass_pollen": "Low",
+            "tree_pollen": "Low",
+            "weed_pollen": "Moderate"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 29
+            },
+            "Others": 2,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 1,
+                "Nettle": 65,
+                "Ragweed": 3
+            }
+        },
+        "time": 1627362000
+    },
+    {
+        "Count": {
+            "grass_pollen": 22,
+            "tree_pollen": 0,
+            "weed_pollen": 58
+        },
+        "Risk": {
+            "grass_pollen": "Low",
+            "tree_pollen": "Low",
+            "weed_pollen": "Moderate"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 22
+            },
+            "Others": 3,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 0,
+                "Nettle": 53,
+                "Ragweed": 2
+            }
+        },
+        "time": 1627365600
+    },
+    {
+        "Count": {
+            "grass_pollen": 14,
+            "tree_pollen": 0,
+            "weed_pollen": 40
+        },
+        "Risk": {
+            "grass_pollen": "Low",
+            "tree_pollen": "Low",
+            "weed_pollen": "Moderate"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 14
+            },
+            "Others": 2,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 0,
+                "Nettle": 36,
+                "Ragweed": 2
+            }
+        },
+        "time": 1627369200
+    },
+    {
+        "Count": {
+            "grass_pollen": 37,
+            "tree_pollen": 0,
+            "weed_pollen": 104
+        },
+        "Risk": {
+            "grass_pollen": "Moderate",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 37
+            },
+            "Others": 2,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 1,
+                "Mugwort": 1,
+                "Nettle": 96,
+                "Ragweed": 4
+            }
+        },
+        "time": 1627372800
+    },
+    {
+        "Count": {
+            "grass_pollen": 51,
+            "tree_pollen": 0,
+            "weed_pollen": 134
+        },
+        "Risk": {
+            "grass_pollen": "Moderate",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 51
+            },
+            "Others": 3,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 2,
+                "Nettle": 123,
+                "Ragweed": 6
+            }
+        },
+        "time": 1627376400
+    },
+    {
+        "Count": {
+            "grass_pollen": 59,
+            "tree_pollen": 0,
+            "weed_pollen": 144
+        },
+        "Risk": {
+            "grass_pollen": "Moderate",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 59
+            },
+            "Others": 4,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 1,
+                "Mugwort": 1,
+                "Nettle": 133,
+                "Ragweed": 5
+            }
+        },
+        "time": 1627380000
+    },
+    {
+        "Count": {
+            "grass_pollen": 43,
+            "tree_pollen": 0,
+            "weed_pollen": 107
+        },
+        "Risk": {
+            "grass_pollen": "Moderate",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 43
+            },
+            "Others": 2,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 1,
+                "Mugwort": 1,
+                "Nettle": 99,
+                "Ragweed": 4
+            }
+        },
+        "time": 1627383600
+    },
+    {
+        "Count": {
+            "grass_pollen": 63,
+            "tree_pollen": 0,
+            "weed_pollen": 154
+        },
+        "Risk": {
+            "grass_pollen": "High",
+            "tree_pollen": "Low",
+            "weed_pollen": "High"
+        },
+        "Species": {
+            "Grass": {
+                "Grass / Poaceae": 63
+            },
+            "Others": 3,
+            "Tree": {
+                "Alder": 0,
+                "Birch": 0,
+                "Cypress": 0,
+                "Elm": 0,
+                "Hazel": 0,
+                "Oak": 0,
+                "Pine": 0,
+                "Plane": 0,
+                "Poplar / Cottonwood": 0
+            },
+            "Weed": {
+                "Chenopod": 0,
+                "Mugwort": 3,
+                "Nettle": 141,
+                "Ragweed": 7
+            }
+        },
+        "time": 1627387200
+    }
+]

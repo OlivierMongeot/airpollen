@@ -1,0 +1,118 @@
+<div class="state aqi-#id#-particule #name#">
+     <!-- /* Dashboard */ -->
+    <div class="aqi-#id#-row" style="width:265px;">
+        <!-- Nom -->
+        <div class="state aqi-#id#-particule">
+             <div style="min-width:100px;" class="cmd noRefresh aqi-#id#-label tooltips cursor" data-type="info"
+            data-subtype="numeric" data-cmd_id="#cmdid#">#display-name#</div>
+            <div style="font-size: 0.9em;">#risk#</div>
+        </div>
+       
+        <!-- Icone -->
+        <div class="#info-modalcmd# tooltips cursor" style="max-width:65px;">#icone#</div>
+        <div class="aqi-#id#-particule" style="width:90px;">
+            <!-- Valeur -->
+            <div title="#value# #unity#" style="text-align: center;" class="aqi-#id#-value">#value#</div>
+            <!-- Historique -->
+            <div class="contain-minmax-#id# #history# state tooltips #display#" style="text-align: center;width:100px;"
+                data-cmd_id="#cmdid#" data-eqlogic_id="#id#" data-type="info" data-subtype="numeric">
+                <div style="font-size: 0.8em;" class="state">
+                    <span title="#mini#" class="tooltips">#minHistoryValue#</span> |
+                    <span title="#average#" class="tooltips">#averageHistoryValue#</span> |
+                    <span title="#maxi#" class="tooltips">#maxHistoryValue#</span>&nbsp;
+                    <i title="#tendency#" style="font-size: 0.75em;" class="#tendance#"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Graphique -->
+    <div #height0#>
+    <div id="container_#name#_#id#"> </div>
+    </div>
+</div>
+<script>
+    Highcharts.chart(container_#name#_#id#, {
+        chart: {
+            type: 'column',
+            height: 170,
+            width: 235,
+            alignTicks: true,
+            borderWidth:0
+        },
+        exporting: {
+            enabled: false
+        },
+        credits: {
+            enabled: false
+        },
+        title: {
+            text: null
+        },
+        xAxis: {
+            labels: {
+                rotation: -40,
+                overflow: 'justify',
+                style: { fontSize: '10px', color: 'red'},                
+                x: 14,
+                y: 15
+            },
+            min: 0,
+            categories: #labels#,
+            tickWidth: 1,
+            gridLineWidth: 0
+        },
+        yAxis: [{
+            visible: false,
+            title: {
+                text: null
+            },
+            labels: {
+                align: 'center',
+                x: 0,
+                y: 0,
+                format: '{value:.,0f}'
+            },
+        }],
+        legend: {
+            align: 'center',
+            verticalAlign: 'bottom',
+            borderWidth: 0,
+            padding: 2,
+            margin: 2
+        },
+        tooltip: {
+            shared: true,
+            padding: 3,
+       },
+        plotOptions: {
+
+            column: {
+                pointPadding: 0.20,
+                borderWidth: 0
+             },
+            series: {
+                lineWidth: 5,
+                marker: {
+                    lineWidth: 0
+                },
+                borderRadius: 2,
+                pointWidth: 10
+            }
+        },
+        series: [
+            {
+                name: '#display-name#' + ' min',
+                lineWidth: '4px',
+                marker: { radius: 2 },
+                data: #min#,
+                color: 'currentColor'
+            }, {
+                name: '#display-name#' + ' max',
+                lineWidth: '4px',
+                marker: { radius: 2 },
+                data: #max#,
+                color: '#color#'
+            }
+        ]
+    });
+</script>

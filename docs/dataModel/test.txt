@@ -1,0 +1,89 @@
+<br />
+<b>Notice</b>:  Undefined property: stdClass::$Species in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>459</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Grass' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>459</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Grass / Poaceae' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>459</b><br />
+<br />
+<b>Notice</b>:  Undefined property: stdClass::$Species in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>471</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Tree' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>471</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Elm' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>471</b><br />
+<br />
+<b>Notice</b>:  Undefined property: stdClass::$Species in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>483</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Tree' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>483</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Alder' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>483</b><br />
+<br />
+<b>Notice</b>:  Undefined property: stdClass::$Species in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>494</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Tree' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>494</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Birch' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>494</b><br />
+<br />
+<b>Notice</b>:  Undefined property: stdClass::$Species in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>505</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Tree' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>505</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Cypress' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>505</b><br />
+<br />
+<b>Notice</b>:  Undefined property: stdClass::$Species in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>517</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Tree' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>517</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Hazel' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>517</b><br />
+<br />
+<b>Notice</b>:  Undefined property: stdClass::$Species in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>529</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Tree' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>529</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Oak' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>529</b><br />
+<br />
+<b>Notice</b>:  Undefined property: stdClass::$Species in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>541</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Tree' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>541</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Pine' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>541</b><br />
+<br />
+<b>Notice</b>:  Undefined property: stdClass::$Species in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>553</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Tree' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>553</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Plane' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>553</b><br />
+<br />
+<b>Notice</b>:  Undefined property: stdClass::$Species in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>565</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Tree' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>565</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Poplar / Cottonwood' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>565</b><br />
+<br />
+<b>Notice</b>:  Undefined property: stdClass::$Species in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>577</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Weed' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>577</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Chenopod' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>577</b><br />
+<br />
+<b>Notice</b>:  Undefined property: stdClass::$Species in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>588</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Weed' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>588</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Mugwort' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>588</b><br />
+<br />
+<b>Notice</b>:  Undefined property: stdClass::$Species in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>600</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Weed' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>600</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Nettle' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>600</b><br />
+<br />
+<b>Notice</b>:  Undefined property: stdClass::$Species in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>611</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Weed' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>611</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Ragweed' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>611</b><br />
+<br />
+<b>Notice</b>:  Undefined property: stdClass::$Species in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>623</b><br />
+<br />
+<b>Notice</b>:  Trying to get property 'Others' of non-object in <b>/var/www/html/plugins/airquality/3rdparty/class.DisplayInfo.php</b> on line <b>623</b><br />
+{"state":"ok","result":"0"}
