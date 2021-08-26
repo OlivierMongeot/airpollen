@@ -127,7 +127,6 @@ class DisplayInfoPollen
 
 
 
-
   
     private function getSynonyme($name)
     {
@@ -456,44 +455,7 @@ class DisplayInfoPollen
         }
     }
 
-    private function formatAqiForSms($messages)
-    {
-        if (!empty($messages)) {
-            $arrayMessage[] = "-- ".__('Alerte',__FILE__)." AQI -- \n";
-            foreach ($messages as $message) {
-                $message = str_replace('³', '3', $message);
-                $message = str_replace('²', '2', $message);
-                $arrayMessage[] = strip_tags($message) . " \n";
-            }
-            return implode(' ', $arrayMessage);
-        }
-    }
 
-    private function getGoodIcon()
-    {
-        $goodsIcons = ['&#128166;', '&#127808;', '&#127752;'];
-        $rand_keys = array_rand($goodsIcons, 1);
-        return $goodsIcons[$rand_keys];
-    }
-
-    private function getBadIcon()
-    {
-        $badsIcons = ['&#128169;', '&#128549;', '&#128557;'];
-        $rand_keys = array_rand($badsIcons, 1);
-        return $badsIcons[$rand_keys];
-    }
-
-    private function getIconsWithStatus()
-    {
-        $iconsGood =  $this->getGoodIcon();
-        $iconsBad =  $this->getBadIcon();
-        return ['correct' => '&#127795;',  'élevé'  =>'&#128549;', 'haut' => '&#128549;', 'mauvais' => $iconsBad , 'très' => '&#128545;', 'extrême' => '&#128520;',
-            'modéré' => '&#128551;', 'moyenne' => '&#128550;', 'dégradé' => '&#128529;', 'nul' => '&#127749;', 'faible' => '&#127752;', 'bon' => $iconsGood,
-            'degraded' => '&#128529;', 'moderate' => '&#128551;', 'very' => '&#128545;', 'extreme' => '&#128520;', 'low' => '&#127752;', 'good' => $iconsGood        
-        ];
-    }
-
-  
 
     private function formatPollensForTelegram($messages, $city)
     {
@@ -550,7 +512,5 @@ class DisplayInfoPollen
         // log::add('airquality', 'debug', 'Markdown Pollen : '. (implode(' ', $arrayMessage)));
         return implode(' ', $arrayMessage);
     }
-
-  
-
 }
+

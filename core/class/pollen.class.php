@@ -33,10 +33,10 @@ class pollen extends eqLogic
         // Assignation d'une minute de refresh aléatoire suite mail Ambee
         foreach (self::byType('pollen') as $pollen) {
 
-         
+
             // Pollen
             if ($pollen->getIsEnable() == 1) {
-          
+
                 //  Pollen current toutes heures
                 try {
                     $minutePollen = (int)trim(config::byKey('cron_pollen_minute', 'pollen'));
@@ -153,11 +153,11 @@ class pollen extends eqLogic
         $this->setCategory('heating', 1);
         $this->setIsEnable(1);
         $this->setIsVisible(1);
-       
+
         if ($this->getConfiguration('elements') == 'pollen') {
-        $minute = rand(2, 58);
-        config::save('cron_pollen_minute', $minute, 'pollen');
-        log::add('pollen', 'debug', 'Set New Cron pollen minute PreInsert : ' . $minute . ' for pollen');
+            $minute = rand(2, 58);
+            config::save('cron_pollen_minute', $minute, 'pollen');
+            log::add('pollen', 'debug', 'Set New Cron pollen minute PreInsert : ' . $minute . ' for pollen');
         }
     }
 
@@ -186,8 +186,8 @@ class pollen extends eqLogic
 
     public function postSave()
     {
-  
-        if ($this->getIsEnable() ) {
+
+        if ($this->getIsEnable()) {
 
             $cmdXCheckNull =  $this->getCmd(null, 'poaceae');
             if (is_object($cmdXCheckNull) && $cmdXCheckNull->execCmd() == null) {
@@ -217,41 +217,41 @@ class pollen extends eqLogic
 
     public function postUpdate()
     {
-   
 
-            $refreshForecast = $this->getCmd(null, 'refresh_pollen_forecast');
-            if (!is_object($refreshForecast)) {
-                $refreshForecast = new pollenCmd();
-                $refreshForecast->setName('Rafraichir Forecast Pollen');
-            }
-            $refreshForecast->setEqLogic_id($this->getId())
-                ->setLogicalId('refresh_pollen_forecast')
-                ->setType('action')
-                ->setSubType('other')->save();
 
-            $refresh = $this->getCmd(null, 'refresh');
-            if (!is_object($refresh)) {
-                $refresh = new pollenCmd();
-                $refresh->setName('Rafraichir');
-            }
-            $refresh->setEqLogic_id($this->getId())
-                ->setLogicalId('refresh')
-                ->setType('action')
-                ->setSubType('other')->save();
+        $refreshForecast = $this->getCmd(null, 'refresh_pollen_forecast');
+        if (!is_object($refreshForecast)) {
+            $refreshForecast = new pollenCmd();
+            $refreshForecast->setName('Rafraichir Forecast Pollen');
+        }
+        $refreshForecast->setEqLogic_id($this->getId())
+            ->setLogicalId('refresh_pollen_forecast')
+            ->setType('action')
+            ->setSubType('other')->save();
 
-            $refresh = $this->getCmd(null, 'refresh_alert_pollen');
-            if (!is_object($refresh)) {
-                $refresh = new pollenCmd();
-                $refresh->setName('Rafraichir les alertes pollens');
-            }
-            $refresh->setEqLogic_id($this->getId())
-                ->setLogicalId('refresh_alert_pollen')
-                ->setType('action')
-                ->setSubType('other')->save();
+        $refresh = $this->getCmd(null, 'refresh');
+        if (!is_object($refresh)) {
+            $refresh = new pollenCmd();
+            $refresh->setName('Rafraichir');
+        }
+        $refresh->setEqLogic_id($this->getId())
+            ->setLogicalId('refresh')
+            ->setType('action')
+            ->setSubType('other')->save();
 
-            $setup = Setup::$setupPollen;
+        $refresh = $this->getCmd(null, 'refresh_alert_pollen');
+        if (!is_object($refresh)) {
+            $refresh = new pollenCmd();
+            $refresh->setName('Rafraichir les alertes pollens');
+        }
+        $refresh->setEqLogic_id($this->getId())
+            ->setLogicalId('refresh_alert_pollen')
+            ->setType('action')
+            ->setSubType('other')->save();
 
-        
+        $setup = Setup::$setupPollen;
+
+
 
         foreach ($setup as $command) {
             $cmdInfo = $this->getCmd(null, $command['name']);
@@ -282,228 +282,227 @@ class pollen extends eqLogic
         if (!is_array($replace)) {
             return $replace;
         }
-        // $this->emptyCacheWidget(); //vide le cache
+        $this->emptyCacheWidget(); //vide le cache
         $version = jeedom::versionAlias($_version);
         $activePollenCounter = 0;
         $display = new DisplayInfoPollen;
         $tabUnitReplace = [];
-    
 
         // Pollen ---------------
-   
-            $tabHeader = [];
-            $counterMain = 0;
-            $elementTemplate = getTemplate('core', $version, 'elementPollen', 'pollen');
-            $headerTemplate = getTemplate('core', $version, 'headerPollen', 'pollen');
+        $tabHeader = [];
+        $counterMain = 0;
+        $elementTemplate = getTemplate('core', $version, 'elementPollen', 'pollen');
+        $headerTemplate = getTemplate('core', $version, 'headerPollen', 'pollen');
 
-            foreach ($this->getCmd('info') as $cmd) {
-                $nameCmd = $cmd->getLogicalId();
-                $isObjet = is_object($cmd);
-                $iconePollen = new IconesPollen;
+        foreach ($this->getCmd('info') as $cmd) {
+            $nameCmd = $cmd->getLogicalId();
+            $isObjet = is_object($cmd);
+            $iconePollen = new IconesPollen;
 
-                if ($nameCmd == 'tree_pollen' || $nameCmd == 'grass_pollen'  || $nameCmd == 'weed_pollen') {
-                    switch ($nameCmd) {
-                        case 'tree_pollen':
-                            $treePollenCmd = $this->getCmd(null, 'tree_risk');
-                            $value = $treePollenCmd->execCmd();
-                            $headerReplace['#main_risk#'] =  $isObjet ? $display->getPollenRisk($value) : '';
-                            break;
-                        case 'grass_pollen':
-                            $grassPollenCmd = $this->getCmd(null, 'grass_risk');
-                            $value = $grassPollenCmd->execCmd();
-                            $headerReplace['#main_risk#'] =  $isObjet ? $display->getPollenRisk($value) : '';
-                            break;
-                        case 'weed_pollen':
-                            $weedPollenCmd = $this->getCmd(null, 'weed_risk');
-                            $value = $weedPollenCmd->execCmd();
-                            $headerReplace['#main_risk#'] =  $isObjet ? $display->getPollenRisk($value) : '';
+            if ($nameCmd == 'tree_pollen' || $nameCmd == 'grass_pollen'  || $nameCmd == 'weed_pollen') {
+                switch ($nameCmd) {
+                    case 'tree_pollen':
+                        $treePollenCmd = $this->getCmd(null, 'tree_risk');
+                        $value = $treePollenCmd->execCmd();
+                        $headerReplace['#main_risk#'] =  $isObjet ? $display->getPollenRisk($value) : '0';
+                        break;
+                    case 'grass_pollen':
+                        $grassPollenCmd = $this->getCmd(null, 'grass_risk');
+                        $value = $grassPollenCmd->execCmd();
+                        $headerReplace['#main_risk#'] =  $isObjet ? $display->getPollenRisk($value) : '0';
+                        break;
+                    case 'weed_pollen':
+                        $weedPollenCmd = $this->getCmd(null, 'weed_risk');
+                        $value = $weedPollenCmd->execCmd();
+                        $headerReplace['#main_risk#'] =  $isObjet ? $display->getPollenRisk($value) : '0';
+                }
+                $headerReplace['#id#'] =  $isObjet ? $this->getId() : '';
+                $headerReplace['#main_cmd_pollen_id#'] =   $isObjet ? $cmd->getId() : '';
+                $headerReplace['#main_pollen_name#'] =  $isObjet ? __($cmd->getName(), __FILE__) : '';
+                $headerReplace['#list_main_pollen#'] =  $isObjet ?  $display->getListPollen($nameCmd) : '';
+                $value = $isObjet ? $cmd->execCmd() : '';
+                if ($value > 0) {
+                    $counterMain++;
+                }
+                $headerReplace['#main_pollen_value#'] = $value;
+
+                $newIcon = $iconePollen->getIcon($nameCmd, $value, $cmd->getId());
+                $headerReplace['#icone__pollen#'] = $isObjet ?  $newIcon : '';
+                $tabHederOne = template_replace($headerReplace, $headerTemplate);
+                $tabHeader[] = [$tabHederOne, $value];
+            } else  if ($nameCmd == 'updatedAt') {
+
+                $updatedAt = ($isObjet && $cmd->execCmd()) ? $display->parseDate($cmd->getCollectDate()) : '';
+            } else if ($nameCmd == 'telegramPollen') {
+                $message_alert =  $isObjet ? $cmd->execCmd() : '';
+                $alert = (!empty($message_alert)) ? true : false;
+                if ($alert) {
+                    $htmlAlertPollen = '<div style="text-align: center; margin:15px 0px 0px 0px">';
+                    $htmlAlertPollen .= '<marquee scrollamount="4" width="85%" class="state" style="font-size: 100%;height:18px;margin: -10px 0px important!">' . $message_alert . '</marquee>';
+                    $htmlAlertPollen .= '</div>';
+                    $replace['#message_alert#'] =  $htmlAlertPollen;
+                }
+            } else if ($cmd->getConfiguration($nameCmd) == 'slide') {
+
+                $activePollenCounter = ($cmd->execCmd() > 0) ? $activePollenCounter + 1 : $activePollenCounter;
+                $valueCurrent = $isObjet ? $cmd->execCmd() : '';
+                $maxDisplayLevel = $this->getConfiguration('pollen_alert_level');
+                // Value > 0 && Value > Max Display && Cmd visible 
+                if ($cmd->getIsVisible() == 1 && $maxDisplayLevel <= $valueCurrent && $valueCurrent > 0) {
+
+                    // Latest display
+                    $newIcon = $iconePollen->getIcon($nameCmd, $cmd->execCmd(), $cmd->getId());
+                    $unitreplace['#icone#'] =  $isObjet ? $newIcon : '';
+                    $unitreplace['#id#'] =  $isObjet ? $this->getId() : '';
+                    $value = $isObjet ? $cmd->execCmd() : '';
+                    $unitreplace['#value#'] =  $value;
+                    $unitreplace['#name#'] = $isObjet ? $cmd->getLogicalId() : '';
+                    $unitreplace['#display-name#'] =  $isObjet ? __($cmd->getName(), __FILE__) : '';
+                    $unitreplace['#cmdid#'] = $isObjet ?  $cmd->getId() : '';
+                    $unitreplace['#history#'] =  $isObjet ? 'history cursor' : '';
+                    $unitreplace['#info-modalcmd#'] = $isObjet ?  'info-modal' . $cmd->getLogicalId() . $this->getId() : '';
+                    $unitreplace['#unity#'] =  $isObjet ? $cmd->getUnite() : '';
+
+                    // Forecast Display 
+                    if ($this->getConfiguration('data_forecast') != 'disable') {
+                        $maxCmd = $this->getCmd(null, $nameCmd . '_max');
+                        $unitreplace['#max#'] = (is_object($maxCmd) && !empty($maxCmd->execCmd())) ? $maxCmd->execCmd() : "[0,0,0]";
+                        $minCmd = $this->getCmd(null, $nameCmd . '_min');
+                        $unitreplace['#min#'] = (is_object($minCmd) && !empty($minCmd->execCmd())) ? $minCmd->execCmd() : "[0,0,0]";
+                        $unitreplace['#color#'] =  ($isObjet &&  !empty($iconePollen->getColor())) ?  $iconePollen->getColor() : '#222222';
+                        $labels = $this->getCmd(null, 'daysPollen');
+                        $unitreplace['#labels#'] =  (is_object($labels) && !empty($labels->execCmd())) ? $labels->execCmd() : "['no','-','data']";
+                        $unitreplace['#height0#'] = '';
+                    } else {
+                        $unitreplace['#labels#'] = "['0','0','0']"; // for not js error 
+                        $unitreplace['#max#'] = "[0,0,0]";
+                        $unitreplace['#min#'] =  "[0,0,0]";
+                        $unitreplace['#color#'] = '#333333';
+                        $unitreplace['#height0#'] = 'style="height:0"';
                     }
+
+
+                    $iconePollen->getIcon($nameCmd, $cmd->execCmd(), $cmd->getId());
+                    $unitreplace['#risk#'] =  $isObjet ?  $display->getElementRiskPollen($iconePollen->getColor()) : '';
+
+                    $unitreplace['#info-tooltips#'] =   __("Cliquez pour + d'info", __FILE__);
+                    $unitreplace['#mini#'] = __("Mini 10 jours", __FILE__);
+                    $unitreplace['#maxi#'] = __("Maxi 10 jours", __FILE__);
+                    $unitreplace['#tendency#'] = __("Tendance 12h", __FILE__);
+                    $unitreplace['#average#'] = __("Moyenne 10 jours", __FILE__);
+
+                    if ($cmd->getIsHistorized() == 1) {
+                        $startHist = date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' -' . 240 . ' hour'));
+                        $historyStatistique = $cmd->getStatistique($startHist, date('Y-m-d H:i:s'));
+                        $unitreplace['#minHistoryValue#'] =  $isObjet ?  $display->formatValueForDisplay($historyStatistique['min'], 'short') : '';
+                        $unitreplace['#maxHistoryValue#'] =  $isObjet ? $display->formatValueForDisplay($historyStatistique['max'], 'short') : '';
+                        $unitreplace['#averageHistoryValue#'] =  $isObjet ?  $display->formatValueForDisplay($historyStatistique['avg'], 'short') : '';
+                        $startHist = date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' -' . 12 . ' hour'));
+                        $tendance = $cmd->getTendance($startHist, date('Y-m-d H:i:s'));
+                        if ($tendance > config::byKey('historyCalculTendanceThresholddMax')) {
+                            $unitreplace['#tendance#'] = $isObjet ? 'fas fa-arrow-up' : '';
+                        } else if ($tendance < config::byKey('historyCalculTendanceThresholddMin')) {
+                            $unitreplace['#tendance#'] = $isObjet ? 'fas fa-arrow-down' : '';
+                        } else {
+                            $unitreplace['#tendance#'] = $isObjet ? 'fas fa-minus' : '';
+                        }
+                        $unitreplace['#display#'] = '';
+                    } else {
+                        $unitreplace['#display#'] =  $isObjet ? 'hidden' : '';
+                    }
+                    $tabUnitReplace[] = [template_replace($unitreplace, $elementTemplate), $value];
+                }
+                // Cas Pollen à ZERO 
+                else if ($this->getConfiguration('pollen_alert_level') == 0 && $cmd->execCmd() == 0) {
+                  
+                    log::add('pollen', 'debug', 'Name Cmd Pollen ZERO : ' . $cmd->getName() . ' - ' .  $cmd->getLogicalId());
+                    $newIcon = $iconePollen->getIcon($nameCmd, $cmd->execCmd(), $cmd->getId());
+                    $pollenZeroReplace['#icone#'] = $isObjet ? $newIcon : '';
+                    $pollenZeroReplace['#id#'] = $isObjet ? $this->getId() : '';
+                    $pollenZeroReplace['#value#'] = $isObjet ? 0 : '';
+                    $pollenZeroReplace['#name#'] = $isObjet ?  $cmd->getLogicalId() : '';
+                    $pollenZeroReplace['#display-name#'] =  $isObjet ? __($cmd->getName(), __FILE__) : '';
+                    $pollenZeroReplace['#cmdid#'] = $isObjet ?  $cmd->getId() : '';
+                    $pollenZeroReplace['#info-modalcmd#'] =  $isObjet ? 'info-modal' . $cmd->getLogicalId() . $this->getId() : '';
+                    $pollenZeroReplace['#message#'] = __('Aucune Détection', __FILE__);
+                    $templateZero = getTemplate('core', $version, 'elementPollenZero', 'pollen');
+                    if ($this->getConfiguration('data_forecast') != 'disable') {
+                        $pollenZeroReplace['#height#'] =  'min-height:75px;';
+                    } else {
+                        $pollenZeroReplace['#height#'] = '';
+                    }
+                    $tabZero[] = template_replace($pollenZeroReplace, $templateZero);
+                }
+
+                // Affichage central pour Others à la fin/(double passage boucle) car double affichage
+                if ($nameCmd == 'others') {
+                    $headerReplace['#main_pollen_value#'] =  $isObjet && $cmd->execCmd() != null ? $cmd->execCmd() : '';
                     $headerReplace['#id#'] =  $isObjet ? $this->getId() : '';
                     $headerReplace['#main_cmd_pollen_id#'] =   $isObjet ? $cmd->getId() : '';
                     $headerReplace['#main_pollen_name#'] =  $isObjet ? __($cmd->getName(), __FILE__) : '';
-                    $headerReplace['#list_main_pollen#'] =  $isObjet ?  $display->getListPollen($nameCmd) : '';
-                    $value = $isObjet ? $cmd->execCmd() : '';
-                    if ($value > 0) {
-                        $counterMain++;
-                    }
-                    $headerReplace['#main_pollen_value#'] = $value;
-
-                    $newIcon = $iconePollen->getIcon($nameCmd, $value, $cmd->getId(), false);
+                    $newIcon = $iconePollen->getIcon($nameCmd, $cmd->execCmd(), $cmd->getId());
                     $headerReplace['#icone__pollen#'] = $isObjet ?  $newIcon : '';
-                    $tabHederOne = template_replace($headerReplace, $headerTemplate);
-                    $tabHeader[] = [$tabHederOne, $value];
-                } else  if ($nameCmd == 'updatedAt') {
-
-                    $updatedAt = ($isObjet && $cmd->execCmd()) ? $display->parseDate($cmd->getCollectDate()) : '';
-                } else if ($nameCmd == 'telegramPollen') {
-                    $message_alert =  $isObjet ? $cmd->execCmd() : '';
-                    $alert = (!empty($message_alert)) ? true : false;
-                    if ($alert) {
-                        $htmlAlertPollen = '<div style="text-align: center; margin:15px 0px 0px 0px">';
-                        $htmlAlertPollen .= '<marquee scrollamount="4" width="85%" class="state" style="font-size: 100%;height:18px;margin: -10px 0px important!">' . $message_alert . '</marquee>';
-                        $htmlAlertPollen .= '</div>';
-                        $replace['#message_alert#'] =  $htmlAlertPollen;
-                    }
-                } else if ($cmd->getConfiguration($nameCmd) == 'slide') {
-
-                    $activePollenCounter = ($cmd->execCmd() > 0) ? $activePollenCounter + 1 : $activePollenCounter;
-                    $valueCurrent = $isObjet ? $cmd->execCmd() : '';
-                    $maxDisplayLevel = $this->getConfiguration('pollen_alert_level');
-
-                    if ($cmd->getIsVisible() == 1 && $maxDisplayLevel <= $valueCurrent && $valueCurrent > 0) {
-                        $newIcon = $iconePollen->getIcon($nameCmd, $cmd->execCmd(), $cmd->getId(), false);
-                        $unitreplace['#icone#'] =  $isObjet ? $newIcon : '';
-                        $unitreplace['#id#'] =  $isObjet ? $this->getId() : '';
-                        $value = $isObjet ? $cmd->execCmd() : '';
-                        $unitreplace['#value#'] =  $value;
-                        $unitreplace['#name#'] = $isObjet ? $cmd->getLogicalId() : '';
-                        $unitreplace['#display-name#'] =  $isObjet ? __($cmd->getName(), __FILE__) : '';
-                        $unitreplace['#cmdid#'] = $isObjet ?  $cmd->getId() : '';
-                        $unitreplace['#history#'] =  $isObjet ? 'history cursor' : '';
-                        $unitreplace['#info-modalcmd#'] = $isObjet ?  'info-modal' . $cmd->getLogicalId() . $this->getId() : '';
-                        $unitreplace['#unity#'] =  $isObjet ? $cmd->getUnite() : '';
-
-                         //forecast Display 
-                         if ($this->getConfiguration('data_forecast') != 'disable') {
-                            $maxCmd = $this->getCmd(null, $nameCmd . '_max');
-                            $unitreplace['#max#'] = (is_object($maxCmd) && !empty($maxCmd->execCmd())) ? $maxCmd->execCmd() : "[0,0,0]";
-                            $minCmd = $this->getCmd(null, $nameCmd . '_min');
-                            $unitreplace['#min#'] = (is_object($minCmd) && !empty($minCmd->execCmd())) ? $minCmd->execCmd() : "[0,0,0]";
-                            $unitreplace['#color#'] =  ($isObjet &&  !empty($iconePollen->getColor())) ?  $iconePollen->getColor() : '#222222';
-                            $labels = $this->getCmd(null, 'daysPollen');
-                            $unitreplace['#labels#'] =  (is_object($labels) && !empty($labels->execCmd())) ? $labels->execCmd() : "['no','-','data']";
-                            $unitreplace['#height0#'] = '';
-                        } else {
-                            $unitreplace['#labels#'] = "['0','0','0']";
-                            $unitreplace['#max#'] = "[0,0,0]";
-                            $unitreplace['#min#'] =  "[0,0,0]";
-                            $unitreplace['#color#'] = '#333333';
-                            $unitreplace['#height0#'] = 'style="height:0"';
-
-                         }
-
-                      
-                        $iconePollen->getIcon($nameCmd, $cmd->execCmd(), $cmd->getId(), false);
-                        $unitreplace['#risk#'] =  $isObjet ?  $display->getElementRiskPollen($iconePollen->getColor()) : '';
-
-                        $unitreplace['#info-tooltips#'] =   __("Cliquez pour + d'info", __FILE__);
-                        $unitreplace['#mini#'] = __("Mini 10 jours", __FILE__);
-                        $unitreplace['#maxi#'] = __("Maxi 10 jours", __FILE__);
-                        $unitreplace['#tendency#'] = __("Tendance 12h", __FILE__);
-                        $unitreplace['#average#'] = __("Moyenne 10 jours", __FILE__);
-
-                        if ($cmd->getIsHistorized() == 1) {
-                            $startHist = date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' -' . 240 . ' hour'));
-                            $historyStatistique = $cmd->getStatistique($startHist, date('Y-m-d H:i:s'));
-                            $unitreplace['#minHistoryValue#'] =  $isObjet ?  $display->formatValueForDisplay($historyStatistique['min'], 'short') : '';
-                            $unitreplace['#maxHistoryValue#'] =  $isObjet ? $display->formatValueForDisplay($historyStatistique['max'], 'short') : '';
-                            $unitreplace['#averageHistoryValue#'] =  $isObjet ?  $display->formatValueForDisplay($historyStatistique['avg'], 'short') : '';
-                            $startHist = date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' -' . 12 . ' hour'));
-                            $tendance = $cmd->getTendance($startHist, date('Y-m-d H:i:s'));
-                            if ($tendance > config::byKey('historyCalculTendanceThresholddMax')) {
-                                $unitreplace['#tendance#'] = $isObjet ? 'fas fa-arrow-up' : '';
-                            } else if ($tendance < config::byKey('historyCalculTendanceThresholddMin')) {
-                                $unitreplace['#tendance#'] = $isObjet ? 'fas fa-arrow-down' : '';
-                            } else {
-                                $unitreplace['#tendance#'] = $isObjet ? 'fas fa-minus' : '';
-                            }
-                            $unitreplace['#display#'] = '';
-                        } else {
-                            $unitreplace['#display#'] =  $isObjet ? 'hidden' : '';
-                        }
-                        $tabUnitReplace[] = [template_replace($unitreplace, $elementTemplate), $value];
-                    } else
-                        // Cas Pollen à ZERO 
-                        if ($this->getConfiguration('pollen_alert_level') == 0 && $cmd->execCmd() == 0) {
-                            log::add('pollen', 'debug', 'Name Cmd Pollen ZERO : '.$cmd->getName(). ' - '.  $cmd->getLogicalId());
-                            $newIcon = $iconePollen->getIcon($nameCmd, $cmd->execCmd(), $cmd->getId(), false);
-                            $pollenZeroReplace['#icone#'] = $isObjet ? $newIcon : '';
-                            $pollenZeroReplace['#id#'] = $isObjet ? $this->getId() : '';
-                            $pollenZeroReplace['#value#'] = $isObjet ? 0 : '';
-                            $pollenZeroReplace['#name#'] = $isObjet ?  $cmd->getLogicalId() : '';
-                            $pollenZeroReplace['#display-name#'] =  $isObjet ? __($cmd->getName(), __FILE__) : '';
-                            $pollenZeroReplace['#cmdid#'] = $isObjet ?  $cmd->getId() : '';
-                            $pollenZeroReplace['#info-modalcmd#'] =  $isObjet ? 'info-modal' . $cmd->getLogicalId() . $this->getId() : '';
-                            $pollenZeroReplace['#message#'] = __('Aucune Détection', __FILE__);
-                            $templateZero = getTemplate('core', $version, 'elementPollenZero', 'pollen');
-                            if ($this->getConfiguration('data_forecast') != 'disable') {
-                                $pollenZeroReplace['#height#'] =  'min-height:75px;';
-                            } else {
-                                $pollenZeroReplace['#height#'] = '';
-                            }
-                            $tabZero[] = template_replace($pollenZeroReplace, $templateZero);
-                        }
-
-                        // Affichage central pour Others à la fin/(double passage boucle) car double affichage
-                        if ($nameCmd == 'others') {
-                            $headerReplace['#main_pollen_value#'] =  $isObjet ? $cmd->execCmd() : '';
-                            $headerReplace['#id#'] =  $isObjet ? $this->getId() : '';
-                            $headerReplace['#main_cmd_pollen_id#'] =   $isObjet ? $cmd->getId() : '';
-                            $headerReplace['#main_pollen_name#'] =  $isObjet ? __($cmd->getName(), __FILE__) : '';
-                            $newIcon = $iconePollen->getIcon($nameCmd, $cmd->execCmd(), $cmd->getId(), false);
-                            $headerReplace['#icone__pollen#'] = $isObjet ?  $newIcon : '';
-                            $headerReplace['#list_main_pollen#'] =  $isObjet ?  $display->getListPollen($nameCmd) : '';
-                            $headerReplace['#main_risk#'] =  $isObjet ? $display->getElementRiskPollen($iconePollen->getColor($cmd->execCmd(), $nameCmd)) : '';
-                            $value = $isObjet ? $cmd->execCmd() : '';
-                            $tabHeaderOne = template_replace($headerReplace, $headerTemplate);
-                            $tabHeader[] = [$tabHeaderOne, $value];
-                        }
+                    $headerReplace['#list_main_pollen#'] =  $isObjet ?  $display->getListPollen($nameCmd) : '';
+                    $headerReplace['#main_risk#'] =  $isObjet ? $display->getElementRiskPollen($iconePollen->getColor($cmd->execCmd(), $nameCmd)) : '';
+                    $value = $isObjet ? $cmd->execCmd() : '';
+                    $tabHeaderOne = template_replace($headerReplace, $headerTemplate);
+                    $tabHeader[] = [$tabHeaderOne, $value];
                 }
             }
-            $tabUnityValue = array_column($tabUnitReplace, 1);
-            $tabUnityHtml = array_column($tabUnitReplace, 0);
-            array_multisort($tabUnityValue, SORT_DESC, $tabUnityHtml);
+        }
+        $tabUnityValue = array_column($tabUnitReplace, 1);
+        $tabUnityHtml = array_column($tabUnitReplace, 0);
+        array_multisort($tabUnityValue, SORT_DESC, $tabUnityHtml);
 
-            $counterPollenZero = 0;
-            if (isset($tabZero)) {
-                if ($this->getConfiguration('data_forecast') != 'disable') {
-                    $newArray = array_chunk($tabZero,3);
-                } else {
-                       $newArray = array_chunk($tabZero, 1);
-                }
-                foreach ($newArray as $arr) {
-                    $tabUnityHtml[] = implode('', $arr);
-                    $counterPollenZero++;
-                }
+        $counterPollenZero = 0;
+        if (isset($tabZero)) {
+            if ($this->getConfiguration('data_forecast') != 'disable') {
+                $newArray = array_chunk($tabZero, 3);
+            } else {
+                $newArray = array_chunk($tabZero, 1);
             }
+            foreach ($newArray as $arr) {
+                $tabUnityHtml[] = implode('', $arr);
+                $counterPollenZero++;
+            }
+        }
 
 
-
-            if (!$alert) {
-                if ($activePollenCounter == 0) {
-                    // Vérifier si pollen principaux présent dans la reponse API
-                    if (isset($counterMain) && $counterMain > 0) {
-                        $active_pollen_label = __('Pollens principaux actifs', __FILE__);
-                        $htmlActivePollen = '<div title="' . $updatedAt . '" class="cmd noRefresh header-' . $this->getId() . '-mini ';
-                        $htmlActivePollen .= 'active-pollen-' . $this->getId() . ' " data-type="info" data-subtype="string" data-cmd_id="' . $cmd->getId() . '">';
-                        $htmlActivePollen .= $active_pollen_label . '&nbsp;&nbsp;' . $counterMain . ' / 3 </div>';
-                        $replace['#message_alert#'] = $htmlActivePollen;
-                    } else {
-                        $active_pollen_label = __('Aucun pollen actif', __FILE__);
-                        $htmlActivePollen = '<div title="' . $updatedAt . '" class="cmd noRefresh header-' . $this->getId() . '-mini ';
-                        $htmlActivePollen .= 'active-pollen-' . $this->getId() . ' " data-type="info" data-subtype="string" data-cmd_id="' . $cmd->getId() . '">';
-                        $htmlActivePollen .= $active_pollen_label . '</div>';
-                        $replace['#message_alert#'] = $htmlActivePollen;
-                    }
-                } else {
-                    $active_pollen_label = __('Pollens actifs', __FILE__);
+        if (!$alert) {
+            if ($activePollenCounter == 0) {
+                // Vérifier si pollen principaux présent dans la reponse API
+                if (isset($counterMain) && $counterMain > 0) {
+                    $active_pollen_label = __('Pollens principaux actifs', __FILE__);
                     $htmlActivePollen = '<div title="' . $updatedAt . '" class="cmd noRefresh header-' . $this->getId() . '-mini ';
                     $htmlActivePollen .= 'active-pollen-' . $this->getId() . ' " data-type="info" data-subtype="string" data-cmd_id="' . $cmd->getId() . '">';
-                    $htmlActivePollen .= $active_pollen_label . '&nbsp;&nbsp;' . $activePollenCounter . ' / 15 </div>';
+                    $htmlActivePollen .= $active_pollen_label . '&nbsp;&nbsp;' . $counterMain . ' / 3 </div>';
+                    $replace['#message_alert#'] = $htmlActivePollen;
+                } else {
+                    $active_pollen_label = __('Aucun pollen actif', __FILE__);
+                    $htmlActivePollen = '<div title="' . $updatedAt . '" class="cmd noRefresh header-' . $this->getId() . '-mini ';
+                    $htmlActivePollen .= 'active-pollen-' . $this->getId() . ' " data-type="info" data-subtype="string" data-cmd_id="' . $cmd->getId() . '">';
+                    $htmlActivePollen .= $active_pollen_label . '</div>';
                     $replace['#message_alert#'] = $htmlActivePollen;
                 }
+            } else {
+                $active_pollen_label = __('Pollens actifs', __FILE__);
+                $htmlActivePollen = '<div title="' . $updatedAt . '" class="cmd noRefresh header-' . $this->getId() . '-mini ';
+                $htmlActivePollen .= 'active-pollen-' . $this->getId() . ' " data-type="info" data-subtype="string" data-cmd_id="' . $cmd->getId() . '">';
+                $htmlActivePollen .= $active_pollen_label . '&nbsp;&nbsp;' . $activePollenCounter . ' / 15 </div>';
+                $replace['#message_alert#'] = $htmlActivePollen;
             }
-            $tabValue  = array_column($tabHeader, 1);
-            $tabHtml = array_column($tabHeader, 0);
-            array_multisort($tabValue, SORT_DESC, $tabHtml);
+        }
+        $tabValue  = array_column($tabHeader, 1);
+        $tabHtml = array_column($tabHeader, 0);
+        array_multisort($tabValue, SORT_DESC, $tabHtml);
 
-            if (in_array(0, $tabValue) && $this->getConfiguration('pollen_alert_level') > 0) {
-                array_pop($tabHtml);
-            }
-            $replace['#header#'] = implode('', $tabHtml);
-            $elementHtml = new CreateHtmlPollen($tabUnityHtml, $this->getId(), 1, $version, $counterPollenZero);
-        // }
-    
+        if (in_array(0, $tabValue) && $this->getConfiguration('pollen_alert_level') > 0) {
+            array_pop($tabHtml);
+        }
+        $replace['#header#'] = implode('', $tabHtml);
+        $elementHtml = new CreateHtmlPollen($tabUnityHtml, $this->getId(), 1, $version, $counterPollenZero);
+
+
         // Global  ----------------
         if ($this->getConfiguration('searchMode') == 'follow_me') {
             [$lon, $lat] = $this->getCurrentLonLat();
@@ -519,20 +518,19 @@ class pollen extends eqLogic
             $replace['#stateRefreshDesktop#'] = '';
             $replace['#padding#'] = '0px';
         }
-        $minaqi = config::byKey('cron_aqi_minute', 'pollen');
-     
-        $min30aqi =   ((int)$minaqi + 30 > 59) ? (int)$minaqi - 30 : (int)$minaqi + 30;
-        if ($min30aqi > (int)$minaqi) {
-            $replace['#updatetimeaqi#'] = "Mise à jour à la minute " .  $minaqi . " et " . $min30aqi . " de chaque heure";
-        } else {
-            $replace['#updatetimeaqi#'] = "Mise à jour à la minute " .  $min30aqi . " et " . $minaqi . " de chaque heure";
-        }
 
         $minPollen = config::byKey('cron_pollen_minute', 'pollen');
         $replace['#updatetimepollen#'] = "Mise à jour à la minute $minPollen de chaque heure";
 
         $replace['#info-tooltips#'] = __("Cliquez pour + d'info", __FILE__);
-        $replace['#mini_slide#'] =  $elementHtml->getLayer();
+        [$miniSlide, $state] = $elementHtml->getLayer();
+        $replace['#mini_slide#'] =  $miniSlide;
+
+        if ($state == 'empty') {
+            $replace['#hidden#'] = 'hidden';
+        } else {
+            $replace['#hidden#'] = '';
+        }
 
         $refresh = $this->getCmd(null, 'refresh');
         $replace['#refresh#'] = is_object($refresh) ? $refresh->getId() : '';
@@ -544,10 +542,7 @@ class pollen extends eqLogic
             $replace['#animation#'] = 'active';
             $replace['#classCaroussel#'] = '';
         }
-
-      
-            return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $version, 'pollen', __CLASS__)));
-        
+        return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $version, 'pollen', __CLASS__)));
     }
 
     private function setMinutedAction($configName, $delay = 2)
@@ -569,7 +564,7 @@ class pollen extends eqLogic
     public static function postConfig_apikey()
     {
         if (config::byKey('apikey', 'pollen') == '' && config::byKey('apikeyAmbee', 'pollen') == '') {
-            throw new Exception('Au moins une clef OpenWeather est requise pour faire marcher le plugin');
+            throw new Exception('Au moins une clef API est requise pour faire marcher le plugin');
         }
     }
 
@@ -710,7 +705,6 @@ class pollen extends eqLogic
      */
     public function updatePollen()
     {
-
         $iMinutes = $this->getIntervalLastRefresh($this->getCmd(null, 'grass_pollen'));
         if ($iMinutes > 50) {
             log::add('pollen', 'debug', 'Interval > 50 : Start Refresh Pollen latest');

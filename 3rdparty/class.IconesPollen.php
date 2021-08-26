@@ -5,7 +5,6 @@ class IconesPollen
     private $name;
     private $height = '35px';
     private $color;
-    private $noColor;
     private $id;
     private $value;
     private $viewBox = [
@@ -32,12 +31,11 @@ class IconesPollen
         'others' => '0 0 132.82721 132.81453'
     ];
 
-    public function getIcon($name, $value, $id, $noColor = false)
+    public function getIcon($name, $value, $id)
     {
         $this->name = $name;
         $this->value = $value;
         $this->id = $id;
-        $this->noColor = $noColor;
         $this->getColor();
         return  $this->firstPartIcon() . $this->lastPartIcon();
     }
@@ -45,24 +43,24 @@ class IconesPollen
 
     public function getColor($value = false, $type = false)
     {
-        if ($this->noColor == true)
-        {
-            $this->color = 'currentColor';
-            return 'currentColor';
-        }
+
       $composants = Setup::$pollenRange;
 
         if ($value && $type){
+          
             foreach ($composants[$type] as $color => $range) {
                 if ($range[0] <= $value && $range[1] > $value) {
+                    message::add('debug', 'getColor Type: ' . $type);
                     return $color;
                 }
             }
         } 
    
         foreach ($composants[$this->name] as $color => $range) {
+           
             if ($range[0] <= $this->value && $range[1] > $this->value) {
                 $this->color = $color;
+                message::add('debug', 'getColor: ' . $color);
                 return $color;
             }
         }

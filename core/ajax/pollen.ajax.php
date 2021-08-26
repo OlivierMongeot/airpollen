@@ -16,43 +16,48 @@
  */
 
 try {
-  require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
-  include_file('core', 'authentification', 'php');
+    require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
+    include_file('core', 'authentification', 'php');
 
-  if (!isConnect('admin')) {
-    throw new Exception(__('401 - Accès non autorisé', __FILE__));
-  }
+    if (!isConnect('admin')) {
+        throw new Exception(__('401 - Accès non autorisé', __FILE__));
+    }
 
-  /* Fonction permettant l'envoi de l'entête 'Content-Type: application/json'
+    /* Fonction permettant l'envoi de l'entête 'Content-Type: application/json'
     En V3 : indiquer l'argument 'true' pour contrôler le token d'accès Jeedom
     En V4 : autoriser l'exécution d'une méthode 'action' en GET en indiquant le(s) nom(s) de(s) action(s) dans un tableau en argument
   */
-  switch (init('action')) {
+    switch (init('action')) {
 
-    case 'getcity':
-      $city = pollen::getCityName(init('longitude'), init('latitude'), init('save'));
-      ajax::success($city);
-      break;
+        case 'getcity':
+            $city = pollen::getCityName(init('longitude'), init('latitude'), init('save'));
+            ajax::success($city);
+            break;
 
-    case 'getCoordinates':
-      $coordinates =  pollen::getCoordinates(init('cityName'), init('cityCode'));
-      ajax::success($coordinates);
-      break;
+        case 'getCoordinates':
+            $coordinates =  pollen::getCoordinates(init('cityName'), init('cityCode'));
+            ajax::success($coordinates);
+            break;
 
-    case 'setDynGeoloc':
-      $setup =  pollen::setNewGeoloc(init('longitude'), init('latitude'));      
-      log::add('pollen', 'debug', 'Set DynGeoloc response Lat & Lon : ' . json_encode($setup));
-      ajax::success($setup);
-      break;
+        case 'setDynGeoloc':
+            $setup =  pollen::setNewGeoloc(init('longitude'), init('latitude'));
+            log::add('pollen', 'debug', 'Set DynGeoloc response Lat & Lon : ' . json_encode($setup));
+            ajax::success($setup);
+            break;
 
-    case 'getApiKeyWeather':
-      $apiKeyWheather = config::byKey('apikey', 'weather');
-      ajax::success($apiKeyWheather);
-      break;
-  };
+        case 'getApiKeyWeather':
+            $apiKeyWheather = config::byKey('apikey', 'weather');
+            ajax::success($apiKeyWheather);
+            break;
 
-  throw new Exception(__('Aucune méthode correspondante à : ', __FILE__) . init('action'));
-  /*     * *********Catch exeption*************** */
+        case 'getApiKeyAirquality':
+            $apiKeyAirquality = config::byKey('apikey', 'airquality');
+            ajax::success($apiKeyAirquality);
+            break;
+    };
+
+    throw new Exception(__('Aucune méthode correspondante à : ', __FILE__) . init('action'));
+    /*     * *********Catch exeption*************** */
 } catch (Exception $e) {
-  ajax::error(displayException($e), $e->getCode());
+    ajax::error(displayException($e), $e->getCode());
 }

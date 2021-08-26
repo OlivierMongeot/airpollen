@@ -1,10 +1,10 @@
 {
-    "plugins\/airquality\/plugin_info\/configuration.php": {
+    "plugins\/pollen\/plugin_info\/configuration.php": {
 
         "Clef API OpenWeatherMap": "API Key OpenWeatherMap",
         "Clef API Ambee": "API Key Ambee"
     },
-    "plugins\/airquality\/desktop\/php\/airquality.php": {
+    "plugins\/pollen\/desktop\/php\/pollen.php": {
         "401 - Accès non autorisé": "401 - Unauthorized access",
         "Gestion": "Management",
         "Ajouter": "Add",
@@ -62,17 +62,17 @@
         "Vérifier": "Check"
       
     },
-    "plugins\/airquality\/desktop\/js\/airquality.js": {
+    "plugins\/pollen\/desktop\/js\/pollen.js": {
         "Nom": "Name",
         "Historiser": "History",
         "Afficher":"Display",
         "Tester": "Test"
     },
-    "plugins\/airquality\/core\/ajax\/airquality.ajax.php": {
+    "plugins\/pollen\/core\/ajax\/pollen.ajax.php": {
         "401 - Accès non autorisé": "401 - Unauthorized access",
         "Aucune methode correspondante à : ": "No method corresponding to:"
     },
-    "plugins\/airquality\/core\/class\/airquality.class.php": {
+    "plugins\/pollen\/core\/class\/pollen.class.php": {
         "La ville ou le code pays ne peuvent être vide": "City or country code can't be empty",
         "La longitude ou la latitude ne peuvent être vide": "Longitude or latitude can't be empty",
         "Probleme de localisation par le navigateur": "Probleme with navigator location",
@@ -135,7 +135,7 @@
         "Aucune Détection":"No Detection"
    
 
-    }, "plugins\/airquality\/3rdparty\/class.DisplayInfo.php": {
+    }, "plugins\/pollen\/3rdparty\/class.DisplayInfoPollen.php": {
         "Bon":"Good",
         "Correct":"Moderate",
         "Dégradé":"Degraded",
@@ -186,7 +186,7 @@
 
    
     },
-    "plugins\/airquality\/3rdparty\/class.ApiAqi.php": {
+    "plugins\/pollen\/3rdparty\/class.ApiPollen.php": {
         "Impossible de récupérer les coordonnées de cete ville": "Unable to retrieve the coordinates of this city",
         "Les coordonnées sont vides":"The coordinates are empty",
         "Pas de lieu trouvé par l'API Reverse Geoloc avec ces coordonnées":"No location found by Reverse Geoloc API with these coordinates",

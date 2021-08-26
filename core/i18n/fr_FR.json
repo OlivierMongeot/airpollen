@@ -1,10 +1,10 @@
 {
-    "plugins\/airquality\/plugin_info\/configuration.php": {
+    "plugins\/pollen\/plugin_info\/configuration.php": {
 
         "Clef API OpenWeatherMap": "Clef API OpenWeatherMap",
         "Clef API Ambee": "Clef API Ambee"
     },
-    "plugins\/airquality\/desktop\/php\/airquality.php": {
+    "plugins\/pollen\/desktop\/php\/pollen.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",
         "Gestion": "Gestion",
         "Ajouter": "Ajouter",
@@ -93,17 +93,17 @@
 
       
     },
-    "plugins\/airquality\/desktop\/js\/airquality.js": {
+    "plugins\/pollen\/desktop\/js\/pollen.js": {
         "Nom": "Nom",
         "Historiser": "Historiser",
         "Tester": "Tester",
         "Afficher":"Afficher"
     },
-    "plugins\/airquality\/core\/ajax\/airquality.ajax.php": {
+    "plugins\/pollen\/core\/ajax\/pollen.ajax.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",
         "Aucune methode correspondante à : ": "Aucune methode correspondante à : "
     },
-    "plugins\/airquality\/core\/class\/airquality.class.php": {
+    "plugins\/pollen\/core\/class\/pollen.class.php": {
         "La ville ou le code pays ne peuvent être vide": "La ville ou le code pays ne peuvent être vide",
         "La longitude ou la latitude ne peuvent être vide": "La longitude ou la latitude ne peuvent être vide",
         "Probleme de localisation par le navigateur": "Probleme de localisation par le navigateur",
@@ -172,7 +172,7 @@
         "Indices en alerte": "Indices en alerte"
 
     },
-    "plugins\/airquality\/3rdparty\/class.DisplayInfo.php": {
+    "plugins\/pollen\/3rdparty\/class.DisplayInfoPollen.php": {
         "Bon":"Bon",
         "bon":"bon",
         "bonne":"bonne",
@@ -257,7 +257,7 @@
         "reste au niveau":"reste au niveau"
 
     },
-    "plugins\/airquality\/3rdparty\/class.ApiAqi.php": {
+    "plugins\/pollen\/3rdparty\/class.ApiPollen.php": {
         "Impossible de récupérer les coordonnées de cete ville": "Impossible de récupérer les coordonnées de cette ville",
         "Les coordonnées sont vides":"Les coordonnées sont vides",
         "Pas de lieu trouvé par l'API Reverse Geoloc avec ces coordonnées":"Pas de lieu trouvé par l'API Reverse Geoloc avec ces coordonnées",
