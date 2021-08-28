@@ -10,7 +10,7 @@ class ApiPollen
 
     /**
      *  OpenWeather Api Key
-    */
+     */
     private $apiKey;
 
 
@@ -18,7 +18,6 @@ class ApiPollen
     {
         $this->ambeeApiKey = trim(config::byKey('apikeyAmbee', 'pollen'));
         $this->apiKey = trim(config::byKey('apikey', 'pollen'));
-
     }
 
     /**
@@ -80,7 +79,6 @@ class ApiPollen
             return (__('Impossible de récupérer les coordonnées de cette ville', __FILE__));
         }
         if (!isset($coordinates[0]->name)) {
-
             return [0, 0];
         } else {
             if (isset($coordinates[0]->lat) && isset($coordinates[0]->lon)) {
@@ -121,6 +119,7 @@ class ApiPollen
      */
     public function getForecastPollen($longitude = null, $latitude = null)
     {
+        
         $pollens = [
             "Poaceae", "Alder", "Birch", "Cypress", "Elm", "Hazel", "Oak", "Pine", "Plane", "Poplar",
             "Chenopod", "Mugwort", "Nettle", "Ragweed", "Others"
@@ -139,6 +138,15 @@ class ApiPollen
         }
     }
 
+
+
+    public function getFakeData($apiName){
+        if ($apiName == 'getForecastPollen') {
+        return $this->fakeForecastPollen();
+        } else {
+            return json_decode($this->fakeDataPollen());
+        }
+    }
 
 
 
@@ -176,6 +184,12 @@ class ApiPollen
         } else {
             throw new Exception('No data pollen server response - Http code : ' . $response[2]);
         }
+
+        // Test
+       
+        // $response = file_get_contents(dirname(__DIR__) . '/docs/dataModel/pollenLatest.json', 1);
+        // return json_decode($response);
+
     }
 
 
@@ -216,9 +230,7 @@ class ApiPollen
         // Test
         // $response = file_get_contents(dirname(__DIR__) . '/core/dataModel/pollen2f.json', 1);     
         // return json_decode($response);
-
     }
-
 
 
     /**
@@ -247,7 +259,7 @@ class ApiPollen
         foreach ($response as $hourCast) {
             if ($hourCast->time >= $beginOfDay && $hourCast->time <= ($beginOfDay + 5 * $day)) {
                 $weekday = date('N', ($hourCast->time + 100));
-                $nameDay = new DisplayInfo();
+                $nameDay = new DisplayInfoPollen();
                 $dayName =  $nameDay->getNameDay($weekday);
                 switch ($element) {
                     case "Poaceae":
@@ -281,5 +293,140 @@ class ApiPollen
         return $newTabAqiDay;
     }
 
+    private function fakeDataPollen()
+    {
+        $fakeData = [];
+        $alder = rand(0, 5);
+        $birch = rand(0, 20);
+        $cypress = rand(0, 3);
+        $elm = rand(0, 3);
+        $hazel = rand(0, 3);
+        $oak = rand(0, 25);
+        $pine = rand(0, 7);
+        $plane = rand(0, 5);
+        $poplar = rand(0, 10);
+        $totalTree = $alder + $birch + $cypress + $elm + $hazel + $oak + $pine + $plane + $poplar;
+        $others = rand(0, 4);
+        $poaceae = rand(0, 40);
+        $chenopod = rand(0, 50);
+        $mugwort = rand(0, 10);
+        $nettle = rand(50, 200);
+        $ragweed = rand(0, 3);
+        $totalWeed = $chenopod + $mugwort + $nettle + $ragweed;
 
+        $infoPollen = new DisplayInfoPollen();
+        $grass_risk = $infoPollen->getLevelPollen($poaceae, 'grass_pollen');
+        $tree_risk = $infoPollen->getLevelPollen($totalTree, 'tree_pollen');
+        $weed_risk = $infoPollen->getLevelPollen($totalWeed, 'weed_pollen');
+
+        $fakeData  = [
+            "Count" => [
+                "grass_pollen"  => $poaceae,
+                "tree_pollen"   => $totalTree,
+                "weed_pollen"   => $totalWeed
+            ],
+            "Risk" => [
+                "grass_pollen"  => $grass_risk,
+                "tree_pollen"   => $tree_risk,
+                "weed_pollen"   => $weed_risk
+            ],
+            "Species" => [
+                "Grass" => ["Grass / Poaceae" => $poaceae],
+                "Others" => $others,
+                "Tree" => [
+                    "Alder" => $alder,
+                    "Birch" => $birch,
+                    "Cypress" => $cypress,
+                    "Elm" => $elm,
+                    "Hazel" => $hazel,
+                    "Oak" => $oak,
+                    "Pine" => $pine,
+                    "Plane" => $plane,
+                    "Poplar / Cottonwood" => $poplar
+                ],
+                "Weed" => [
+                    "Chenopod" => $chenopod,
+                    "Mugwort" => $mugwort,
+                    "Nettle" => $nettle,
+                    "Ragweed" => $ragweed
+                ]
+            ],
+            "updatedAt" => "2021-08-29T13:00:00.000"
+        ];
+        return json_encode(["data"=>[$fakeData]]);
+    }
+
+
+    private function fakeForecastPollen(){
+
+        $nameDay = new DisplayInfoPollen();
+        $today =  $nameDay->getNameDay( date('N', time()));
+        $tomorrow = $nameDay->getNameDay( date('N', time() + 86400));
+        $afterTomorrow = $nameDay->getNameDay( date('N', time() + 2 * 86400));
+        $fakeData = [
+            "Alder" => [
+                "day" => [$today ,$tomorrow,$afterTomorrow],
+                "min"   => [rand(1, 5),rand(3, 5),rand(1, 5)],
+                "max"   => [rand(5, 10,),rand(5, 10),rand(5, 10)]
+            ],
+            "Poaceae" => [          
+                "min"   => [rand(0, 3),rand(0, 5),rand(0, 5)],
+                "max"   => [rand(4, 7),rand(5, 10),rand(5, 10)]
+            ],
+            "Birch" => [
+                "min"   => [rand(0, 5), rand(1, 5), rand(1, 5)],
+                "max"   => [rand(5, 10), rand(5, 10), rand(5, 10)]
+            ],
+            "Cypress" => [
+                "min"   => [rand(1, 5), rand(0, 5), rand(0, 5)],
+                "max"   => [rand(5, 10), rand(5, 10), rand(5, 10)]
+            ],
+            "Elm" => [
+                "min"   => [rand(1, 5), rand(0, 5), rand(0, 5)],
+                "max"   => [rand(5, 10),    rand(5, 10), rand(5, 10)]
+            ],
+            "Hazel" => [
+                "min"   => [rand(2, 5), rand(1, 5), rand(0, 5)],
+                "max"   => [ rand(5, 10), rand(5, 15), rand(5, 10)]
+            ],
+            "Oak" => [
+                "min"   => [rand(1, 5), rand(1, 5), rand(1, 5)],
+                "max"   => [rand(5, 10), rand(5, 10), rand(5, 10)]
+            ],
+            "Pine" => [
+                "min"   => [ rand(0, 5), rand(0, 5), rand(0, 5)],
+                "max"   => [rand(5, 10), rand(5, 10), rand(5, 10)]
+            ],
+            "Plane" => [
+                "min"   => [rand(0, 5), rand(0, 5), rand(0, 5)],
+                "max"   => [rand(5, 10), rand(5, 20), rand(5, 10)]
+            ],
+            "Poplar" => [
+                "min"   => [rand(0, 5), rand(0, 5), rand(0, 5)],
+                "max"   => [rand(5, 10), rand(5, 10), rand(5, 10)]
+            ],
+            "Chenopod" => [ 
+                "min" => [rand(1, 5), rand(1, 5), rand(3, 5)],
+                "max" => [rand(5, 10), rand(5, 10), rand(5, 20)]
+            ],
+            "Mugwort" => [
+                "min" => [rand(1, 5), rand(1, 5), rand(1, 5)],
+                "max" => [rand(5, 10), rand(5, 10), rand(5, 10)]
+            ],
+            "Nettle" => [
+                "min" => [rand(3, 10), rand(6, 10), rand(4, 10)],
+                "max" => [rand(10, 50), rand(10, 50), rand(10, 50)]
+            ],
+            "Ragweed" => [
+                "min" => [rand(1, 5), rand(1, 5), rand(2, 5)],
+                "max" => [rand(5, 10), rand(5, 10), rand(5, 10)]
+            ],
+            "Others" => [
+                "min" => [rand(1, 5), rand(1, 5), rand(3, 5)],
+                "max" => [rand(5, 10), rand(5, 10), rand(5, 15)]
+            ]
+            
+        ];
+        return $fakeData;
+    }
 }

@@ -33,64 +33,79 @@ class pollen extends eqLogic
         // Assignation d'une minute de refresh aléatoire suite mail Ambee
         foreach (self::byType('pollen') as $pollen) {
 
-
-            // Pollen
             if ($pollen->getIsEnable() == 1) {
 
-                //  Pollen current toutes heures
-                try {
-                    $minutePollen = (int)trim(config::byKey('cron_pollen_minute', 'pollen'));
-                    if (empty($minutePollen)) {
-                        log::add('pollen', 'debug', 'Minute de la cron de pollen non définie');
-                        $minutePollen = rand(2, 58);
-                        config::save('cron_pollen_minute', $minutePollen, 'pollen');
-                    }
-                    $crontabPollen = $minutePollen . " * * * *";
-                    // log::add('pollen', 'debug', 'Cron pollen current : ' . $crontabPollen);
-                    $c = new Cron\CronExpression($crontabPollen, new Cron\FieldFactory);
-                    if ($c->isDue()) {
-                        // $pollen->updatePollen();
-                    }
-                } catch (Exception $e) {
-                    log::add('pollen', 'debug', __('Expression cron non valide pour update Pollen', __FILE__) . $pollen->getHumanName() . ' : ' . json_encode($e));
-                }
+                if ($pollen->getConfiguration('data_refresh') == 'full' || $pollen->getConfiguration('data_refresh') == 'fake_data') {
 
-                // Pollen forecast 1x jours si enable
-                if ($pollen->getConfiguration('data_forecast') == 'actived') {
-
+                    //  Pollen current toutes heures
                     try {
-                        // 3 tentatives programmés  suite à de nombreux echecs de call + action en cas d'échec uniquement gèrer par le bridage de temps
-                        $tenMinMore = $minutePollen + 10;
-                        if ($tenMinMore > 59) {
-                            $tenMinMore = $tenMinMore - 60;
-                        }
-                        $twentyMinMore = $minutePollen + 20;
-                        if ($twentyMinMore > 59) {
-                            $twentyMinMore = $twentyMinMore - 60;
-                        }
-                        $cronForecast = $minutePollen + 1 . "," . $tenMinMore . "," . $twentyMinMore . " 7 * * *";
-                        log::add('pollen', 'debug', 'Cron forecast Pollen  : ' . $cronForecast);
-                        $c = new Cron\CronExpression($cronForecast, new Cron\FieldFactory);
-
+                        $crontabPollen = "1 * * * *";
+                       
+                        $c = new Cron\CronExpression($crontabPollen, new Cron\FieldFactory);
                         if ($c->isDue()) {
-                            try {
-                                $refresh = $pollen->getCmd(null, 'refresh_pollen_forecast');
-                                if (is_object($refresh)) {
-                                    // $refresh->execCmd();
-                                } else {
-                                    log::add('pollen', 'debug', 'Impossible de trouver la commande refresh pour ' . $pollen->getHumanName());
-                                }
-                            } catch (Exception $e) {
-                                log::add('pollen', 'debug', __('Erreur pour ', __FILE__) . $pollen->getHumanName() . ' : ' . $e->getMessage());
-                            }
+                             log::add('pollen', 'debug', 'Cron pollen current : ' . $crontabPollen);
+                            $pollen->updatePollen();
                         }
                     } catch (Exception $e) {
-                        log::add('pollen', 'debug', __('Expression cron non valide pour Pollen refresh forecast', __FILE__) . $pollen->getHumanName() . ' - ' .  $e->getMessage());
+                        log::add('pollen', 'debug', __('Expression cron non valide pour update Pollen full', __FILE__) . $pollen->getHumanName() . ' : ' . json_encode($e));
+                    }
+
+
+                    // Pollen forecast 1x jours si enable
+                    if ($pollen->getConfiguration('data_forecast') == 'actived') {
+                        try {
+                            $cronForecast = "2,42 7 * * *";
+                           
+                            $c = new Cron\CronExpression($cronForecast, new Cron\FieldFactory);
+
+                            if ($c->isDue()) {
+                                log::add('pollen', 'debug', 'Cron forecast Pollen  : ' . $cronForecast);
+                                try {
+                                    $refresh = $pollen->getCmd(null, 'refresh_pollen_forecast');
+                                    if (is_object($refresh)) {
+                                        $refresh->execCmd();
+                                    } else {
+                                        log::add('pollen', 'debug', 'Impossible de trouver la commande refresh pour ' . $pollen->getHumanName());
+                                    }
+                                } catch (Exception $e) {
+                                    log::add('pollen', 'debug', __('Erreur pour ', __FILE__) . $pollen->getHumanName() . ' : ' . $e->getMessage());
+                                }
+                            }
+                        } catch (Exception $e) {
+                            log::add('pollen', 'debug', __('Expression cron non valide pour Pollen refresh forecast', __FILE__) . $pollen->getHumanName() . ' - ' .  $e->getMessage());
+                        }
                     }
                 }
 
+                switch ($pollen->getConfiguration('data_refresh')) {
 
+                    case 'oneByHour':    //  Pollen current toutes heures 7h à 20h
+                        $crontab = "1 8,9,10,11,12,13,14,15,16,17,18,19 * * *";
+                        break;
+                    case 'oneByTwoHour':    //  Pollen current toutes les 2h
+                        $crontab = "1 8,10,12,14,16,18 * * *";
+                    case 'twoByDay':     //  Pollen current 2x jours
+                        $crontab = "1 8,15 * * *";
+                        break;
+                    case 'ThreeByDay':       //  Pollen current  3x /jour
+                        $crontab = "1 8,12,16 * * *";
+                    default:
+                        $crontab = false;
+                }
 
+                if ($crontab) {
+                    //  Pollen current toutes heures 7h à 20h
+                    try {
+                        $c = new Cron\CronExpression($crontab, new Cron\FieldFactory);
+                        if ($c->isDue()) {
+                            $pollen->updatePollen();
+                        }
+                    } catch (Exception $e) {
+                        log::add('pollen', 'debug', __('Expression cron non valide pour update Pollen manual', __FILE__) . $pollen->getHumanName() . ' : ' . json_encode($e));
+                    }
+                }
+
+                
                 // Refresh alert Message Pollen
                 try {
                     $specialCronPollen =  $pollen->getConfiguration('alertPollenCronTwoMin');
@@ -113,6 +128,7 @@ class pollen extends eqLogic
                 } catch (Exception $e) {
                     log::add('pollen', 'debug', __('Expression cron non valide pour Refresh alert Pollen', __FILE__) . $pollen->getHumanName() . ' : ' . json_encode($specialCron)  . json_encode($e));
                 }
+
             }
         }
     }
@@ -149,21 +165,13 @@ class pollen extends eqLogic
 
     public function preInsert()
     {
-        log::add('pollen', 'debug', 'Start Function preInsert');
         $this->setCategory('heating', 1);
         $this->setIsEnable(1);
         $this->setIsVisible(1);
-
-        if ($this->getConfiguration('elements') == 'pollen') {
-            $minute = rand(2, 58);
-            config::save('cron_pollen_minute', $minute, 'pollen');
-            log::add('pollen', 'debug', 'Set New Cron pollen minute PreInsert : ' . $minute . ' for pollen');
-        }
     }
 
     public function preUpdate()
     {
-        log::add('pollen', 'debug', 'Start Function preUpdate pour ' . $this->getHumanName());
         if ($this->getIsEnable()) {
             switch ($this->getConfiguration('searchMode')) {
                 case 'city_mode':
@@ -208,7 +216,7 @@ class pollen extends eqLogic
     {
         $this->setDisplay("width", "265px");
         if ($this->getConfiguration('data_forecast') == 'disable') {
-            $this->setDisplay("height", "225px");
+            $this->setDisplay("height", "210px");
         } else {
             $this->setDisplay("height", "375px");
         }
@@ -276,6 +284,7 @@ class pollen extends eqLogic
         }
     }
 
+
     public function toHtml($_version = 'dashboard')
     {
         $replace = $this->preToHtml($_version);
@@ -304,17 +313,20 @@ class pollen extends eqLogic
                     case 'tree_pollen':
                         $treePollenCmd = $this->getCmd(null, 'tree_risk');
                         $value = $treePollenCmd->execCmd();
-                        $headerReplace['#main_risk#'] =  $isObjet ? $display->getPollenRisk($value) : '0';
+                        $headerReplace['#main_risk#'] =  $isObjet ? $display->getPollenRisk($value) : '';
+                        // log::add('pollen', 'debug', 'tree_pollen : ' . $value);
                         break;
                     case 'grass_pollen':
                         $grassPollenCmd = $this->getCmd(null, 'grass_risk');
                         $value = $grassPollenCmd->execCmd();
-                        $headerReplace['#main_risk#'] =  $isObjet ? $display->getPollenRisk($value) : '0';
+                        $headerReplace['#main_risk#'] =  $isObjet ? $display->getPollenRisk($value) : '';
+                        // log::add('pollen', 'debug', 'grass_pollen : ' . $value);
                         break;
                     case 'weed_pollen':
                         $weedPollenCmd = $this->getCmd(null, 'weed_risk');
                         $value = $weedPollenCmd->execCmd();
-                        $headerReplace['#main_risk#'] =  $isObjet ? $display->getPollenRisk($value) : '0';
+                        $headerReplace['#main_risk#'] =  $isObjet ? $display->getPollenRisk($value) : '';
+                        // log::add('pollen', 'debug', 'weed_pollen : ' . $value);
                 }
                 $headerReplace['#id#'] =  $isObjet ? $this->getId() : '';
                 $headerReplace['#main_cmd_pollen_id#'] =   $isObjet ? $cmd->getId() : '';
@@ -414,8 +426,8 @@ class pollen extends eqLogic
                 }
                 // Cas Pollen à ZERO 
                 else if ($this->getConfiguration('pollen_alert_level') == 0 && $cmd->execCmd() == 0) {
-                  
-                    log::add('pollen', 'debug', 'Name Cmd Pollen ZERO : ' . $cmd->getName() . ' - ' .  $cmd->getLogicalId());
+
+                    // log::add('pollen', 'debug', 'Name Cmd Pollen ZERO : ' . $cmd->getName() . ' - ' .  $cmd->getLogicalId());
                     $newIcon = $iconePollen->getIcon($nameCmd, $cmd->execCmd(), $cmd->getId());
                     $pollenZeroReplace['#icone#'] = $isObjet ? $newIcon : '';
                     $pollenZeroReplace['#id#'] = $isObjet ? $this->getId() : '';
@@ -436,7 +448,9 @@ class pollen extends eqLogic
 
                 // Affichage central pour Others à la fin/(double passage boucle) car double affichage
                 if ($nameCmd == 'others') {
-                    $headerReplace['#main_pollen_value#'] =  $isObjet && $cmd->execCmd() != null ? $cmd->execCmd() : '';
+
+                    $headerReplace['#main_pollen_value#'] =  $isObjet && $cmd->execCmd() !== null ? $cmd->execCmd() : '';
+                    log::add('pollen', 'debug', 'Value Cmd Pollen Others : ' . $cmd->execCmd() . ' - ' .  $cmd->getLogicalId());
                     $headerReplace['#id#'] =  $isObjet ? $this->getId() : '';
                     $headerReplace['#main_cmd_pollen_id#'] =   $isObjet ? $cmd->getId() : '';
                     $headerReplace['#main_pollen_name#'] =  $isObjet ? __($cmd->getName(), __FILE__) : '';
@@ -519,8 +533,6 @@ class pollen extends eqLogic
             $replace['#padding#'] = '0px';
         }
 
-        $minPollen = config::byKey('cron_pollen_minute', 'pollen');
-        $replace['#updatetimepollen#'] = "Mise à jour à la minute $minPollen de chaque heure";
 
         $replace['#info-tooltips#'] = __("Cliquez pour + d'info", __FILE__);
         [$miniSlide, $state] = $elementHtml->getLayer();
@@ -618,6 +630,10 @@ class pollen extends eqLogic
     private function getApiData(string $apiName)
     {
         $api = new ApiPollen();
+        if ($this->getConfiguration('data_refresh') == 'fake_data') {
+            return  $api->getFakeData($apiName);
+        }
+
         $city = $this->getCurrentCityName();
         [$lon, $lat] = $this->getCurrentLonLat();
         log::add('pollen', 'debug', $this->getHumanName() . ' -> Start API ' . $apiName . ' Calling for City : ' . $city . ' - Long :' . $lon . ' Lat :' . $lat);
@@ -705,56 +721,56 @@ class pollen extends eqLogic
      */
     public function updatePollen()
     {
-        $iMinutes = $this->getIntervalLastRefresh($this->getCmd(null, 'grass_pollen'));
-        if ($iMinutes > 50) {
-            log::add('pollen', 'debug', 'Interval > 50 : Start Refresh Pollen latest');
-            $dataAll = $this->getApiData('getAmbee');
-            if (isset($dataAll->data)) {
-                $oldData = $this->getCurrentValues();
-                $dataPollen = $dataAll->data;
-                $this->checkAndUpdateCmd('tree_risk', $dataPollen[0]->Risk->tree_pollen);
-                $this->checkAndUpdateCmd('weed_risk', $dataPollen[0]->Risk->weed_pollen);
-                $this->checkAndUpdateCmd('grass_risk', $dataPollen[0]->Risk->grass_pollen);
-                $this->checkAndUpdateCmd('tree_pollen', $dataPollen[0]->Count->tree_pollen);
-                $this->checkAndUpdateCmd('weed_pollen', $dataPollen[0]->Count->weed_pollen);
-                $this->checkAndUpdateCmd('grass_pollen', $dataPollen[0]->Count->grass_pollen);
-                // Cas API fournit juste 3 principaux Pollen
-                $this->checkAndUpdateCmd('poaceae', isset($dataPollen[0]->Species->Grass->{"Grass / Poaceae"}) ? $dataPollen[0]->Species->Grass->{"Grass / Poaceae"} : '');
-                $this->checkAndUpdateCmd('alder',  isset($dataPollen[0]->Species->Tree->Alder) ? $dataPollen[0]->Species->Tree->Alder : '');
-                $this->checkAndUpdateCmd('birch', isset($dataPollen[0]->Species->Tree->Birch) ? $dataPollen[0]->Species->Tree->Birch : '');
-                $this->checkAndUpdateCmd('cypress', isset($dataPollen[0]->Species->Tree->Cypress) ? $dataPollen[0]->Species->Tree->Cypress : '');
-                $this->checkAndUpdateCmd('elm',  isset($dataPollen[0]->Species->Tree->Elm) ? $dataPollen[0]->Species->Tree->Elm : '');
-                $this->checkAndUpdateCmd('hazel', isset($dataPollen[0]->Species->Tree->Hazel) ? $dataPollen[0]->Species->Tree->Hazel : '');
-                $this->checkAndUpdateCmd('oak', isset($dataPollen[0]->Species->Tree->Oak) ? $dataPollen[0]->Species->Tree->Oak : '');
-                $this->checkAndUpdateCmd('pine', isset($dataPollen[0]->Species->Tree->Pine) ? $dataPollen[0]->Species->Tree->Pine  : '');
-                $this->checkAndUpdateCmd('plane', isset($dataPollen[0]->Species->Tree->Plane) ? $dataPollen[0]->Species->Tree->Plane  : '');
-                $this->checkAndUpdateCmd('poplar', isset($dataPollen[0]->Species->Tree->{"Poplar / Cottonwood"}) ? $dataPollen[0]->Species->Tree->{"Poplar / Cottonwood"}  : '');
-                $this->checkAndUpdateCmd('chenopod', isset($dataPollen[0]->Species->Weed->Chenopod) ? $dataPollen[0]->Species->Weed->Chenopod : '');
-                $this->checkAndUpdateCmd('mugwort', isset($dataPollen[0]->Species->Weed->Mugwort) ? $dataPollen[0]->Species->Weed->Mugwort : '');
-                $this->checkAndUpdateCmd('nettle', isset($dataPollen[0]->Species->Weed->Nettle) ? $dataPollen[0]->Species->Weed->Nettle : '');
-                $this->checkAndUpdateCmd('ragweed', isset($dataPollen[0]->Species->Weed->Ragweed) ? $dataPollen[0]->Species->Weed->Ragweed : '');
-                $this->checkAndUpdateCmd('others', isset($dataPollen[0]->Species->Others) ? $dataPollen[0]->Species->Others : '');
-                $this->checkAndUpdateCmd('updatedAt', $dataPollen[0]->updatedAt);
-                $paramAlertPollen = $this->getParamAlertPollen();
-                $display = new DisplayInfoPollen;
-                $city = $this->getCurrentCityName();
-                log::add('pollen', 'debug', 'City For Pollen Message : ' . $city);
-                $messagesPollens =  $display->getAllMessagesPollen($oldData, $dataPollen, $paramAlertPollen, $city);
-                $this->checkAndUpdateCmd('messagePollen', $messagesPollens[0]);
-                $telegramMess = !empty($messagesPollens[0]) ? $messagesPollens[1] : '';
-                $this->checkAndUpdateCmd('telegramPollen', $telegramMess);
-                $smsMess = !empty($messagesPollens[0]) ? $messagesPollens[2] : '';
-                $this->checkAndUpdateCmd('smsPollen',  $smsMess);
-                $markdownMessage = !empty($messagesPollens[0]) ? $messagesPollens[3] : '';
-                $this->checkAndUpdateCmd('markdownPollen', $markdownMessage);
-                if (!empty($messagesPollens[0])) {
-                    $this->setMinutedAction('alertPollenCronTwoMin', 2);
-                }
-                $this->refreshWidget();
+        // $iMinutes = $this->getIntervalLastRefresh($this->getCmd(null, 'grass_pollen'));
+        // if ($iMinutes > 0) {
+        log::add('pollen', 'debug', 'Interval > 50 : Start Refresh Pollen latest');
+        $dataAll = $this->getApiData('getAmbee');
+        if (isset($dataAll->data)) {
+            $oldData = $this->getCurrentValues();
+            $dataPollen = $dataAll->data;
+            $this->checkAndUpdateCmd('tree_risk', $dataPollen[0]->Risk->tree_pollen);
+            $this->checkAndUpdateCmd('weed_risk', $dataPollen[0]->Risk->weed_pollen);
+            $this->checkAndUpdateCmd('grass_risk', $dataPollen[0]->Risk->grass_pollen);
+            $this->checkAndUpdateCmd('tree_pollen', $dataPollen[0]->Count->tree_pollen);
+            $this->checkAndUpdateCmd('weed_pollen', $dataPollen[0]->Count->weed_pollen);
+            $this->checkAndUpdateCmd('grass_pollen', $dataPollen[0]->Count->grass_pollen);
+            // Cas API fournit juste 3 principaux Pollen
+            $this->checkAndUpdateCmd('poaceae', isset($dataPollen[0]->Species->Grass->{"Grass / Poaceae"}) ? $dataPollen[0]->Species->Grass->{"Grass / Poaceae"} : '');
+            $this->checkAndUpdateCmd('alder',  isset($dataPollen[0]->Species->Tree->Alder) ? $dataPollen[0]->Species->Tree->Alder : '');
+            $this->checkAndUpdateCmd('birch', isset($dataPollen[0]->Species->Tree->Birch) ? $dataPollen[0]->Species->Tree->Birch : '');
+            $this->checkAndUpdateCmd('cypress', isset($dataPollen[0]->Species->Tree->Cypress) ? $dataPollen[0]->Species->Tree->Cypress : '');
+            $this->checkAndUpdateCmd('elm',  isset($dataPollen[0]->Species->Tree->Elm) ? $dataPollen[0]->Species->Tree->Elm : '');
+            $this->checkAndUpdateCmd('hazel', isset($dataPollen[0]->Species->Tree->Hazel) ? $dataPollen[0]->Species->Tree->Hazel : '');
+            $this->checkAndUpdateCmd('oak', isset($dataPollen[0]->Species->Tree->Oak) ? $dataPollen[0]->Species->Tree->Oak : '');
+            $this->checkAndUpdateCmd('pine', isset($dataPollen[0]->Species->Tree->Pine) ? $dataPollen[0]->Species->Tree->Pine  : '');
+            $this->checkAndUpdateCmd('plane', isset($dataPollen[0]->Species->Tree->Plane) ? $dataPollen[0]->Species->Tree->Plane  : '');
+            $this->checkAndUpdateCmd('poplar', isset($dataPollen[0]->Species->Tree->{"Poplar / Cottonwood"}) ? $dataPollen[0]->Species->Tree->{"Poplar / Cottonwood"}  : '');
+            $this->checkAndUpdateCmd('chenopod', isset($dataPollen[0]->Species->Weed->Chenopod) ? $dataPollen[0]->Species->Weed->Chenopod : '');
+            $this->checkAndUpdateCmd('mugwort', isset($dataPollen[0]->Species->Weed->Mugwort) ? $dataPollen[0]->Species->Weed->Mugwort : '');
+            $this->checkAndUpdateCmd('nettle', isset($dataPollen[0]->Species->Weed->Nettle) ? $dataPollen[0]->Species->Weed->Nettle : '');
+            $this->checkAndUpdateCmd('ragweed', isset($dataPollen[0]->Species->Weed->Ragweed) ? $dataPollen[0]->Species->Weed->Ragweed : '');
+            $this->checkAndUpdateCmd('others', isset($dataPollen[0]->Species->Others) ? $dataPollen[0]->Species->Others : '');
+            $this->checkAndUpdateCmd('updatedAt', $dataPollen[0]->updatedAt);
+            $paramAlertPollen = $this->getParamAlertPollen();
+            $display = new DisplayInfoPollen;
+            $city = $this->getCurrentCityName();
+            log::add('pollen', 'debug', 'City For Pollen Message : ' . $city);
+            $messagesPollens =  $display->getAllMessagesPollen($oldData, $dataPollen, $paramAlertPollen, $city);
+            $this->checkAndUpdateCmd('messagePollen', $messagesPollens[0]);
+            $telegramMess = !empty($messagesPollens[0]) ? $messagesPollens[1] : '';
+            $this->checkAndUpdateCmd('telegramPollen', $telegramMess);
+            $smsMess = !empty($messagesPollens[0]) ? $messagesPollens[2] : '';
+            $this->checkAndUpdateCmd('smsPollen',  $smsMess);
+            $markdownMessage = !empty($messagesPollens[0]) ? $messagesPollens[3] : '';
+            $this->checkAndUpdateCmd('markdownPollen', $markdownMessage);
+            if (!empty($messagesPollens[0])) {
+                $this->setMinutedAction('alertPollenCronTwoMin', 2);
             }
-        } else {
-            log::add('pollen', 'debug', 'Dernier Pollen latest Update < 50 min, veuillez patienter svp');
+            $this->refreshWidget();
         }
+        // } else {
+        //     log::add('pollen', 'debug', 'Dernier Pollen latest Update < 50 min, veuillez patienter svp');
+        // }
     }
 
 
@@ -770,15 +786,18 @@ class pollen extends eqLogic
         $cmdXToTest = $this->getCmd(null, 'others_min');
         $interval = $this->getIntervalLastRefresh($cmdXToTest);
         log::add('pollen', 'debug', 'Refresh Forecast Pollen : Test Interval last refresh = ' . $interval . ' min');
-        if ($interval > 240) {
+        if ($interval >= 0) {
             log::add('pollen', 'debug', 'Refresh Forecast Pollen : Interval > 240 min (6h)');
             $forecast =  $this->getApiData('getForecastPollen');
             log::add('pollen', 'debug', 'Forecast Pollen parsed : ' . json_encode($forecast));
             if (is_array($forecast) && !empty($forecast)) {
 
                 $this->checkAndUpdateCmd('daysPollen', json_encode($forecast['Alder']['day']));
+                log::add('pollen', 'debug', 'Alder Pollen Days : ' . json_encode($forecast['Alder']['day']));
                 $this->checkAndUpdateCmd('poaceae_min', json_encode($forecast['Poaceae']['min']));
+                log::add('pollen', 'debug', 'Poaceae Pollen Min : ' . json_encode($forecast['Poaceae']['min']));
                 $this->checkAndUpdateCmd('poaceae_max', json_encode($forecast['Poaceae']['max']));
+                log::add('pollen', 'debug', 'Poaceae Pollen Max : ' . json_encode($forecast['Poaceae']['max']));
                 $this->checkAndUpdateCmd('alder_min', json_encode($forecast['Alder']['min']));
                 $this->checkAndUpdateCmd('alder_max', json_encode($forecast['Alder']['max']));
                 $this->checkAndUpdateCmd('birch_min', json_encode($forecast['Birch']['min']));

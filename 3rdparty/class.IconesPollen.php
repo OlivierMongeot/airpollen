@@ -50,7 +50,6 @@ class IconesPollen
           
             foreach ($composants[$type] as $color => $range) {
                 if ($range[0] <= $value && $range[1] > $value) {
-                    message::add('debug', 'getColor Type: ' . $type);
                     return $color;
                 }
             }
@@ -60,7 +59,6 @@ class IconesPollen
            
             if ($range[0] <= $this->value && $range[1] > $this->value) {
                 $this->color = $color;
-                message::add('debug', 'getColor: ' . $color);
                 return $color;
             }
         }

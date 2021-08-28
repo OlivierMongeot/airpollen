@@ -248,7 +248,9 @@ $eqLogics = eqLogic::byType($plugin->getId());
                             </div>
                             <br>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">{{Affichage des prévivsions}}</label>
+                                <label class="col-sm-3 control-label">{{Affichage des prévivsions}}
+                                    <sup><i class="fa fa-question-circle tooltips" title="{{ Consomme 48 appels d'API par jours }}"></i></sup></label>
+                               
                                 <div class="col-sm-6">
                                     <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="data_forecast">
                                         <option value="actived">{{Activer}}</option>
@@ -257,9 +259,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                 </div>
                             </div>
                             <br>
-                        
-                            <br />
-                       
+                            <br/>
                             <div class="form-group elements pollen">
                                 <label style="margin-top:7px;" class="col-sm-3 control-label">{{Afficher à partir de}}</label>
                                 <div class="col-sm-6">
@@ -273,13 +273,23 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                     </div>
                                 </div>
                             </div>
+
+
+
+
+
                         </div>
                         <!-- Affiche l'icône du plugin par défaut mais vous pouvez y afficher les informations de votre choix -->
                         <div class="col-lg-6">
+                            <br>
+
+
                             <legend><i class="fas fa-info"></i> {{Informations}}</legend>
-                           
+
                             <!--  -->
                             <div class="form-group">
+
+
                                 <div class="container">
                                     <h6>{{Code couleur pollen utilisé dans le plugin}}</h6>
                                 </div>
@@ -302,6 +312,26 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                     <br>
                                 </div>
                             </div>
+                         
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">{{Rafraichissement des données}} <sup><i class="fa fa-question-circle tooltips" title="{{ Toutes les possibilitées sont gratuites pendant 15 jours dans la limite de 100 appels/jours}}"></i></sup></label>
+                                    <div class="col-sm-6">
+                                        <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="data_refresh">
+                                            <option value="disable">{{Manuel : 0.017€/appel}}</option>
+                                            <option value="oneByHour">{{Auto : 12 X par jour (de 8h à 19h) environ 6.20€/mois}}</option>
+                                            <option value="oneByTwoHour">{{Auto : 6 X par jour (de 8h à 18h) environ 3.10€/mois}}</option>
+                                              <option value="ThreeByDay">{{Auto : 3 X par jour (8h, 12h et 16h) environ 1.55€/mois}}</option>
+                                            <option value="twoByDay">{{Auto : 2 X par jour  (8h et 15h) environ 1€/mois}}</option>
+                                            <option value="full">{{Auto : 1 X par heure + forecast 1X par jour, environs 1.20€/jour}}</option>
+                                            <option value="fake_data">{{Données aléatoires pour démo (gratuit)}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <br><br>
+                            
+
                             <!--  -->
                             <div class="form-group">
                                 <div class="text-center">

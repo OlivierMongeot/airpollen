@@ -1,0 +1,38 @@
+{
+    "data": [{
+        "Count": {
+            "grass_pollen": 140,
+            "tree_pollen": 1504,
+            "weed_pollen": 740
+        },
+        "Risk": {
+            "grass_pollen": "very high risk",
+            "tree_pollen": "very high risk",
+            "weed_pollen": "very high risk"
+        },
+        "Species": {
+            "Grass": {
+                "Grass \/ Poecae": 140
+            },
+            "Others": 268,
+            "Tree": {
+                "Alder": 133,
+                "Birch": 85,
+                "Cypress": 151,
+                "Elm": 9,
+                "Hazel": 288,
+                "Oak": 256,
+                "Pine": 186,
+                "Plane": 198,
+                "Poplar \/ Cottonwood": 198
+            },
+            "Weed": {
+                "Chenopod": 275,
+                "Mugwort": 184,
+                "Nettle": 26,
+                "Ragweed": 255
+            }
+        }
+    }
+    ]
+}

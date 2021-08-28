@@ -58,14 +58,19 @@ class DisplayInfoPollen
 
     public function getPollenRisk(string $level)
     {
+        // log::add('pollen', 'debug', 'getPollenRisk for level : ' . $level);
         switch ($level) {
             case  'High':
+            case  'high risk':
                 return __("Risque haut", __FILE__);
             case 'Moderate':
+            case 'moderate risk':
                 return __("Risque modéré", __FILE__);
             case 'Low':
+            case 'low risk':
                 return __("Risque bas", __FILE__);
             case 'Very High':
+            case 'very high risk':
                 return __("Risque très haut", __FILE__);
             default:
                 return __("Risque inconnu", __FILE__);
@@ -400,28 +405,31 @@ class DisplayInfoPollen
             }
             // Message pour les hauts niveaus 
             else {
-                $messageHigh = '- <b>' . __($typeName, __FILE__) . "</b> " . __($this->getSynonyme('en hausse'), __FILE__) . ", reste " . __($this->getSynonyme('au niveau'), __FILE__) . " " . $newCategory .
+                $messageHigh = '- <b>' . __($typeName, __FILE__) . "</b> " . __($this->getSynonyme('en hausse'), __FILE__) . __($this->getSynonyme('reste au niveau'), __FILE__) . " " . $newCategory .
                     " " . __('avec', __FILE__) . " " . $newData . " part/m³ ";
             }
-        //Baisse
+            //Baisse
         } else if ($newData < $oldData) {
             $newCategory = $this->getLevelPollen($newData, $type);
             $oldCategory = $this->getLevelPollen($oldData, $type);
             // log::add('pollen', 'debug', 'Make Message Baisse Pollen type: ' . $type . ' New Cat: ' . $newCategory . ' < OldCat: ' . $oldCategory);
             if ($newCategory !== $oldCategory) {
-                $message = "<b>" . __($typeName , __FILE__) . "</b> " . $this->getSynonyme('en baisse') ." " .__($this->getSynonyme('au niveau'),__FILE__) ." " . $newCategory . " ".__('avec',__FILE__)." " . $newData . " part/m³ ";
+                $message = "<b>" . __($typeName, __FILE__) . "</b> " . __($this->getSynonyme('en baisse'), __FILE__) . " " . __($this->getSynonyme('au niveau'), __FILE__) . " " . $newCategory . " " . __('avec', __FILE__) . " " . $newData . " part/m³ ";
+            } // Pas de changement de level 
+            else if ($newCategory != 'risque bas')
+            {
+                $messageMore = "- <b>" .  __($typeName, __FILE__) . "</b> " . __($this->getSynonyme('légère baisse'),__FILE__) . ", " . __($this->getSynonyme('reste au niveau'), __FILE__) . " " . $newCategory .  " " . __('avec', __FILE__) . " " . $newData . " part/m³ ";
             }
-            // Pas de changement de level 
-            else if ($newCategory != 'risque bas') {
-                $messageMore = "- <b>" .  __($typeName , __FILE__) . "</b> " . $this->getSynonyme('légère baisse') . ", " . __($this->getSynonyme('reste au niveau'),__FILE__) . " " . $newCategory .  " ".__('avec',__FILE__)." " . $newData . " part/m³ ";
-            } else if ($newCategory == 'risque bas') {
-                $messageMore = "- <b>" .  __($typeName , __FILE__) . "</b> " . $this->getSynonyme('légère baisse') . ", " . __($this->getSynonyme('reste au meilleur niveau'),__FILE__) . " " . $newCategory .  " ".__('avec',__FILE__)." " . $newData . " part/m³ ";
-            } else if (
-                $newCategory == 'risque très haut' || $newCategory == 'risque haut'
-            ) {
-                $messageHigh = "<b>" . __($typeName, __FILE__) . "</b> " . $this->getSynonyme('en baisse') . ", mais reste " . __($this->getSynonyme('au niveau'), __FILE__) . " " . $newCategory . " " . __('avec', __FILE__) . " " . $newData . " part/m³ ";
+            else if ($newCategory == 'risque bas')
+            {
+                $messageMore = "- <b>" .  __($typeName, __FILE__) . "</b> " . __($this->getSynonyme('légère baisse'),__FILE__) . ", " . __($this->getSynonyme('reste au meilleur niveau'), __FILE__) . " " . $newCategory .  " " . __('avec', __FILE__) . " " . $newData . " part/m³ ";
             }
-         // Stable
+            else if ($newCategory == 'risque très haut' || $newCategory == 'risque haut' )
+            {
+                $messageHigh = "<b>" . __($typeName, __FILE__) . "</b> " . __($this->getSynonyme('en baisse'), __FILE__) . ", ".__("mais reste",__FILE__) ." " .
+                 __($this->getSynonyme('au niveau'), __FILE__) . " " . $newCategory . " " . __('avec',__FILE__) . " " . $newData . " part/m³ ";
+            }
+            // Stable
         } else {
            
             $newCategory = $this->getLevelPollen($newData, $type);
