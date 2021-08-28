@@ -1,17 +1,17 @@
-# Plugin Jeedom AirQuality
+# Plugin Jeedom Air Pollen
 
 <br/>
 
-<img align="right" height="350" src="https://github.com/OlivierMongeot/airpollen/blob/Master/docs/photos/alerte.JPG" class="img-responsive" alt="Pollen">Le plugin Air Quality & Pollen vous informe sur la qualité de l'air et les pollens presque partout dans le monde.
+<img align="right" height="350" src="https://github.com/OlivierMongeot/airpollen/blob/Master/docs/photos/alerte.JPG" class="img-responsive" alt="Pollen">Le plugin Air Pollen vous informe sur les pollens presque partout dans le monde.
 
 Il s'adresse essentiellement aux personnes allergiques, asthmatiques, sensibles et sportifs, mais aussi à tous ceux qui prennent attention à l'air qu'il respire. 
 
 ## Prévisions & live
 
-Grâce aux informations des prévisons et données live, vous pouvez manager votre planning et vous prémunir des polluants ou pollens. 
-Vous accèdez aux informations en direct mais aussi aux prévisions sur 5 jours pour la pollution et sur 2 jours pour les pollens.
+Grâce aux informations des prévisons et données live, vous pouvez manager votre planning et vous prémunir des pollens. 
+Vous accèdez aux informations en direct mais aussi aux prévisions sur 2 jours.
 
-Les polluants et pollens sont affichés par niveau décroissant pour simplifier la lisibilité. 
+Les pollens sont affichés par niveau décroissant pour simplifier la lisibilité. 
 
 ## Alertes
 
@@ -51,8 +51,8 @@ Vous pouvez activer ou pas l'ensemble en activant le bouton ci-dessous dans les 
 Les données sont récupérées par trois API gratuites: Openwheather, Ambee et navigator.geolocation(HTML)
 
 Elles sont gratuites dans une certaine limite d'appels par jour. Dans l'applis, pour Ambee, le plugin est conçu pour être aux limites du gratuit, c'est à dire 100 appels/jour. Cepandant, certains utilisateurs on reçu un courrier de la Sté Ambee, leur stipulant que la version gratuite sera limité dans le temps.
-Il faudrait alors basculer vers leur abonnement payant.  
 
+Il faudrait alors basculer vers leur abonnement payant.  
 
 Les prévisons de pollens sont mises à jour une fois par jour seulement, j'ai choisi 7h du matin, car seulement 24h sont en fait disponibles. Ce qui veux dire que pour le troisième jour de prévision, les infos vont jusqu'a 7h00 du matin et donc sont suceptiblent dévoluer en s'affinant.
 
@@ -61,14 +61,7 @@ Les prévisons de pollens sont mises à jour une fois par jour seulement, j'ai c
 
 En effet, lors du refresh des prévisons pollens l'api compte 1 appel par heure de données fournie, donc l'appel forecast sur 48 heures coûte 48 appels sur les 100 journalier. Ce qui explique mon choix d'appel une fois par jour. 
 
-Pour OpenWheather, la limite d'appel par jour est beaucoup plus haut, donc pas de soucis de quota. 
-
-J'ai mis en place, un systeme de bridage qui vous empêche des rafraichissements trop important des données.
-
-Les deux Api fonctionnent presque partout dans le monde et vous pouvez l'utilisez en vous géolocalisant automatiquement.
-
-Les normes utilisées sont ceux de l'Agence européenne pour l'environnement 2021.
-
+L'Api fonctionne presque partout dans le monde et vous pouvez l'utilisez en vous géolocalisant automatiquement.
 <br/>
 
 # Configuration principale du plugin
@@ -76,8 +69,6 @@ Les normes utilisées sont ceux de l'Agence européenne pour l'environnement 202
 Après avoir installé le plugin, il faut l’activer puis renseigner votre clef api.
 
 Si vous avez déjà une clef pour le plugin Weather officiel de Jeedom, la clef s'importe dans le plugin en cliquant sur import. Vous n'avez donc pas besoin de nouvelle clef.    
-
-Pour obtenir une clef api OpenWheather il faut aller [ici](https://home.openweathermap.org), créer un compte gratuit et ensuite il faut copier votre clef api dans la zone prévue sur la page "Configuration du Plugin".
 
 Pour obtenir la clef api ambee il faut aller [ici](https://api-dashboard.getambee.com/#/signup), c'est à peu près le même principe qu'avant : vous récupérez une clef gratuite que vous coller dans la configuration du plugin".
 
@@ -97,8 +88,6 @@ Pour la localisation 'Par ville', vous devez vérifier que la ville est bien tro
 
 Vous pouvez également activer, le glissement automatique du carroussel, pour cela mettez Animation en 'activer' 
 
-Ensuite choisissez Polluant ou Pollen. 
-
 Vous pouvez créer plusieurs équipement pour plusieurs villes pour les données AQI. Par contre, pour les pollens, en faisant cela, vous dépassez directement le quota journalier. 
 
 Vous devrez alors choisir une version payante de l'API Ambee.
@@ -110,9 +99,6 @@ En cliquant sur les moyennes vous accèder au graphique représentant ces donné
 
 Le graphique du bas donne le mini et maxi prévu par jour de la semaine pour chaque élément analysé.
 
-Pour l'AQI, tous les polluants sont affichés par défault, il vous suffit de désactiver l'option "Afficher" dans la partie Commandes de votre équipement pour ne plus l'afficher.   
-
-Pour les pollens, tous sont affichés par défaut, le plugin les classe automatiquement par ordre décroissant de risque.
 
 Les pollens non détéctés (à zéro) sont affichés à part dans un tableau à la fin du caroussel comme la photo ci-dessus ou il peuvent ne pas être affichés en réglant la molette ci-dessous :
 
@@ -123,10 +109,6 @@ Les pollens non détéctés (à zéro) sont affichés à part dans un tableau à
 Il existe une version mobile qui reprend pratiquement exactement la vue du dashboard.  
 
 # Important
-
-L'AQI en Europe est désormais calculée de 1 (Bon) à 6 (Extrèmement mauvais)
-
-J'ai utilisé les code couleur officiel pour l'affichage : [voir ici](https://fr.wikipedia.org/wiki/Indice_de_qualit%C3%A9_de_l%27air)
 
 Pour les pollens les niveaux de danger principaux sont donnés par l'API Ambee (de 1 Risque nul à 4 Risque très élevé).
 
@@ -148,13 +130,9 @@ Mais comme tout le monde est différent, vous pouvez régler les alertes selon v
 
 # Note
 
-Le rafraîchissement des données AQI s’effectue toutes les 30 minutes et le forecast trois fois par jour à 7h00, 12h00 et 18h00
-
 Le rafraîchissement des données Pollen s’effectue toutes les 60 minutes et le forecast tous les matin à 7h00
 
 Ce plugin est simplement informatif, il ne remplace en aucun cas pas d'éventuels indications données par votre médecin ou tout autre corps médicale.
-
-
 
 # Gestion des alertes 
 
