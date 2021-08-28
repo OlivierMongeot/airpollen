@@ -112,12 +112,6 @@ Il existe une version mobile qui reprend pratiquement exactement la vue du dashb
 
 Pour les pollens les niveaux de danger principaux sont donnés par l'API Ambee (de 1 Risque nul à 4 Risque très élevé).
 
-Vous pouvez régler les alertes par polluant dans la configuration : 
-
-<p align="center">
-<img height="300" src="https://github.com/OlivierMongeot/airpollen/blob/Master/docs/photos/plancherAqi.JPG">
-</p>
-
 J'ai calé les niveaux alertes par pollens, les calculs sont basés sur un Mémoire de l’École Nationale de la Santé Publique et une étude de l'ENSP (pdf dans le repertoire docs) :
 
 Les niveaux d'alertes moyen sont basées sur des seuils d'environs 40 particules/m³, ce qui correspond au plancher de niveau de sensibilité de la plupart des personnes allergiques. Certains sujets hypersensibles, sont touchés dès 5 part/m³.  
@@ -130,7 +124,7 @@ Mais comme tout le monde est différent, vous pouvez régler les alertes selon v
 
 # Note
 
-Le rafraîchissement des données Pollen s’effectue toutes les 60 minutes et le forecast tous les matin à 7h00
+Le rafraîchissement des données Pollen s’effectue à la carte.
 
 Ce plugin est simplement informatif, il ne remplace en aucun cas pas d'éventuels indications données par votre médecin ou tout autre corps médicale.
 
