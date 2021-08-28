@@ -89,9 +89,15 @@
         "Bonne":"Bonne",
         "Éléments à suivre": "Éléments à suivre",
         "Niveau de déclenchement des alertes":"Niveau de déclenchement des alertes",
-        "Synchroniser alerte et affichage":"Synchroniser alerte et affichage"
-
-      
+        "Synchroniser alerte et affichage":"Synchroniser alerte et affichage",
+        "Rafraichissement des données": "Rafraichissement des données",
+        "Manuel : 0.017€/appel": "Manuel : 0.017€/appel",
+        "Auto : 12 X par jour (de 8h à 19h) environ 6.20€/mois":"Auto : 12 X par jour (de 8h à 19h) environ 6.20€/mois",
+        "Auto : 6 X par jour (de 8h à 18h) environ 3.10€/mois":"Auto : 6 X par jour (de 8h à 18h) environ 3.10€/mois",
+        "Auto : 3 X par jour (8h, 12h et 16h) environ 1.55€/mois":"Auto : 3 X par jour (8h, 12h et 16h) environ 1.55€/mois",
+        "Auto : 2 X par jour  (8h et 15h) environ 1€/mois":"Auto : 2 X par jour  (8h et 15h) environ 1€/mois",
+        "Auto : 1 X par heure + forecast 1X par jour, environs 1.20€/jour":"Auto : 1 X par heure + forecast 1X par jour, environs 1.20€/jour",
+        "Données aléatoires pour démo (gratuit)": "Données aléatoires pour démo (gratuit)"
     },
     "plugins\/pollen\/desktop\/js\/pollen.js": {
         "Nom": "Nom",

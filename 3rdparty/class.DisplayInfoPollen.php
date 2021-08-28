@@ -470,6 +470,7 @@ class DisplayInfoPollen
         $arrayMessage[] = "&#127804; <b>".__('Alerte',__FILE__)." Pollen - ". $city . "</b> " ." \n" . " ";
         $findLetters = [
             '&#127808;' => 'bas', '&#128545;' => 'haut', '&#128520;' => 'très', '&#127803;' => 'modéré', '&#128545;' => 'very',  '&#127752;' => 'low', '&#128551;' => 'moderate'
+            , '&#128545;' => 'high', '&#128520;' => 'very'
         ];
         foreach ($messages as $message) {
             $icon = '';
