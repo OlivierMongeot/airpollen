@@ -19,13 +19,13 @@
 require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
 
 // Fonction exécutée automatiquement après l'installation du plugin
-// function pollen_install()
+// function airpollen_install()
 // {
 
 // }
 
 // Fonction exécutée automatiquement après la mise à jour du plugin
-// function pollen_update()
+// function airpollen_update()
 // {
 
 // }
@@ -33,7 +33,7 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
 
 
 // Fonction exécutée automatiquement après la suppression du plugin
-// function pollen_remove()
+// function airpollen_remove()
 // {
 
 // }

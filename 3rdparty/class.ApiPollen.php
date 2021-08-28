@@ -307,10 +307,10 @@ class ApiPollen
         $poplar = rand(0, 10);
         $totalTree = $alder + $birch + $cypress + $elm + $hazel + $oak + $pine + $plane + $poplar;
         $others = rand(0, 4);
-        $poaceae = rand(0, 40);
+        $poaceae = rand(0, 100);
         $chenopod = rand(0, 50);
         $mugwort = rand(0, 10);
-        $nettle = rand(50, 200);
+        $nettle = rand(10, 250);
         $ragweed = rand(0, 3);
         $totalWeed = $chenopod + $mugwort + $nettle + $ragweed;
 

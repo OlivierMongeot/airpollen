@@ -318,13 +318,13 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                     <label class="col-sm-3 control-label">{{Rafraichissement des données}} <sup><i class="fa fa-question-circle tooltips" title="{{ Toutes les possibilitées sont gratuites pendant 15 jours dans la limite de 100 appels/jours}}"></i></sup></label>
                                     <div class="col-sm-6">
                                         <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="data_refresh">
+                                            <option value="fake_data">{{Données aléatoires pour démo }}</option>
                                             <option value="disable">{{Manuel : 0.017€/appel}}</option>
                                             <option value="oneByHour">{{Auto : 12 X par jour (de 8h à 19h) environ 6.20€/mois}}</option>
                                             <option value="oneByTwoHour">{{Auto : 6 X par jour (de 8h à 18h) environ 3.10€/mois}}</option>
-                                              <option value="ThreeByDay">{{Auto : 3 X par jour (8h, 12h et 16h) environ 1.55€/mois}}</option>
+                                            <option value="ThreeByDay">{{Auto : 3 X par jour (8h, 12h et 16h) environ 1.55€/mois}}</option>
                                             <option value="twoByDay">{{Auto : 2 X par jour  (8h et 15h) environ 1€/mois}}</option>
                                             <option value="full">{{Auto : 1 X par heure + forecast 1X par jour, environs 1.20€/jour}}</option>
-                                            <option value="fake_data">{{Données aléatoires pour démo (gratuit)}}</option>
                                         </select>
                                     </div>
                                 </div>

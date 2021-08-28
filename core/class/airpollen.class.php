@@ -16,9 +16,9 @@
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
 
-error_reporting(E_ALL);
-ini_set('ignore_repeated_errors', TRUE);
-ini_set('display_errors', TRUE);
+// error_reporting(E_ALL);
+// ini_set('ignore_repeated_errors', TRUE);
+// ini_set('display_errors', TRUE);
 
 require_once __DIR__  . '/../../../../core/php/core.inc.php';
 require dirname(__FILE__) . '/../../core/php/airpollen.inc.php';
@@ -201,11 +201,15 @@ class airpollen extends eqLogic
             if (is_object($cmdXCheckNull) && $cmdXCheckNull->execCmd() == null) {
                 $cmd = $this->getCmd(null, 'refresh');
                 if (is_object($cmd)) {
-                    // $cmd->execCmd();
+                    $cmd->execCmd();
                 }
+            }
+
+            $cmdXCheckNull =  $this->getCmd(null, 'poaceae_min');
+            if (is_object($cmdXCheckNull) && $cmdXCheckNull->execCmd() == null) {
                 $cmd = $this->getCmd(null, 'refresh_pollen_forecast');
-                if (is_object($cmd)) {
-                    // $cmd->execCmd();
+                if (is_object($cmd)  && $this->getConfiguration('data_forecast') == 'actived' && $this->getConfiguration('data_refresh') == 'full') {
+                    $cmd->execCmd();
                 }
             }
         }
@@ -216,7 +220,7 @@ class airpollen extends eqLogic
     {
         $this->setDisplay("width", "265px");
         if ($this->getConfiguration('data_forecast') == 'disable') {
-            $this->setDisplay("height", "210px");
+            $this->setDisplay("height", "220px");
         } else {
             $this->setDisplay("height", "375px");
         }
@@ -766,6 +770,11 @@ class airpollen extends eqLogic
             if (!empty($messagesPollens[0])) {
                 $this->setMinutedAction('alertPollenCronTwoMin', 2);
             }
+
+            if ($this->getConfiguration('data_refresh') == 'fake_data') {
+                $this->updateForecastPollen();
+            }
+
             $this->refreshWidget();
         }
         // } else {
