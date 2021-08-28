@@ -55,7 +55,7 @@ if (!isConnect()) {
     $(document).on('click', '#import-weather-key', function() {
         $.ajax({
             type: "POST",
-            url: "plugins/pollen/core/ajax/pollen.ajax.php",
+            url: "plugins/airpollen/core/ajax/airpollen.ajax.php",
             data: {
                 action: "getApiKeyWeather"
             },
@@ -76,7 +76,7 @@ if (!isConnect()) {
     $(document).on('click', '#import-airquality-key', function() {
         $.ajax({
             type: "POST",
-            url: "plugins/pollen/core/ajax/pollen.ajax.php",
+            url: "plugins/airpollen/core/ajax/airpollen.ajax.php",
             data: {
                 action: "getApiKeyAirquality"
             },

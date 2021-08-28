@@ -1,6 +1,6 @@
 <?php
 
-class  Setup
+class  SetupPollen
 {
 
     public static $setupPollen = [

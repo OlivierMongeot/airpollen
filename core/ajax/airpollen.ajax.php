@@ -30,17 +30,17 @@ try {
     switch (init('action')) {
 
         case 'getcity':
-            $city = pollen::getCityName(init('longitude'), init('latitude'), init('save'));
+            $city = airpollen::getCityName(init('longitude'), init('latitude'), init('save'));
             ajax::success($city);
             break;
 
         case 'getCoordinates':
-            $coordinates =  pollen::getCoordinates(init('cityName'), init('cityCode'));
+            $coordinates =  airpollen::getCoordinates(init('cityName'), init('cityCode'));
             ajax::success($coordinates);
             break;
 
         case 'setDynGeoloc':
-            $setup =  pollen::setNewGeoloc(init('longitude'), init('latitude'));
+            $setup =  airpollen::setNewGeoloc(init('longitude'), init('latitude'));
             log::add('pollen', 'debug', 'Set DynGeoloc response Lat & Lon : ' . json_encode($setup));
             ajax::success($setup);
             break;

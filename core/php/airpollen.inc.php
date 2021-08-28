@@ -23,8 +23,8 @@ require_once __DIR__  . '/../../../../core/php/core.inc.php';
  * 
  */
 
-if (!class_exists('Setup')){
-    require_once dirname(__FILE__) . '/../../3rdparty/class.Setup.php';
+if (!class_exists('SetupPollen')){
+    require_once dirname(__FILE__) . '/../../3rdparty/class.SetupPollen.php';
 }
 if (!class_exists('ApiPollen')){
     require_once dirname(__FILE__) . '/../../3rdparty/class.ApiPollen.php';

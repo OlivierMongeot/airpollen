@@ -58,7 +58,7 @@ class DisplayInfoPollen
 
     public function getPollenRisk(string $level)
     {
-        // log::add('pollen', 'debug', 'getPollenRisk for level : ' . $level);
+        // log::add('airpollen', 'debug', 'getPollenRisk for level : ' . $level);
         switch ($level) {
             case  'High':
             case  'high risk':
@@ -178,7 +178,7 @@ class DisplayInfoPollen
             if (!empty($mess[0])) {
                 $message[] = $mess[0];
                 if (!empty($mess[2])) {
-                    // log::add('pollen', 'debug', 'Message High' . $mess[2]);
+                    // log::add('airpollen', 'debug', 'Message High' . $mess[2]);
                     $message[] = $mess[2];
                 }
             } else if (!empty($mess[1])) {
@@ -312,7 +312,7 @@ class DisplayInfoPollen
             if (!empty($mess[0])) {
                 $message[] = $mess[0];
                 if (!empty($mess[2])) {
-                    log::add('pollen', 'debug', 'Message High' . $mess[2]);
+                    log::add('airpollen', 'debug', 'Message High' . $mess[2]);
                     $message[] = $mess[2];
                 }
             } else if (!empty($mess[1])) {
@@ -328,7 +328,7 @@ class DisplayInfoPollen
             if (!empty($mess[0])) {
                 $message[] = $mess[0];
                 if (!empty($mess[2])) {
-                    log::add('pollen', 'debug', 'Message High' . $mess[2]);
+                    log::add('airpollen', 'debug', 'Message High' . $mess[2]);
                     $message[] = $mess[2];
                 }
             } else if (!empty($mess[1])) {
@@ -343,7 +343,7 @@ class DisplayInfoPollen
             if (!empty($mess[0])) {
                 $message[] = $mess[0];
                 if (!empty($mess[2])) {
-                    log::add('pollen', 'debug', 'Message High' . $mess[2]);
+                    log::add('airpollen', 'debug', 'Message High' . $mess[2]);
                     $message[] = $mess[2];
                 }
             } else if (!empty($mess[1])) {
@@ -359,7 +359,7 @@ class DisplayInfoPollen
             if (!empty($mess[0])) {
                 $message[] = $mess[0];
                 if (!empty($mess[2])) {
-                    log::add('pollen', 'debug', 'Message High' . $mess[2]);
+                    log::add('airpollen', 'debug', 'Message High' . $mess[2]);
                     $message[] = $mess[2];
                 }
             } else if (!empty($mess[1])) {   
@@ -379,7 +379,7 @@ class DisplayInfoPollen
         $telegramMessage = $this->formatPollensForTelegram($message, $city);
         $markdownMessage = $this->formatPollenMarkDown($message);
         $smsMessage = $this->formatPollensForSms($message);
-        log::add('pollen', 'debug', 'Markdown Message Pollen' . json_encode( $message));
+        log::add('airpollen', 'debug', 'Markdown Message Pollen' . json_encode( $message));
         return [$stringMess, $telegramMessage, $smsMessage, $markdownMessage];
     }
 
@@ -389,12 +389,12 @@ class DisplayInfoPollen
         $messageMore = '';
         $messageHigh = '';
         //Hausse
-        // log::add('pollen', 'debug', '----------Make Message Pollen ----------------------');
-        // log::add('pollen', 'debug', 'New Data : ' . $newData . ' Old Data : ' . $oldData . ' For: ' . $typeName);
+        // log::add('airpollen', 'debug', '----------Make Message Pollen ----------------------');
+        // log::add('airpollen', 'debug', 'New Data : ' . $newData . ' Old Data : ' . $oldData . ' For: ' . $typeName);
         if ($newData > $oldData) {
             $newCategory = $this->getLevelPollen($newData, $type);
             $oldCategory = $this->getLevelPollen($oldData, $type);
-            // log::add('pollen', 'debug', 'Get Level Message Hausse Pollen for type: ' . $type . ' New Cat: ' . $newCategory . ' > OldCat: ' . $oldCategory);
+            // log::add('airpollen', 'debug', 'Get Level Message Hausse Pollen for type: ' . $type . ' New Cat: ' . $newCategory . ' > OldCat: ' . $oldCategory);
             if ($newCategory !== $oldCategory) {
                 $message = '- <b>' . __($typeName , __FILE__) . "</b> " . __($this->getSynonyme('en hausse'),__FILE__) . " " .__($this->getSynonyme('au niveau'),__FILE__) ." " . $newCategory .
                     " " . __('avec', __FILE__) . " " . $newData . " part/m³ ";
@@ -412,7 +412,7 @@ class DisplayInfoPollen
         } else if ($newData < $oldData) {
             $newCategory = $this->getLevelPollen($newData, $type);
             $oldCategory = $this->getLevelPollen($oldData, $type);
-            // log::add('pollen', 'debug', 'Make Message Baisse Pollen type: ' . $type . ' New Cat: ' . $newCategory . ' < OldCat: ' . $oldCategory);
+            // log::add('airpollen', 'debug', 'Make Message Baisse Pollen type: ' . $type . ' New Cat: ' . $newCategory . ' < OldCat: ' . $oldCategory);
             if ($newCategory !== $oldCategory) {
                 $message = "<b>" . __($typeName, __FILE__) . "</b> " . __($this->getSynonyme('en baisse'), __FILE__) . " " . __($this->getSynonyme('au niveau'), __FILE__) . " " . $newCategory . " " . __('avec', __FILE__) . " " . $newData . " part/m³ ";
             } // Pas de changement de level 
@@ -433,7 +433,7 @@ class DisplayInfoPollen
         } else {
            
             $newCategory = $this->getLevelPollen($newData, $type);
-            // log::add('pollen', 'debug', 'Make Message Stable Pollen type: ' . $type . ' New Cat: ' . $newCategory . ' is stable ');
+            // log::add('airpollen', 'debug', 'Make Message Stable Pollen type: ' . $type . ' New Cat: ' . $newCategory . ' is stable ');
 
             if ($newCategory == 'risque haut' || $newCategory == 'risque très haut') {
                 $messageHigh = ' - <b>' .  __($typeName, __FILE__) . "</b> " . __($this->getSynonyme('stable'), __FILE__)
@@ -454,7 +454,7 @@ class DisplayInfoPollen
 
     public function getLevelPollen($value, $type)
     {
-        $allranges = Setup::$pollenRange;
+        $allranges = SetupPollen::$pollenRange;
         $ranges = $allranges[$type];
         foreach ($ranges as $color => $range) {
             if ($range[0] <= $value && $range[1] > $value) {

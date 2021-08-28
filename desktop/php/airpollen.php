@@ -3,7 +3,7 @@ if (!isConnect('admin')) {
     throw new Exception('{{401 - Accès non autorisé}}');
 }
 // Déclaration des variables obligatoires
-$plugin = plugin::byId('pollen');
+$plugin = plugin::byId('airpollen');
 sendVarToJS('eqType', $plugin->getId());
 $eqLogics = eqLogic::byType($plugin->getId());
 
@@ -561,8 +561,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
                     </div>
                 </div>
 
-
-
                 <!-- </div> -->
             </div>
             <!--/.tabpanel-->
@@ -573,5 +571,5 @@ $eqLogics = eqLogic::byType($plugin->getId());
     </div><!-- /.eqLogic -->
 </div><!-- /.row row-overflow -->
 
-<?php include_file('desktop', 'pollen', 'js', 'pollen'); ?>
+<?php include_file('desktop', 'airpollen', 'js', 'airpollen'); ?>
 <?php include_file('core', 'plugin.template', 'js'); ?>

@@ -44,7 +44,7 @@ class IconesPollen
     public function getColor($value = false, $type = false)
     {
 
-      $composants = Setup::$pollenRange;
+      $composants = SetupPollen::$pollenRange;
 
         if ($value && $type){
           

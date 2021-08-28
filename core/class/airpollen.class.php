@@ -21,9 +21,9 @@ ini_set('ignore_repeated_errors', TRUE);
 ini_set('display_errors', TRUE);
 
 require_once __DIR__  . '/../../../../core/php/core.inc.php';
-require dirname(__FILE__) . '/../../core/php/pollen.inc.php';
+require dirname(__FILE__) . '/../../core/php/airpollen.inc.php';
 
-class pollen extends eqLogic
+class airpollen extends eqLogic
 {
 
     public static $_widgetPossibility = ['custom' => true, 'custom::layout' => false];
@@ -31,7 +31,7 @@ class pollen extends eqLogic
     public static function cron()
     {
         // Assignation d'une minute de refresh aléatoire suite mail Ambee
-        foreach (self::byType('pollen') as $pollen) {
+        foreach (self::byType('airpollen') as $pollen) {
 
             if ($pollen->getIsEnable() == 1) {
 
@@ -43,11 +43,11 @@ class pollen extends eqLogic
                        
                         $c = new Cron\CronExpression($crontabPollen, new Cron\FieldFactory);
                         if ($c->isDue()) {
-                             log::add('pollen', 'debug', 'Cron pollen current : ' . $crontabPollen);
+                             log::add('airpollen', 'debug', 'Cron pollen current : ' . $crontabPollen);
                             $pollen->updatePollen();
                         }
                     } catch (Exception $e) {
-                        log::add('pollen', 'debug', __('Expression cron non valide pour update Pollen full', __FILE__) . $pollen->getHumanName() . ' : ' . json_encode($e));
+                        log::add('airpollen', 'debug', __('Expression cron non valide pour update Pollen full', __FILE__) . $pollen->getHumanName() . ' : ' . json_encode($e));
                     }
 
 
@@ -59,20 +59,20 @@ class pollen extends eqLogic
                             $c = new Cron\CronExpression($cronForecast, new Cron\FieldFactory);
 
                             if ($c->isDue()) {
-                                log::add('pollen', 'debug', 'Cron forecast Pollen  : ' . $cronForecast);
+                                log::add('airpollen', 'debug', 'Cron forecast Pollen  : ' . $cronForecast);
                                 try {
                                     $refresh = $pollen->getCmd(null, 'refresh_pollen_forecast');
                                     if (is_object($refresh)) {
                                         $refresh->execCmd();
                                     } else {
-                                        log::add('pollen', 'debug', 'Impossible de trouver la commande refresh pour ' . $pollen->getHumanName());
+                                        log::add('airpollen', 'debug', 'Impossible de trouver la commande refresh pour ' . $pollen->getHumanName());
                                     }
                                 } catch (Exception $e) {
-                                    log::add('pollen', 'debug', __('Erreur pour ', __FILE__) . $pollen->getHumanName() . ' : ' . $e->getMessage());
+                                    log::add('airpollen', 'debug', __('Erreur pour ', __FILE__) . $pollen->getHumanName() . ' : ' . $e->getMessage());
                                 }
                             }
                         } catch (Exception $e) {
-                            log::add('pollen', 'debug', __('Expression cron non valide pour Pollen refresh forecast', __FILE__) . $pollen->getHumanName() . ' - ' .  $e->getMessage());
+                            log::add('airpollen', 'debug', __('Expression cron non valide pour Pollen refresh forecast', __FILE__) . $pollen->getHumanName() . ' - ' .  $e->getMessage());
                         }
                     }
                 }
@@ -101,7 +101,7 @@ class pollen extends eqLogic
                             $pollen->updatePollen();
                         }
                     } catch (Exception $e) {
-                        log::add('pollen', 'debug', __('Expression cron non valide pour update Pollen manual', __FILE__) . $pollen->getHumanName() . ' : ' . json_encode($e));
+                        log::add('airpollen', 'debug', __('Expression cron non valide pour update Pollen manual', __FILE__) . $pollen->getHumanName() . ' : ' . json_encode($e));
                     }
                 }
 
@@ -119,14 +119,14 @@ class pollen extends eqLogic
                             if (is_object($refresh)) {
                                 $refresh->execCmd();
                             } else {
-                                log::add('pollen', 'debug', __('Impossible de trouver la commande refresh pour ', __FILE__) . $pollen->getHumanName());
+                                log::add('airpollen', 'debug', __('Impossible de trouver la commande refresh pour ', __FILE__) . $pollen->getHumanName());
                             }
                         } catch (Exception $e) {
-                            log::add('pollen', 'debug', __('Erreur pour ', __FILE__) . $pollen->getHumanName() . ' : ' . $e->getMessage());
+                            log::add('airpollen', 'debug', __('Erreur pour ', __FILE__) . $pollen->getHumanName() . ' : ' . $e->getMessage());
                         }
                     }
                 } catch (Exception $e) {
-                    log::add('pollen', 'debug', __('Expression cron non valide pour Refresh alert Pollen', __FILE__) . $pollen->getHumanName() . ' : ' . json_encode($specialCron)  . json_encode($e));
+                    log::add('airpollen', 'debug', __('Expression cron non valide pour Refresh alert Pollen', __FILE__) . $pollen->getHumanName() . ' : ' . json_encode($specialCron)  . json_encode($e));
                 }
 
             }
@@ -146,8 +146,8 @@ class pollen extends eqLogic
             $dateNow = new DateTime();
             $dateNow->setTimezone(new DateTimeZone('Europe/Paris'));
             $interval = $datetimeCollected->diff($dateNow);
-            log::add('pollen', 'debug', '----------------------------------------------------------------------');
-            log::add('pollen', 'debug', 'Check Intervale derniere Collecte pour ' . $cmdXToTest->getHumanName() . '  : ' . $interval->i . ' m ' . $interval->h . ' h et ' . $interval->d . ' jours');
+            log::add('airpollen', 'debug', '----------------------------------------------------------------------');
+            log::add('airpollen', 'debug', 'Check Intervale derniere Collecte pour ' . $cmdXToTest->getHumanName() . '  : ' . $interval->i . ' m ' . $interval->h . ' h et ' . $interval->d . ' jours');
             $minuteToAdd = 0;
             if ($interval->d > 0) {
                 $minuteToAdd = $interval->d * 24 * 60;
@@ -229,7 +229,7 @@ class pollen extends eqLogic
 
         $refreshForecast = $this->getCmd(null, 'refresh_pollen_forecast');
         if (!is_object($refreshForecast)) {
-            $refreshForecast = new pollenCmd();
+            $refreshForecast = new airpollenCmd();
             $refreshForecast->setName('Rafraichir Forecast Pollen');
         }
         $refreshForecast->setEqLogic_id($this->getId())
@@ -239,7 +239,7 @@ class pollen extends eqLogic
 
         $refresh = $this->getCmd(null, 'refresh');
         if (!is_object($refresh)) {
-            $refresh = new pollenCmd();
+            $refresh = new airpollenCmd();
             $refresh->setName('Rafraichir');
         }
         $refresh->setEqLogic_id($this->getId())
@@ -249,7 +249,7 @@ class pollen extends eqLogic
 
         $refresh = $this->getCmd(null, 'refresh_alert_pollen');
         if (!is_object($refresh)) {
-            $refresh = new pollenCmd();
+            $refresh = new airpollenCmd();
             $refresh->setName('Rafraichir les alertes pollens');
         }
         $refresh->setEqLogic_id($this->getId())
@@ -257,14 +257,14 @@ class pollen extends eqLogic
             ->setType('action')
             ->setSubType('other')->save();
 
-        $setup = Setup::$setupPollen;
+        $setup = SetupPollen::$setupPollen;
 
 
 
         foreach ($setup as $command) {
             $cmdInfo = $this->getCmd(null, $command['name']);
             if (!is_object($cmdInfo)) {
-                $cmdInfo = new pollenCmd();
+                $cmdInfo = new airpollenCmd();
                 $cmdInfo->setName($command['title']);
             }
             $cmdInfo->setEqLogic_id($this->getId())
@@ -300,8 +300,8 @@ class pollen extends eqLogic
         // Pollen ---------------
         $tabHeader = [];
         $counterMain = 0;
-        $elementTemplate = getTemplate('core', $version, 'elementPollen', 'pollen');
-        $headerTemplate = getTemplate('core', $version, 'headerPollen', 'pollen');
+        $elementTemplate = getTemplate('core', $version, 'elementPollen', 'airpollen');
+        $headerTemplate = getTemplate('core', $version, 'headerPollen', 'airpollen');
 
         foreach ($this->getCmd('info') as $cmd) {
             $nameCmd = $cmd->getLogicalId();
@@ -314,19 +314,19 @@ class pollen extends eqLogic
                         $treePollenCmd = $this->getCmd(null, 'tree_risk');
                         $value = $treePollenCmd->execCmd();
                         $headerReplace['#main_risk#'] =  $isObjet ? $display->getPollenRisk($value) : '';
-                        // log::add('pollen', 'debug', 'tree_pollen : ' . $value);
+                        // log::add('airpollen', 'debug', 'tree_pollen : ' . $value);
                         break;
                     case 'grass_pollen':
                         $grassPollenCmd = $this->getCmd(null, 'grass_risk');
                         $value = $grassPollenCmd->execCmd();
                         $headerReplace['#main_risk#'] =  $isObjet ? $display->getPollenRisk($value) : '';
-                        // log::add('pollen', 'debug', 'grass_pollen : ' . $value);
+                        // log::add('airpollen', 'debug', 'grass_pollen : ' . $value);
                         break;
                     case 'weed_pollen':
                         $weedPollenCmd = $this->getCmd(null, 'weed_risk');
                         $value = $weedPollenCmd->execCmd();
                         $headerReplace['#main_risk#'] =  $isObjet ? $display->getPollenRisk($value) : '';
-                        // log::add('pollen', 'debug', 'weed_pollen : ' . $value);
+                        // log::add('airpollen', 'debug', 'weed_pollen : ' . $value);
                 }
                 $headerReplace['#id#'] =  $isObjet ? $this->getId() : '';
                 $headerReplace['#main_cmd_pollen_id#'] =   $isObjet ? $cmd->getId() : '';
@@ -427,7 +427,7 @@ class pollen extends eqLogic
                 // Cas Pollen à ZERO 
                 else if ($this->getConfiguration('pollen_alert_level') == 0 && $cmd->execCmd() == 0) {
 
-                    // log::add('pollen', 'debug', 'Name Cmd Pollen ZERO : ' . $cmd->getName() . ' - ' .  $cmd->getLogicalId());
+                    // log::add('airpollen', 'debug', 'Name Cmd Pollen ZERO : ' . $cmd->getName() . ' - ' .  $cmd->getLogicalId());
                     $newIcon = $iconePollen->getIcon($nameCmd, $cmd->execCmd(), $cmd->getId());
                     $pollenZeroReplace['#icone#'] = $isObjet ? $newIcon : '';
                     $pollenZeroReplace['#id#'] = $isObjet ? $this->getId() : '';
@@ -437,7 +437,7 @@ class pollen extends eqLogic
                     $pollenZeroReplace['#cmdid#'] = $isObjet ?  $cmd->getId() : '';
                     $pollenZeroReplace['#info-modalcmd#'] =  $isObjet ? 'info-modal' . $cmd->getLogicalId() . $this->getId() : '';
                     $pollenZeroReplace['#message#'] = __('Aucune Détection', __FILE__);
-                    $templateZero = getTemplate('core', $version, 'elementPollenZero', 'pollen');
+                    $templateZero = getTemplate('core', $version, 'elementPollenZero', 'airpollen');
                     if ($this->getConfiguration('data_forecast') != 'disable') {
                         $pollenZeroReplace['#height#'] =  'min-height:75px;';
                     } else {
@@ -450,7 +450,7 @@ class pollen extends eqLogic
                 if ($nameCmd == 'others') {
 
                     $headerReplace['#main_pollen_value#'] =  $isObjet && $cmd->execCmd() !== null ? $cmd->execCmd() : '';
-                    log::add('pollen', 'debug', 'Value Cmd Pollen Others : ' . $cmd->execCmd() . ' - ' .  $cmd->getLogicalId());
+                    log::add('airpollen', 'debug', 'Value Cmd Pollen Others : ' . $cmd->execCmd() . ' - ' .  $cmd->getLogicalId());
                     $headerReplace['#id#'] =  $isObjet ? $this->getId() : '';
                     $headerReplace['#main_cmd_pollen_id#'] =   $isObjet ? $cmd->getId() : '';
                     $headerReplace['#main_pollen_name#'] =  $isObjet ? __($cmd->getName(), __FILE__) : '';
@@ -554,7 +554,7 @@ class pollen extends eqLogic
             $replace['#animation#'] = 'active';
             $replace['#classCaroussel#'] = '';
         }
-        return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $version, 'pollen', __CLASS__)));
+        return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $version, 'airpollen', __CLASS__)));
     }
 
     private function setMinutedAction($configName, $delay = 2)
@@ -568,15 +568,15 @@ class pollen extends eqLogic
             $hour = $hour + 1;
         }
         $cron =  $minuteEnd . ' ' . $hour . ' * * *';
-        log::add('pollen', 'debug', 'Set cron + ' . $delay . ' - ' . $cron . ' to stop message alert for equipement ' . $this->getName());
+        log::add('airpollen', 'debug', 'Set cron + ' . $delay . ' - ' . $cron . ' to stop message alert for equipement ' . $this->getName());
         $this->setConfiguration($configName, $cron)->save();
     }
 
 
     public static function postConfig_apikey()
     {
-        if (config::byKey('apikey', 'pollen') == '' && config::byKey('apikeyAmbee', 'pollen') == '') {
-            throw new Exception('Au moins une clef API est requise pour faire marcher le plugin');
+        if (config::byKey('apikey', 'airpollen') == '' && config::byKey('apikeyAmbee', 'airpollen') == '') {
+            throw new Exception('Les clefs API sont requises pour faire marcher le plugin');
         }
     }
 
@@ -590,7 +590,7 @@ class pollen extends eqLogic
         } else if ($this->getConfiguration('searchMode') == 'dynamic_mode') {
             $city = $this->getConfiguration('geoCity');
         } else if ($this->getConfiguration('searchMode') == 'follow_me') {
-            $city =  config::byKey('DynCity', 'pollen');
+            $city = config::byKey('DynCity', 'airpollen');
         } else if ($this->getConfiguration('searchMode') == 'server_mode') {
             $city = config::byKey('info::city');
         }
@@ -600,23 +600,23 @@ class pollen extends eqLogic
     public function getCurrentLonLat()
     {
         if ($this->getConfiguration('searchMode') == 'city_mode') {
-            log::add('pollen', 'debug', 'Mode city_mode concerning ' . $this->getHumanName());
+            log::add('airpollen', 'debug', 'Mode city_mode concerning ' . $this->getHumanName());
             $lon =  $this->getConfiguration('city_longitude');
             $lat =  $this->getConfiguration('city_latitude');
         } elseif ($this->getConfiguration('searchMode') == 'long_lat_mode') {
-            log::add('pollen', 'debug', 'Mode long_lat_mode concerning ' . $this->getHumanName());
+            log::add('airpollen', 'debug', 'Mode long_lat_mode concerning ' . $this->getHumanName());
             $lon = $this->getConfiguration('longitude');
             $lat = $this->getConfiguration('latitude');
         } elseif ($this->getConfiguration('searchMode') == 'dynamic_mode') {
-            log::add('pollen', 'debug', 'Mode dynamic_mode concerning ' . $this->getHumanName());
+            log::add('airpollen', 'debug', 'Mode dynamic_mode concerning ' . $this->getHumanName());
             $lon = $this->getConfiguration('geoLongitude');
             $lat = $this->getConfiguration('geoLatitude');
         } else if ($this->getConfiguration('searchMode') == 'follow_me') {
-            log::add('pollen', 'debug', 'Mode follow_me concerning ' . $this->getHumanName());
-            $lon = config::byKey('DynLongitude', 'pollen');
-            $lat = config::byKey('DynLatitude', 'pollen');
+            log::add('airpollen', 'debug', 'Mode follow_me concerning ' . $this->getHumanName());
+            $lon = config::byKey('DynLongitude', 'airpollen');
+            $lat = config::byKey('DynLatitude', 'airpollen');
         } else if ($this->getConfiguration('searchMode') == 'server_mode') {
-            log::add('pollen', 'debug', 'Mode server_mode concerning ' . $this->getHumanName());
+            log::add('airpollen', 'debug', 'Mode server_mode concerning ' . $this->getHumanName());
             $lon = config::byKey('info::longitude');
             $lat = config::byKey('info::latitude');
         }
@@ -636,7 +636,7 @@ class pollen extends eqLogic
 
         $city = $this->getCurrentCityName();
         [$lon, $lat] = $this->getCurrentLonLat();
-        log::add('pollen', 'debug', $this->getHumanName() . ' -> Start API ' . $apiName . ' Calling for City : ' . $city . ' - Long :' . $lon . ' Lat :' . $lat);
+        log::add('airpollen', 'debug', $this->getHumanName() . ' -> Start API ' . $apiName . ' Calling for City : ' . $city . ' - Long :' . $lon . ' Lat :' . $lat);
         return $api->$apiName($lon, $lat);
     }
 
@@ -649,8 +649,8 @@ class pollen extends eqLogic
         $api = new ApiPollen;
         $city  = $api->callApiReverseGeoLoc($longitude, $latitude);
         if ($save) {
-            log::add('pollen', 'debug', 'Save City : ' . $city . ' en config general');
-            config::save('DynCity', $city, 'pollen');
+            log::add('airpollen', 'debug', 'Save City : ' . $city . ' en config general');
+            config::save('DynCity', $city, 'airpollen');
         }
         return $city;
     }
@@ -662,7 +662,7 @@ class pollen extends eqLogic
     public static function getCoordinates($city, $country_code, $state_code = null)
     {
         $api = new ApiPollen;
-        log::add('pollen', 'debug', 'Get new Coordinate Ajax for config -By City- or -Follow Me-');
+        log::add('airpollen', 'debug', 'Get new Coordinate Ajax for config -By City- or -Follow Me-');
         return $api->callApiGeoLoc($city, $country_code, $state_code = null);
     }
 
@@ -672,9 +672,9 @@ class pollen extends eqLogic
      */
     public static function setNewGeoloc($longitude, $latitude)
     {
-        log::add('pollen', 'debug', 'Save latitude et longitude en config generale pour mode Follow Me');
-        config::save('DynLatitude', $latitude, 'pollen');
-        config::save('DynLongitude', $longitude, 'pollen');
+        log::add('airpollen', 'debug', 'Save latitude et longitude en config generale pour mode Follow Me');
+        config::save('DynLatitude', $latitude, 'airpollen');
+        config::save('DynLongitude', $longitude, 'airpollen');
         return [$latitude, $longitude];
     }
 
@@ -723,7 +723,7 @@ class pollen extends eqLogic
     {
         // $iMinutes = $this->getIntervalLastRefresh($this->getCmd(null, 'grass_pollen'));
         // if ($iMinutes > 0) {
-        log::add('pollen', 'debug', 'Interval > 50 : Start Refresh Pollen latest');
+        log::add('airpollen', 'debug', 'Interval > 50 : Start Refresh Pollen latest');
         $dataAll = $this->getApiData('getAmbee');
         if (isset($dataAll->data)) {
             $oldData = $this->getCurrentValues();
@@ -754,7 +754,7 @@ class pollen extends eqLogic
             $paramAlertPollen = $this->getParamAlertPollen();
             $display = new DisplayInfoPollen;
             $city = $this->getCurrentCityName();
-            log::add('pollen', 'debug', 'City For Pollen Message : ' . $city);
+            log::add('airpollen', 'debug', 'City For Pollen Message : ' . $city);
             $messagesPollens =  $display->getAllMessagesPollen($oldData, $dataPollen, $paramAlertPollen, $city);
             $this->checkAndUpdateCmd('messagePollen', $messagesPollens[0]);
             $telegramMess = !empty($messagesPollens[0]) ? $messagesPollens[1] : '';
@@ -769,7 +769,7 @@ class pollen extends eqLogic
             $this->refreshWidget();
         }
         // } else {
-        //     log::add('pollen', 'debug', 'Dernier Pollen latest Update < 50 min, veuillez patienter svp');
+        //     log::add('airpollen', 'debug', 'Dernier Pollen latest Update < 50 min, veuillez patienter svp');
         // }
     }
 
@@ -785,19 +785,19 @@ class pollen extends eqLogic
 
         $cmdXToTest = $this->getCmd(null, 'others_min');
         $interval = $this->getIntervalLastRefresh($cmdXToTest);
-        log::add('pollen', 'debug', 'Refresh Forecast Pollen : Test Interval last refresh = ' . $interval . ' min');
+        log::add('airpollen', 'debug', 'Refresh Forecast Pollen : Test Interval last refresh = ' . $interval . ' min');
         if ($interval >= 0) {
-            log::add('pollen', 'debug', 'Refresh Forecast Pollen : Interval > 240 min (6h)');
+            log::add('airpollen', 'debug', 'Refresh Forecast Pollen : Interval > 240 min (6h)');
             $forecast =  $this->getApiData('getForecastPollen');
-            log::add('pollen', 'debug', 'Forecast Pollen parsed : ' . json_encode($forecast));
+            log::add('airpollen', 'debug', 'Forecast Pollen parsed : ' . json_encode($forecast));
             if (is_array($forecast) && !empty($forecast)) {
 
                 $this->checkAndUpdateCmd('daysPollen', json_encode($forecast['Alder']['day']));
-                log::add('pollen', 'debug', 'Alder Pollen Days : ' . json_encode($forecast['Alder']['day']));
+                log::add('airpollen', 'debug', 'Alder Pollen Days : ' . json_encode($forecast['Alder']['day']));
                 $this->checkAndUpdateCmd('poaceae_min', json_encode($forecast['Poaceae']['min']));
-                log::add('pollen', 'debug', 'Poaceae Pollen Min : ' . json_encode($forecast['Poaceae']['min']));
+                log::add('airpollen', 'debug', 'Poaceae Pollen Min : ' . json_encode($forecast['Poaceae']['min']));
                 $this->checkAndUpdateCmd('poaceae_max', json_encode($forecast['Poaceae']['max']));
-                log::add('pollen', 'debug', 'Poaceae Pollen Max : ' . json_encode($forecast['Poaceae']['max']));
+                log::add('airpollen', 'debug', 'Poaceae Pollen Max : ' . json_encode($forecast['Poaceae']['max']));
                 $this->checkAndUpdateCmd('alder_min', json_encode($forecast['Alder']['min']));
                 $this->checkAndUpdateCmd('alder_max', json_encode($forecast['Alder']['max']));
                 $this->checkAndUpdateCmd('birch_min', json_encode($forecast['Birch']['min']));
@@ -827,12 +827,12 @@ class pollen extends eqLogic
                 $this->checkAndUpdateCmd('others_min', json_encode($forecast['Others']['min']));
                 $this->checkAndUpdateCmd('others_max', json_encode($forecast['Others']['max']));
                 $this->refreshWidget();
-                log::add('pollen', 'debug', 'Refresh Forecast Pollen finish');
+                log::add('airpollen', 'debug', 'Refresh Forecast Pollen finish');
             } else {
-                log::add('pollen', 'debug', 'Cas Forecast != [] ou [] vide : pas de refresh des data');
+                log::add('airpollen', 'debug', 'Cas Forecast != [] ou [] vide : pas de refresh des data');
             }
         } else {
-            log::add('pollen', 'debug', 'Test date de dernière collecte forecast Pollen < 240 min test jour : pas de refresh');
+            log::add('airpollen', 'debug', 'Test date de dernière collecte forecast Pollen < 240 min test jour : pas de refresh');
         }
     }
 
@@ -849,7 +849,7 @@ class pollen extends eqLogic
     }
 }
 
-class pollenCmd extends cmd
+class airpollenCmd extends cmd
 {
 
     public static $_widgetPossibility = array('custom' => false);
@@ -857,20 +857,20 @@ class pollenCmd extends cmd
     public function execute($_options = [])
     {
         if ($this->getLogicalId() == 'refresh') {
-            log::add('pollen', 'debug', '---------------------------------------------------');
-            log::add('pollen', 'debug', 'Refresh equipement ' . $this->getEqLogic()->getHumanName());
+            log::add('airpollen', 'debug', '---------------------------------------------------');
+            log::add('airpollen', 'debug', 'Refresh equipement ' . $this->getEqLogic()->getHumanName());
             $this->getEqLogic()->updatePollen();
         }
 
         if ($this->getLogicalId() == 'refresh_pollen_forecast') {
-            log::add('pollen', 'debug', '---------------------------------------------------');
-            log::add('pollen', 'debug', 'Refresh Forecast Pollen equipement ' . $this->getEqLogic()->getHumanName());
+            log::add('airpollen', 'debug', '---------------------------------------------------');
+            log::add('airpollen', 'debug', 'Refresh Forecast Pollen equipement ' . $this->getEqLogic()->getHumanName());
             $this->getEqLogic()->updateForecastPollen();
         }
 
         if ($this->getLogicalId() == 'refresh_alert_pollen') {
-            log::add('pollen', 'debug', 'Cron Action : Delete/Refresh Alert Pollen equipement ' . $this->getEqLogic()->getHumanName());
-            log::add('pollen', 'debug', '---------------------------------------------------');
+            log::add('airpollen', 'debug', 'Cron Action : Delete/Refresh Alert Pollen equipement ' . $this->getEqLogic()->getHumanName());
+            log::add('airpollen', 'debug', '---------------------------------------------------');
             $this->getEqLogic()->deleteAlertPollen();
         }
     }

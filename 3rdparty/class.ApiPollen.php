@@ -16,8 +16,8 @@ class ApiPollen
 
     public function __construct()
     {
-        $this->ambeeApiKey = trim(config::byKey('apikeyAmbee', 'pollen'));
-        $this->apiKey = trim(config::byKey('apikey', 'pollen'));
+        $this->ambeeApiKey = trim(config::byKey('apikeyAmbee', 'airpollen'));
+        $this->apiKey = trim(config::byKey('apikey', 'airpollen'));
     }
 
     /**
@@ -55,11 +55,11 @@ class ApiPollen
 
         if ($http_response_code !== 200) {
 
-            log::add('pollen', 'debug', 'Info Curl httpResponse != 200 : ' . json_encode($curlInfo) . ' - Url : ' . json_encode($url));
+            log::add('airpollen', 'debug', 'Info Curl httpResponse != 200 : ' . json_encode($curlInfo) . ' - Url : ' . json_encode($url));
         }
         $error = curl_error($curl);
         if ($error != '') {
-            log::add('pollen', 'debug', 'Problem with API : ' . json_encode($error));
+            log::add('airpollen', 'debug', 'Problem with API : ' . json_encode($error));
         }
         curl_close($curl);
         return [$response, $error, $http_response_code];
@@ -104,7 +104,7 @@ class ApiPollen
             } else {
 
                 $data = json_decode($response[0]);
-                log::add('pollen', 'debug', 'Ville récupéré par l\'API reverse geoloc: ' . $data[0]->name);
+                log::add('airpollen', 'debug', 'Ville récupéré par l\'API reverse geoloc: ' . $data[0]->name);
                 return  $data[0]->name;
             }
         } else {
@@ -124,7 +124,7 @@ class ApiPollen
             "Poaceae", "Alder", "Birch", "Cypress", "Elm", "Hazel", "Oak", "Pine", "Plane", "Poplar",
             "Chenopod", "Mugwort", "Nettle", "Ragweed", "Others"
         ];
-        log::add('pollen', 'debug', 'getForecastPollen Methode Start');
+        log::add('airpollen', 'debug', 'getForecastPollen Methode Start');
         $dataList = $this->callApiForecastPollen($longitude, $latitude);
 
         if (isset($dataList) && $dataList != []) {
@@ -157,14 +157,14 @@ class ApiPollen
     {
         $longitude = (float)trim(round($longitude, 3));
         $latitude =  (float)trim(round($latitude, 3));
-        log::add('pollen', 'debug', 'Call Pollen laltest For longitude: ' . $longitude . ' / latitude: ' . $latitude);
+        log::add('airpollen', 'debug', 'Call Pollen laltest For longitude: ' . $longitude . ' / latitude: ' . $latitude);
         $url = "https://api.ambeedata.com/latest/pollen/by-lat-lng?lat=" . $latitude . "&lng=" . $longitude;
-        log::add('pollen', 'debug', 'URL Pollen Latest : ' . $url);
+        log::add('airpollen', 'debug', 'URL Pollen Latest : ' . $url);
         $response = $this->curlApi($url, $this->ambeeApiKey, 'ambee');
 
         if ($response[2] == '429') {
             message::add('Ambee', __('Quota journalier données pollen dépassé', __FILE__));
-            log::add('pollen', 'debug', 'Quota journalier données pollen dépassé');
+            log::add('airpollen', 'debug', 'Quota journalier données pollen dépassé');
 
         } else  if ($response[2] == '401') {
             throw new Exception('Api Key is unauthorized');
@@ -172,14 +172,14 @@ class ApiPollen
         } else if ($response[2] == '200') {
             $data = json_decode($response[0]);
             if (property_exists($data, 'data')) {
-                log::add('pollen', 'debug', 'Pollen latest for Longitude: ' . $longitude . ' & Latitude: ' . $latitude);
-                log::add('pollen', 'debug', 'Data Ambee latest : ' . json_encode($data));
+                log::add('airpollen', 'debug', 'Pollen latest for Longitude: ' . $longitude . ' & Latitude: ' . $latitude);
+                log::add('airpollen', 'debug', 'Data Ambee latest : ' . json_encode($data));
                 return $data;
             }
 
         } else if ($response[2] == '403') {
             message::add('Ambee', __('Votre clef Ambee n\'a plus de permission', __FILE__));
-            log::add('pollen', 'debug', 'Votre clef Ambee n\'a plus de permission, vous pouvez basculer sur une formule payante');
+            log::add('airpollen', 'debug', 'Votre clef Ambee n\'a plus de permission, vous pouvez basculer sur une formule payante');
 
         } else {
             throw new Exception('No data pollen server response - Http code : ' . $response[2]);
@@ -202,9 +202,9 @@ class ApiPollen
 
         $longitude = (float)trim(round($longitude, 4));
         $latitude =  (float)trim(round($latitude, 4));
-        log::add('pollen', 'debug', 'Call API Forecast Pollen for Longitude: ' . $longitude . ' & Latitude: ' . $latitude);
+        log::add('airpollen', 'debug', 'Call API Forecast Pollen for Longitude: ' . $longitude . ' & Latitude: ' . $latitude);
         $url = "https://api.ambeedata.com/forecast/pollen/by-lat-lng?lat=" . $latitude . "&lng=" . $longitude;
-        log::add('pollen', 'debug', 'URL Forecast Pollen  : ' . $url);
+        log::add('airpollen', 'debug', 'URL Forecast Pollen  : ' . $url);
         $response = $this->curlApi($url, $this->ambeeApiKey, 'ambee');
 
         if ($response[2] == '429') {
@@ -219,9 +219,9 @@ class ApiPollen
             $data = json_decode($response[0]);
 
             if (isset($data->message) && $data->data == []) {
-                log::add('pollen', 'debug', 'Data Pollen Forecast not available !!');
+                log::add('airpollen', 'debug', 'Data Pollen Forecast not available !!');
             } else if (property_exists($data, 'data')) {
-                log::add('pollen', 'debug', 'Data Pollen Forecast : ' . json_encode($response));
+                log::add('airpollen', 'debug', 'Data Pollen Forecast : ' . json_encode($response));
                 return $data->data;
             }
         } else {
