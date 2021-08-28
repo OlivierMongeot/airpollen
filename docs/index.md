@@ -2,7 +2,7 @@
 
 <br/>
 
-<img align="right" height="350" src="https://github.com/OlivierMongeot/airpollen/blob/Master/docs/photos/alerte.JPG" class="img-responsive" alt="Pollen">Le plugin Air Pollen vous informe sur les pollens presque partout dans le monde.
+<img align="right" height="350" src="https://github.com/OlivierMongeot/airpollen/blob/Master/docs/photos/pollen_mo.JPG" class="img-responsive" alt="Pollen">Le plugin Air Pollen vous informe sur les pollens presque partout dans le monde.
 
 Il s'adresse essentiellement aux personnes allergiques, asthmatiques, sensibles et sportifs, mais aussi à tous ceux qui prennent attention à l'air qu'il respire. 
 
