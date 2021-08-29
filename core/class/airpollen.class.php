@@ -731,8 +731,8 @@ class airpollen extends eqLogic
     public function updatePollen()
     {
         $iMinutes = $this->getIntervalLastRefresh($this->getCmd(null, 'grass_pollen'));
-        if ($iMinutes > 0) {
-        log::add('airpollen', 'debug', 'Interval > 5 : Start Refresh Pollen latest');
+        if ($iMinutes > 1) {
+        log::add('airpollen', 'debug', 'Interval > 1 : Start Refresh Pollen latest');
         $dataAll = $this->getApiData('getAmbee');
         if (isset($dataAll->data)) {
             $oldData = $this->getCurrentValues();
@@ -783,7 +783,7 @@ class airpollen extends eqLogic
             $this->refreshWidget();
         }
         } else {
-            log::add('airpollen', 'debug', 'Dernier Pollen latest Update < 5 min, veuillez patienter svp');
+            log::add('airpollen', 'debug', 'Dernier Pollen latest Update < 1 min, veuillez patienter svp');
         }
     }
 
