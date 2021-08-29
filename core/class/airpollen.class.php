@@ -602,6 +602,7 @@ class airpollen extends eqLogic
         } else if ($this->getConfiguration('searchMode') == 'server_mode') {
             $city = config::byKey('info::city');
         }
+        log::add('airpollen', 'debug', 'Get Current City : ' . $city);
         return isset($city) ? $city : 'No city';
     }
 
@@ -730,7 +731,7 @@ class airpollen extends eqLogic
     public function updatePollen()
     {
         $iMinutes = $this->getIntervalLastRefresh($this->getCmd(null, 'grass_pollen'));
-        if ($iMinutes > 5) {
+        if ($iMinutes > 0) {
         log::add('airpollen', 'debug', 'Interval > 5 : Start Refresh Pollen latest');
         $dataAll = $this->getApiData('getAmbee');
         if (isset($dataAll->data)) {
