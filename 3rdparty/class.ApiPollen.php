@@ -186,7 +186,6 @@ class ApiPollen
         }
 
         // Test
-       
         // $response = file_get_contents(dirname(__DIR__) . '/docs/dataModel/pollenLatest.json', 1);
         // return json_decode($response);
 
@@ -305,13 +304,35 @@ class ApiPollen
         $pine = rand(0, 7);
         $plane = rand(0, 5);
         $poplar = rand(0, 10);
+
+        if($birch > 0) {
+            $cypress = 0;
+        }
+        if($elm > 0) {
+            $hazel = 0;
+        }
+        if($oak > 0) {
+            $pine = 0;
+        }
+
+
         $totalTree = $alder + $birch + $cypress + $elm + $hazel + $oak + $pine + $plane + $poplar;
         $others = rand(0, 4);
-        $poaceae = rand(0, 100);
         $chenopod = rand(0, 50);
-        $mugwort = rand(0, 10);
-        $nettle = rand(10, 250);
         $ragweed = rand(0, 3);
+        $mugwort = rand(0, 10);
+         if ($ragweed > 0) {
+               $mugwort = 0;
+         }
+      
+        
+        $nettle = rand(10, 250);
+        if ($nettle < 120) {
+            $poaceae = rand(130, 180);
+        }else{
+            $poaceae = rand(0, 90);
+        }
+        
         $totalWeed = $chenopod + $mugwort + $nettle + $ragweed;
 
         $infoPollen = new DisplayInfoPollen();

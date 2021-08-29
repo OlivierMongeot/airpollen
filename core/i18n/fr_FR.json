@@ -1,10 +1,10 @@
 {
-    "plugins\/pollen\/plugin_info\/configuration.php": {
+    "plugins\/airpollen\/plugin_info\/configuration.php": {
 
         "Clef API OpenWeatherMap": "Clef API OpenWeatherMap",
         "Clef API Ambee": "Clef API Ambee"
     },
-    "plugins\/pollen\/desktop\/php\/pollen.php": {
+    "plugins\/airpollen\/desktop\/php\/airpollen.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",
         "Gestion": "Gestion",
         "Ajouter": "Ajouter",
@@ -99,17 +99,17 @@
         "Auto : 1 X par heure + forecast 1X par jour, environs 1.20€/jour":"Auto : 1 X par heure + forecast 1X par jour, environs 1.20€/jour",
         "Données aléatoires pour démo (gratuit)": "Données aléatoires pour démo (gratuit)"
     },
-    "plugins\/pollen\/desktop\/js\/pollen.js": {
+    "plugins\/airpollen\/desktop\/js\/airpollen.js": {
         "Nom": "Nom",
         "Historiser": "Historiser",
         "Tester": "Tester",
         "Afficher":"Afficher"
     },
-    "plugins\/pollen\/core\/ajax\/pollen.ajax.php": {
+    "plugins\/airpollen\/core\/ajax\/airpollen.ajax.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",
         "Aucune methode correspondante à : ": "Aucune methode correspondante à : "
     },
-    "plugins\/pollen\/core\/class\/pollen.class.php": {
+    "plugins\/airpollen\/core\/class\/airpollen.class.php": {
         "La ville ou le code pays ne peuvent être vide": "La ville ou le code pays ne peuvent être vide",
         "La longitude ou la latitude ne peuvent être vide": "La longitude ou la latitude ne peuvent être vide",
         "Probleme de localisation par le navigateur": "Probleme de localisation par le navigateur",
@@ -178,7 +178,7 @@
         "Indices en alerte": "Indices en alerte"
 
     },
-    "plugins\/pollen\/3rdparty\/class.DisplayInfoPollen.php": {
+    "plugins\/airpollen\/3rdparty\/class.DisplayInfoPollen.php": {
         "Bon":"Bon",
         "bon":"bon",
         "bonne":"bonne",
@@ -273,7 +273,7 @@
         "mais reste":"mais reste"
 
     },
-    "plugins\/pollen\/3rdparty\/class.ApiPollen.php": {
+    "plugins\/airpollen\/3rdparty\/class.ApiPollen.php": {
         "Impossible de récupérer les coordonnées de cete ville": "Impossible de récupérer les coordonnées de cette ville",
         "Les coordonnées sont vides":"Les coordonnées sont vides",
         "Pas de lieu trouvé par l'API Reverse Geoloc avec ces coordonnées":"Pas de lieu trouvé par l'API Reverse Geoloc avec ces coordonnées",

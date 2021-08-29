@@ -165,7 +165,7 @@ data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#" data-ca
 
             $.ajax({
                 type: "POST",
-                url: "plugins/airquality/core/ajax/airquality.ajax.php",
+                url: "plugins/airpollen/core/ajax/airpollen.ajax.php",
                 data: { action: "setDynGeoloc", longitude: longitude, latitude: latitude },
                 dataType: 'json',
                 error: function (request, status, error) { handleAjaxError(request, status, error); },
@@ -174,7 +174,7 @@ data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#" data-ca
                     // AJAX IN AJAX
                     $.ajax({
                         type: "POST",
-                        url: "plugins/airquality/core/ajax/airquality.ajax.php",
+                        url: "plugins/airpollen/core/ajax/airpollen.ajax.php",
                         data: { action: "getcity", longitude: longitude, latitude: latitude, save: true },
                         dataType: 'json',
                         error: function (request, status, error) { handleAjaxError(request, status, error); },

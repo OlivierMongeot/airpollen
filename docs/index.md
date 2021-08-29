@@ -144,8 +144,8 @@ Ex pour les pollens vers Telegram :
 -   Insérez un SI : ``` #[nom_de_votre_objet][nom_de_votre_equipement_pollen][Alerte Pollen]# !='' ``` (cherchez avec la recherche simplifié)
 -   Pas d’espace entre les '' et un != pas de == (Ce qui va déclencher un message Telegram, seulement si un message est disponible.)
 -   ALORS -> action  inserez ```#[nom_de_votre_objet][nom_de_votre_equipement_telegram][votre bot]#```
--   Puis dans message vous allez cherchez la commande du plugin qui s'appelle : Markdown Pollen
--   Cela donne : ```#[nom_de_votre_objet][nom_de_votre_equipement_pollen][Markdown Pollen]#```
+-   Puis dans message vous allez cherchez la commande du plugin qui s'appelle : Telegram Pollen
+-   Cela donne : ```#[nom_de_votre_objet][nom_de_votre_equipement_pollen][Telegram Pollen]#```
 -   Option : vide 
 
 Cela devrait marcher, le cas échéant, faites moi remonter vos problèmes.

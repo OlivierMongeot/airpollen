@@ -230,7 +230,6 @@ class airpollen extends eqLogic
     public function postUpdate()
     {
 
-
         $refreshForecast = $this->getCmd(null, 'refresh_pollen_forecast');
         if (!is_object($refreshForecast)) {
             $refreshForecast = new airpollenCmd();
@@ -316,48 +315,53 @@ class airpollen extends eqLogic
                 switch ($nameCmd) {
                     case 'tree_pollen':
                         $treePollenCmd = $this->getCmd(null, 'tree_risk');
-                        $value = $treePollenCmd->execCmd();
-                        $headerReplace['#main_risk#'] =  $isObjet ? $display->getPollenRisk($value) : '';
-                        // log::add('airpollen', 'debug', 'tree_pollen : ' . $value);
+                        $level = $treePollenCmd->execCmd();
+                        $headerReplace['#main_risk#'] = $isObjet ? $display->getPollenRisk($level) : '';
+
+                        log::add('airpollen', 'debug', 'tree_risk : ' . $level);
                         break;
                     case 'grass_pollen':
                         $grassPollenCmd = $this->getCmd(null, 'grass_risk');
-                        $value = $grassPollenCmd->execCmd();
-                        $headerReplace['#main_risk#'] =  $isObjet ? $display->getPollenRisk($value) : '';
-                        // log::add('airpollen', 'debug', 'grass_pollen : ' . $value);
+                        $level = $grassPollenCmd->execCmd();
+                        $headerReplace['#main_risk#'] = $isObjet ? $display->getPollenRisk($level) : '';
+                        log::add('airpollen', 'debug', 'grass_risk : ' . $level);
                         break;
                     case 'weed_pollen':
                         $weedPollenCmd = $this->getCmd(null, 'weed_risk');
-                        $value = $weedPollenCmd->execCmd();
-                        $headerReplace['#main_risk#'] =  $isObjet ? $display->getPollenRisk($value) : '';
-                        // log::add('airpollen', 'debug', 'weed_pollen : ' . $value);
+                        $level = $weedPollenCmd->execCmd();
+                        $headerReplace['#main_risk#'] = $isObjet ? $display->getPollenRisk($level) : '';
+                        log::add('airpollen', 'debug', 'weed_risk : ' . $level);
                 }
                 $headerReplace['#id#'] =  $isObjet ? $this->getId() : '';
-                $headerReplace['#main_cmd_pollen_id#'] =   $isObjet ? $cmd->getId() : '';
-                $headerReplace['#main_pollen_name#'] =  $isObjet ? __($cmd->getName(), __FILE__) : '';
-                $headerReplace['#list_main_pollen#'] =  $isObjet ?  $display->getListPollen($nameCmd) : '';
+                $headerReplace['#main_cmd_pollen_id#'] = $isObjet ? $cmd->getId() : '';
+                $headerReplace['#main_pollen_name#'] = $isObjet ? __($cmd->getName(), __FILE__) : '';
+                $headerReplace['#list_main_pollen#'] = $isObjet ? $display->getListPollen($nameCmd) : '';
+                $headerReplace['#history#'] =  $isObjet ? 'history cursor' : '';
                 $value = $isObjet ? $cmd->execCmd() : '';
+                log::add('airpollen', 'debug', 'Value Risk for counter: ' . $value);
                 if ($value > 0) {
                     $counterMain++;
                 }
                 $headerReplace['#main_pollen_value#'] = $value;
 
                 $newIcon = $iconePollen->getIcon($nameCmd, $value, $cmd->getId());
-                $headerReplace['#icone__pollen#'] = $isObjet ?  $newIcon : '';
+                $headerReplace['#icone__pollen#'] = $isObjet ? $newIcon : '';
                 $tabHederOne = template_replace($headerReplace, $headerTemplate);
                 $tabHeader[] = [$tabHederOne, $value];
+            
             } else  if ($nameCmd == 'updatedAt') {
-
                 $updatedAt = ($isObjet && $cmd->execCmd()) ? $display->parseDate($cmd->getCollectDate()) : '';
+            
             } else if ($nameCmd == 'telegramPollen') {
                 $message_alert =  $isObjet ? $cmd->execCmd() : '';
                 $alert = (!empty($message_alert)) ? true : false;
                 if ($alert) {
                     $htmlAlertPollen = '<div style="text-align: center; margin:15px 0px 0px 0px">';
-                    $htmlAlertPollen .= '<marquee scrollamount="4" width="85%" class="state" style="font-size: 100%;height:18px;margin: -10px 0px important!">' . $message_alert . '</marquee>';
+                    $htmlAlertPollen .= '<marquee scrollamount="4" width="85%" class="state" style="font-size: 100%;height:18px;margin: -10px -10px important!">' . $message_alert . '</marquee>';
                     $htmlAlertPollen .= '</div>';
                     $replace['#message_alert#'] =  $htmlAlertPollen;
                 }
+            
             } else if ($cmd->getConfiguration($nameCmd) == 'slide') {
 
                 $activePollenCounter = ($cmd->execCmd() > 0) ? $activePollenCounter + 1 : $activePollenCounter;
@@ -452,7 +456,6 @@ class airpollen extends eqLogic
 
                 // Affichage central pour Others à la fin/(double passage boucle) car double affichage
                 if ($nameCmd == 'others') {
-
                     $headerReplace['#main_pollen_value#'] =  $isObjet && $cmd->execCmd() !== null ? $cmd->execCmd() : '';
                     log::add('airpollen', 'debug', 'Value Cmd Pollen Others : ' . $cmd->execCmd() . ' - ' .  $cmd->getLogicalId());
                     $headerReplace['#id#'] =  $isObjet ? $this->getId() : '';
@@ -461,7 +464,9 @@ class airpollen extends eqLogic
                     $newIcon = $iconePollen->getIcon($nameCmd, $cmd->execCmd(), $cmd->getId());
                     $headerReplace['#icone__pollen#'] = $isObjet ?  $newIcon : '';
                     $headerReplace['#list_main_pollen#'] =  $isObjet ?  $display->getListPollen($nameCmd) : '';
-                    $headerReplace['#main_risk#'] =  $isObjet ? $display->getElementRiskPollen($iconePollen->getColor($cmd->execCmd(), $nameCmd)) : '';
+                    $risk =  $isObjet ? $display->getElementRiskPollen($iconePollen->getColor($cmd->execCmd(), $nameCmd)) : '';
+                    log::add('airpollen', 'debug', 'Risk Cmd Pollen Others : ' . $risk . ' - ' .  $cmd->getLogicalId());
+                    $headerReplace['#main_risk#'] = $risk;
                     $value = $isObjet ? $cmd->execCmd() : '';
                     $tabHeaderOne = template_replace($headerReplace, $headerTemplate);
                     $tabHeader[] = [$tabHeaderOne, $value];
@@ -520,8 +525,7 @@ class airpollen extends eqLogic
         $replace['#header#'] = implode('', $tabHtml);
         $elementHtml = new CreateHtmlPollen($tabUnityHtml, $this->getId(), 1, $version, $counterPollenZero);
 
-
-        // Global  ----------------
+        // Global  --------------------------------------------------------------
         if ($this->getConfiguration('searchMode') == 'follow_me') {
             [$lon, $lat] = $this->getCurrentLonLat();
             $replace['#button#'] = '<span><i class="fas fa-map-marker-alt fa-lg"></i></span> ' . $this->getCurrentCityName();
@@ -598,6 +602,7 @@ class airpollen extends eqLogic
         } else if ($this->getConfiguration('searchMode') == 'server_mode') {
             $city = config::byKey('info::city');
         }
+        log::add('airpollen', 'debug', 'Get Current City : ' . $city);
         return isset($city) ? $city : 'No city';
     }
 
@@ -725,9 +730,9 @@ class airpollen extends eqLogic
      */
     public function updatePollen()
     {
-        // $iMinutes = $this->getIntervalLastRefresh($this->getCmd(null, 'grass_pollen'));
-        // if ($iMinutes > 0) {
-        log::add('airpollen', 'debug', 'Interval > 50 : Start Refresh Pollen latest');
+        $iMinutes = $this->getIntervalLastRefresh($this->getCmd(null, 'grass_pollen'));
+        if ($iMinutes > 1) {
+        log::add('airpollen', 'debug', 'Interval > 1 : Start Refresh Pollen latest');
         $dataAll = $this->getApiData('getAmbee');
         if (isset($dataAll->data)) {
             $oldData = $this->getCurrentValues();
@@ -777,9 +782,9 @@ class airpollen extends eqLogic
 
             $this->refreshWidget();
         }
-        // } else {
-        //     log::add('airpollen', 'debug', 'Dernier Pollen latest Update < 50 min, veuillez patienter svp');
-        // }
+        } else {
+            log::add('airpollen', 'debug', 'Dernier Pollen latest Update < 1 min, veuillez patienter svp');
+        }
     }
 
 
@@ -791,12 +796,11 @@ class airpollen extends eqLogic
      */
     public function updateForecastPollen()
     {
-
         $cmdXToTest = $this->getCmd(null, 'others_min');
         $interval = $this->getIntervalLastRefresh($cmdXToTest);
-        log::add('airpollen', 'debug', 'Refresh Forecast Pollen : Test Interval last refresh = ' . $interval . ' min');
-        if ($interval >= 0) {
-            log::add('airpollen', 'debug', 'Refresh Forecast Pollen : Interval > 240 min (6h)');
+        log::add('airpollen', 'debug', 'Forecast Pollen : Test Interval last refresh = ' . $interval . ' min');
+        if ($interval >= 720) {
+            log::add('airpollen', 'debug', 'Forecast Pollen : Interval refresh > 12h');
             $forecast =  $this->getApiData('getForecastPollen');
             log::add('airpollen', 'debug', 'Forecast Pollen parsed : ' . json_encode($forecast));
             if (is_array($forecast) && !empty($forecast)) {
@@ -841,7 +845,7 @@ class airpollen extends eqLogic
                 log::add('airpollen', 'debug', 'Cas Forecast != [] ou [] vide : pas de refresh des data');
             }
         } else {
-            log::add('airpollen', 'debug', 'Test date de dernière collecte forecast Pollen < 240 min test jour : pas de refresh');
+            log::add('airpollen', 'debug', 'Test date de dernière collecte forecast Pollen < 720 min test jour : pas de refresh');
         }
     }
 
@@ -865,6 +869,7 @@ class airpollenCmd extends cmd
 
     public function execute($_options = [])
     {
+        
         if ($this->getLogicalId() == 'refresh') {
             log::add('airpollen', 'debug', '---------------------------------------------------');
             log::add('airpollen', 'debug', 'Refresh equipement ' . $this->getEqLogic()->getHumanName());
@@ -882,5 +887,6 @@ class airpollenCmd extends cmd
             log::add('airpollen', 'debug', '---------------------------------------------------');
             $this->getEqLogic()->deleteAlertPollen();
         }
+        log::add('airpollen', 'debug', 'Execute commande option : ' . json_encode($_options));
     }
 }

@@ -62,9 +62,6 @@ For test you can use the CLI with a linux systeme for installation or going to t
 8. Enjoy and take care yourself !! 
 
 
-
-<img  align="left" height="300" src="https://github.com/OlivierMongeot/airquality/blob/Master/docs/photos/badwheather.JPG">
-
 ## Usage
 
 For all people sensitive, allergic, athletic, asthmatic you can provide your planning with the forecast and so protect yourself.

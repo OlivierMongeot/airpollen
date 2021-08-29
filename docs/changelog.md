@@ -57,6 +57,10 @@
 - Possibilité de ne pas afficher les forecasts pour un affichage plus simple 
 - Debug affichage icones telegram
 
+# 29/08/2021
+
+- Mode données aléatoire pour démonstration.
+
 
 
 
