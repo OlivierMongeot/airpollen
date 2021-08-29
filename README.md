@@ -1,6 +1,6 @@
 # Plugin Jeedom Pollen
 
-<img align="right" height="400" src="https://github.com/OlivierMongeot/airquality/blob/Master/docs/photos/pollen_mo.JPG">Air Quality & Pollen plugin display air quality & pollens informations where you want in the world.  
+<img align="right" height="400" src="https://github.com/OlivierMongeot/airquality/blob/Master/docs/photos/pollen_mo.JPG">Air Pollen plugin display pollens informations where you want in the world.  
 
 It works with the **Jeedom** soft and it's compatible with Version 4.
 
@@ -24,7 +24,7 @@ You must have Jeedom Domotic Software installed before using the plugin.
 
 The plugin is on Jeedom Marketplace only with beta option at the moment, i hope, it will be 'stable' soon.
 
-For test you can use the CLI with a linux systeme for installation or going to the market directly whith Jeedom beta option enable (https://market.jeedom.com/index.php?v=d&p=market_display&id=4165)
+For test you can use the CLI with a linux systeme for installation or going to the market directly whith Jeedom beta option enable (https://market.jeedom.com/index.php?v=d&p=market_display&id=4187)
 
 1. Get a free API Key at [ openweathermap.org ](https://openweathermap.org/). If you ever have one in your Jeedom, you can use the same, the plugin automatically import the key.
 
