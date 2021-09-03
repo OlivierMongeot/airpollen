@@ -22,8 +22,8 @@ Des messages d'alertes sont crées en fonctions des changements des données les
 Regardez le bouton 'Alertes' sur la page de configuration de votre équipement, c'est là que vous pouvez tout régler.
 
 ## Mobilité
-
-<img align="left" height="350" src="https://i.ibb.co/Hq6zzWr/pollenmobile.jpg" class="img-responsive" alt="Pollen">Une option est dispo dans la nouvelle version, le 'FollowMe', cela fonctionne avec la wep app mobile de Jeedom, un bouton vous géolocalise et permet de mettre à jour les données en fonction (fonctionne en https uniquement).
+<!-- <img align="left" height="350" src="https://i.ibb.co/Hq6zzWr/pollenmobile.jpg" class="img-responsive" alt="Pollen"> -->
+![Mobile Pollen](https://i.ibb.co/Hq6zzWr/pollenmobile.jpg){: height="300px" style="float:left; padding-right:10px" }Une option est dispo dans la nouvelle version, le 'FollowMe', cela fonctionne avec la wep app mobile de Jeedom, un bouton vous géolocalise et permet de mettre à jour les données en fonction (fonctionne en https uniquement).
 ><br/>
 Cela vous permet d'avoir les infos locales partout où vous vous trouver (dans les limites des possibilités des API).
 
