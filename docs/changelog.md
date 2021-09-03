@@ -61,6 +61,10 @@
 
 - Mode données aléatoire pour démonstration.
 
+# 03/09/2021
+
+- Debug affichage des photos de la documentation
+
 
 
 

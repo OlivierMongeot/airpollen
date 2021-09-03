@@ -2,7 +2,7 @@
 
 <br/>
 
-<img align="right" height="350" src="https://github.com/OlivierMongeot/airpollen/blob/Master/docs/photos/pollen_mo.JPG" class="img-responsive" alt="Pollen">Le plugin Air Pollen vous informe sur les pollens presque partout dans le monde.
+<img align="right" height="350" src="https://i.ibb.co/jw7FZ15/pollen-mo.jpg" class="img-responsive" alt="Pollen">Le plugin Air Pollen vous informe sur les pollens presque partout dans le monde.
 
 Il s'adresse essentiellement aux personnes allergiques, asthmatiques, sensibles et sportifs, mais aussi à tous ceux qui prennent attention à l'air qu'il respire. 
 
@@ -23,7 +23,7 @@ Regardez le bouton 'Alertes' sur la page de configuration de votre équipement, 
 
 ## Mobilité
 
-<img align="left" height="350" src="https://github.com/OlivierMongeot/airpollen/blob/Master/docs/photos/pollenmobile.JPG" class="img-responsive" alt="Pollen">Une option est dispo dans la nouvelle version, le 'FollowMe', cela fonctionne avec la wep app mobile de Jeedom, un bouton vous géolocalise et permet de mettre à jour les données en fonction (fonctionne en https uniquement).
+<img align="left" height="350" src="https://i.ibb.co/Hq6zzWr/pollenmobile.jpg" class="img-responsive" alt="Pollen">Une option est dispo dans la nouvelle version, le 'FollowMe', cela fonctionne avec la wep app mobile de Jeedom, un bouton vous géolocalise et permet de mettre à jour les données en fonction (fonctionne en https uniquement).
 ><br/>
 Cela vous permet d'avoir les infos locales partout où vous vous trouver (dans les limites des possibilités des API).
 
@@ -42,7 +42,7 @@ Cela historise aussi les données et donne accès la représentation graphique c
 Vous pouvez activer ou pas l'ensemble en activant le bouton ci-dessous dans les paramétrages.
 <br/><br/>
 <p align="center">
-  <img height="60" src="https://github.com/OlivierMongeot/airpollen/blob/Master/docs/photos/tendance.JPG" class="img-responsive" alt="Pollen">
+  <img height="60" src="https://i.ibb.co/xF7d276/tendance.jpg" class="img-responsive" alt="Pollen">
 </p>
 <br/>
 
@@ -57,7 +57,7 @@ Il faudrait alors basculer vers leur abonnement payant.
 Les prévisons de pollens sont mises à jour une fois par jour seulement, j'ai choisi 7h du matin, car seulement 24h sont en fait disponibles. Ce qui veux dire que pour le troisième jour de prévision, les infos vont jusqu'a 7h00 du matin et donc sont suceptiblent dévoluer en s'affinant.
 
 
-<img align="right" height="300" src="https://github.com/OlivierMongeot/airpollen/blob/Master/docs/photos/pollenzero.JPG" class="img-responsive" alt="Pollen">C'est un choix fait pour ne pas atteindre la limite de 100 appels/jour de l'API Ambee et donc que le plugin reste gratuit à l'usage. 
+<img align="right" height="300" src="https://i.ibb.co/HG7NXk4/pollen2.jpg" class="img-responsive" alt="Pollen">C'est un choix fait pour ne pas atteindre la limite de 100 appels/jour de l'API Ambee et donc que le plugin reste gratuit à l'usage. 
 
 En effet, lors du refresh des prévisons pollens l'api compte 1 appel par heure de données fournie, donc l'appel forecast sur 48 heures coûte 48 appels sur les 100 journalier. Ce qui explique mon choix d'appel une fois par jour. 
 
@@ -103,7 +103,7 @@ Le graphique du bas donne le mini et maxi prévu par jour de la semaine pour cha
 Les pollens non détéctés (à zéro) sont affichés à part dans un tableau à la fin du caroussel comme la photo ci-dessus ou il peuvent ne pas être affichés en réglant la molette ci-dessous :
 
 <p align="center">
-  <img height="70" src="https://github.com/OlivierMongeot/airpollen/blob/Master/docs/photos/displaypollenrange.JPG">
+  <img height="70" src="https://i.ibb.co/cLVGq70/displaypollenrange.jpg">
 </p>
 
 Il existe une version mobile qui reprend pratiquement exactement la vue du dashboard.  
@@ -119,7 +119,7 @@ Les niveaux d'alertes moyen sont basées sur des seuils d'environs 40 particules
 Mais comme tout le monde est différent, vous pouvez régler les alertes selon vos caractéristiques.
 
 <p align="center">
-<img height="400" src="https://github.com/OlivierMongeot/airpollen/blob/Master/docs/photos/rangesPollen.JPG">
+<img height="400" src="https://i.ibb.co/L5HwrY8/plancher-pollen.jpg">
 </p>
 
 # Note
@@ -154,13 +154,13 @@ Cela devrait marcher, le cas échéant, faites moi remonter vos problèmes.
 Exemple Message Telegram :
 
 <p align="center">
-<img height="300" src="https://github.com/OlivierMongeot/airpollen/blob/Master/docs/photos/telegram.jpg">
+<img height="300" src="https://i.ibb.co/LNFy95d/messenger.jpg">
 </p>
 
 
 Exemple Message Discord :
 
 <p align="center">
-<img height="60" src="https://github.com/OlivierMongeot/airpollen/blob/Master/docs/photos/discord.JPG">
+<img height="60" src="https://i.ibb.co/VS0TnCg/discord.jpg">
 </p>
 
