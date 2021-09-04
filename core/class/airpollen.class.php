@@ -730,8 +730,8 @@ class airpollen extends eqLogic
     public function updatePollen()
     {
         $iMinutes = $this->getIntervalLastRefresh($this->getCmd(null, 'grass_pollen'));
-        if ($iMinutes > 1) {
-        log::add('airpollen', 'debug', 'Interval > 1 : Start Refresh Pollen latest');
+        if ($iMinutes > 5) {
+        log::add('airpollen', 'debug', 'Interval > 5 min : Start Refresh Pollen latest');
         $dataAll = $this->getApiData('getAmbee');
         if (isset($dataAll->data)) {
             $oldData = $this->getCurrentValues();
@@ -782,7 +782,7 @@ class airpollen extends eqLogic
             $this->refreshWidget();
         }
         } else {
-            log::add('airpollen', 'debug', 'Dernier Pollen latest Update < 1 min, veuillez patienter svp');
+            log::add('airpollen', 'debug', 'Dernier Pollen latest Update < 5 min, veuillez patienter svp');
         }
     }
 
@@ -798,8 +798,8 @@ class airpollen extends eqLogic
         $cmdXToTest = $this->getCmd(null, 'others_min');
         $interval = $this->getIntervalLastRefresh($cmdXToTest);
         log::add('airpollen', 'debug', 'Forecast Pollen : Test Interval last refresh = ' . $interval . ' min');
-        if ($interval >= 720) {
-            log::add('airpollen', 'debug', 'Forecast Pollen : Interval refresh > 12h');
+        if ($interval >= 300 || $this->getConfiguration('data_refresh') == 'fake_data') {
+            log::add('airpollen', 'debug', 'Forecast Pollen : Interval refresh > 5h');
             $forecast =  $this->getApiData('getForecastPollen');
             log::add('airpollen', 'debug', 'Forecast Pollen parsed : ' . json_encode($forecast));
             if (is_array($forecast) && !empty($forecast)) {
@@ -844,7 +844,7 @@ class airpollen extends eqLogic
                 log::add('airpollen', 'debug', 'Cas Forecast != [] ou [] vide : pas de refresh des data');
             }
         } else {
-            log::add('airpollen', 'debug', 'Test date de dernière collecte forecast Pollen < 720 min test jour : pas de refresh');
+            log::add('airpollen', 'debug', 'Test date de dernière collecte forecast Pollen < 300 min test jour : pas de refresh');
         }
     }
 

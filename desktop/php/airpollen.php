@@ -249,7 +249,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                             <br>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">{{Affichage des prévivsions}}
-                                    <sup><i class="fa fa-question-circle tooltips" title="{{ Consomme 48 appels d'API par jours }}"></i></sup></label>
+                                    <sup><i class="fa fa-question-circle tooltips" title="{{Consomme 48 appels d'API par jours}}"></i></sup></label>
                                
                                 <div class="col-sm-6">
                                     <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="data_forecast">
@@ -315,10 +315,10 @@ $eqLogics = eqLogic::byType($plugin->getId());
                          
 
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">{{Rafraichissement des données}} <sup><i class="fa fa-question-circle tooltips" title="{{ Toutes les possibilitées sont gratuites pendant 15 jours dans la limite de 100 appels/jours}}"></i></sup></label>
+                                    <label class="col-sm-3 control-label">{{Rafraichissement des données}} <sup><i class="fa fa-question-circle tooltips" title="{{Toutes les possibilitées sont gratuites pendant 15 jours dans la limite de 100 appels/jours}}"></i></sup></label>
                                     <div class="col-sm-6">
                                         <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="data_refresh">
-                                            <option value="fake_data">{{Données aléatoires pour démo }}</option>
+                                            <option value="fake_data">{{Données aléatoires pour démo (gratuit)}}</option>
                                             <option value="disable">{{Manuel : 0.017€/appel}}</option>
                                             <option value="oneByHour">{{Auto : 12 X par jour (de 8h à 19h) environ 6.20€/mois}}</option>
                                             <option value="oneByTwoHour">{{Auto : 6 X par jour (de 8h à 18h) environ 3.10€/mois}}</option>

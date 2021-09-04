@@ -97,7 +97,10 @@
         "Auto : 3 X par jour (8h, 12h et 16h) environ 1.55€/mois":"Auto : 3 X par jour (8h, 12h et 16h) environ 1.55€/mois",
         "Auto : 2 X par jour  (8h et 15h) environ 1€/mois":"Auto : 2 X par jour  (8h et 15h) environ 1€/mois",
         "Auto : 1 X par heure + forecast 1X par jour, environs 1.20€/jour":"Auto : 1 X par heure + forecast 1X par jour, environs 1.20€/jour",
-        "Données aléatoires pour démo (gratuit)": "Données aléatoires pour démo (gratuit)"
+        "Données aléatoires pour démo (gratuit)": "Données aléatoires pour démo (gratuit)",
+        "Toutes les possibilitées sont gratuites pendant 15 jours dans la limite de 100 appels/jours": "Toutes les possibilitées sont gratuites pendant 15 jours dans la limite de 100 appels/jours",
+        "Affichage des prévisions":"Affichage des prévivsions",
+        "Consomme 48 appels d'API par jours":"Consomme 48 appels d'API par jours"
     },
     "plugins\/airpollen\/desktop\/js\/airpollen.js": {
         "Nom": "Nom",

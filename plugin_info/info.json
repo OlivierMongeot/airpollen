@@ -10,7 +10,7 @@
 	"require" : "4.1.0",
 	"category" : "weather",
 	"changelog" : "https://github.com/OlivierMongeot/airpollen/blob/Master/docs/changelog.md",
-	"documentation" : "https://github.com/OlivierMongeot/airpollen/blob/Master/docs/index.md",
+	"documentation" : "https://oliviermongeot.github.io/airpollen/",
 	"language" : ["fr_FR","en_US"],
 	"compatibility" : ["miniplus","smart","rpi","docker","diy","mobile","v4"]
 }
