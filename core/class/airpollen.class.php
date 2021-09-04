@@ -782,7 +782,7 @@ class airpollen extends eqLogic
             $this->refreshWidget();
         }
         } else {
-            log::add('airpollen', 'debug', 'Dernier Pollen latest Update < 1 min, veuillez patienter svp');
+            log::add('airpollen', 'debug', 'Dernier Pollen latest Update < 5 min, veuillez patienter svp');
         }
     }
 
