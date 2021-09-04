@@ -41,17 +41,16 @@ For test you can use the CLI with a linux systeme for installation or going to t
 
 4. !!! Delete the folder .git if it's just a test. Because on uninstall plugin, Jeedom don't understand what is it and can give errors)
     ```sh
-    sudo rm /airquality/.git
+    sudo rm /airpollen/.git
     ```
 
 5. See the last documentation for configuration
 
-    https://github.com/OlivierMongeot/airpollen/blob/Master/docs/index.md/
+    https://oliviermongeot.github.io/airpollen/
 
 6. To have pollen data you must still get a free API Key at [ Ambee.com ](https://www.getambee.com/) but it's not required to test the plugin.
 
-
-7. I've set PHP display errors to maximum, for developpement: 
+7. I've set PHP display errors to maximum, for branchs used for developpement: 
     ```php
     error_reporting(E_ALL);
     ini_set('ignore_repeated_errors', TRUE);
