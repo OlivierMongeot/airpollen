@@ -22,19 +22,24 @@
         </div>
     </div>
     <!-- Graphique  -->
-    <div id="container_#name#_#id#">
+    <div #hidden# id="container_#name#_#id#">
     </div>
 </div>
 
-<script>
-    
+<script>    
     Highcharts.chart(container_#name#_#id#, {
         chart: {
             type: 'column',
             height: 160,
             width: 320,
             alignTicks: true,
-            borderWidth:0
+            borderWidth:0,
+            borderWidth:0,
+            backgroundColor: 'transparent',
+            plotBackgroundColor: null,
+            plotBackgroundImage: null,
+            plotBorderWidth: 0,
+            plotShadow: false
         },
         exporting: {
             enabled: false
