@@ -15,9 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
-// error_reporting(E_ALL);
-// ini_set('ignore_repeated_errors', TRUE);
-// ini_set('display_errors', TRUE);
+error_reporting(E_ALL);
+ini_set('ignore_repeated_errors', TRUE);
+ini_set('display_errors', TRUE);
 
 require_once __DIR__  . '/../../../../core/php/core.inc.php';
 require dirname(__FILE__) . '/../../core/php/airpollen.inc.php';
@@ -316,7 +316,6 @@ class airpollen extends eqLogic
                         $treePollenCmd = $this->getCmd(null, 'tree_risk');
                         $level = $treePollenCmd->execCmd();
                         $headerReplace['#main_risk#'] = $isObjet ? $display->getPollenRisk($level) : '';
-
                         log::add('airpollen', 'debug', 'tree_risk : ' . $level);
                         break;
                     case 'grass_pollen':
@@ -392,12 +391,14 @@ class airpollen extends eqLogic
                         $labels = $this->getCmd(null, 'daysPollen');
                         $unitreplace['#labels#'] =  (is_object($labels) && !empty($labels->execCmd())) ? $labels->execCmd() : "['no','-','data']";
                         $unitreplace['#height0#'] = '';
+                        $unitreplace['#hidden#'] = '';
                     } else {
                         $unitreplace['#labels#'] = "['0','0','0']"; // for not js error 
                         $unitreplace['#max#'] = "[0,0,0]";
                         $unitreplace['#min#'] =  "[0,0,0]";
                         $unitreplace['#color#'] = '#333333';
                         $unitreplace['#height0#'] = 'style="height:0"';
+                        $unitreplace['#hidden#'] = 'hidden';
                     }
 
 
@@ -526,7 +527,9 @@ class airpollen extends eqLogic
 
         // Global  --------------------------------------------------------------
         if ($this->getConfiguration('searchMode') == 'follow_me') {
-            [$lon, $lat] = $this->getCurrentLonLat();
+            $arrayLL = $this->getCurrentLonLat();
+            $lon = $arrayLL[0];
+            $lat = $arrayLL[1];
             $replace['#button#'] = '<span><i class="fas fa-map-marker-alt fa-lg"></i></span> ' . $this->getCurrentCityName();
             $replace['#long_lat#'] = 'Lat ' . $display->formatValueForDisplay($lat, null, 4) . '° - Lon ' . $display->formatValueForDisplay($lon, null, 4) . '°';
             $replace['#height_footer#'] = 'height:50px';
@@ -542,7 +545,11 @@ class airpollen extends eqLogic
 
 
         $replace['#info-tooltips#'] = __("Cliquez pour + d'info", __FILE__);
-        [$miniSlide, $state] = $elementHtml->getLayer();
+
+        $arrayLayer = $elementHtml->getLayer();
+        $miniSlide = $arrayLayer[0];
+        $state = $arrayLayer[1];
+
         $replace['#mini_slide#'] =  $miniSlide;
 
         if ($state == 'empty') {
@@ -563,6 +570,9 @@ class airpollen extends eqLogic
         }
         return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $version, 'airpollen', __CLASS__)));
     }
+
+
+
 
     private function setMinutedAction($configName, $delay = 2)
     {
@@ -641,9 +651,10 @@ class airpollen extends eqLogic
         if ($this->getConfiguration('data_refresh') == 'fake_data') {
             return  $api->getFakeData($apiName);
         }
-
         $city = $this->getCurrentCityName();
-        [$lon, $lat] = $this->getCurrentLonLat();
+        $arrayLL = $this->getCurrentLonLat();
+        $lon = $arrayLL[0];
+        $lat = $arrayLL[1];    
         log::add('airpollen', 'debug', $this->getHumanName() . ' -> Start API ' . $apiName . ' Calling for City : ' . $city . ' - Long :' . $lon . ' Lat :' . $lat);
         return $api->$apiName($lon, $lat);
     }
