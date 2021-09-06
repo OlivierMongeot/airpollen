@@ -1,0 +1,72 @@
+[2021-09-06 18:48:36][DEBUG] : Start function PostUpdate
+[2021-09-06 18:48:36][DEBUG] : Start function PostSave
+[2021-09-06 18:48:36][DEBUG] : NOT Start function PostSave refresh pollen forecast in fct postSave
+[2021-09-06 18:48:36][DEBUG] : --------------------------------------
+[2021-09-06 19:01:02][DEBUG] : Cron pollen current : 1 * * * *
+[2021-09-06 19:01:02][DEBUG] : ----------------------------------------------------------------------
+[2021-09-06 19:01:03][DEBUG] : Check Intervale derniere Collecte pour [Home][KakePopoUgd][Herbes]  : 21 m 0 h et 0 jours
+[2021-09-06 19:01:03][DEBUG] : Interval > 2 min : Start Refresh Pollen latest
+[2021-09-06 19:01:03][DEBUG] : Fake data for [Home][KakePopoUgd]
+[2021-09-06 19:01:03][DEBUG] : Get Current City : ILLKIRCH-GRAFFENSTADEN
+[2021-09-06 19:01:03][DEBUG] : Markdown Message Pollen["<b>Platane<\/b> en baisse \u00e0 l'\u00e9chelon risque bas avec 1 part\/m\u00b3 ","<b>Ch\u00e9nopodes<\/b> en baisse au niveau risque bas avec 3 part\/m\u00b3 ","- <b>Armoises<\/b> en hausse \u00e0 l'\u00e9chelon risque mod\u00e9r\u00e9 avec 10 part\/m\u00b3 "]
+[2021-09-06 19:01:03][DEBUG] : Set cron + 2 - 3 19 * * * to stop message alert for equipement KakePopoUgd
+[2021-09-06 19:03:03][DEBUG] : Cron Action : Delete/Refresh Alert Pollen equipement [Home][KakePopoUgd]
+[2021-09-06 19:03:03][DEBUG] : ---------------------------------------------------
+[2021-09-06 19:03:03][DEBUG] : tree_risk : risque modéré
+[2021-09-06 19:03:03][DEBUG] : Value Risk for counter: 41
+[2021-09-06 19:03:03][DEBUG] : grass_risk : risque très haut
+[2021-09-06 19:03:03][DEBUG] : Value Risk for counter: 171
+[2021-09-06 19:03:03][DEBUG] : weed_risk : risque modéré
+[2021-09-06 19:03:03][DEBUG] : Value Risk for counter: 74
+[2021-09-06 19:04:26][DEBUG] : Start function PostUpdate
+[2021-09-06 19:04:26][DEBUG] : Start function PostSave
+[2021-09-06 19:04:26][DEBUG] : NOT Start function PostSave refresh pollen forecast in fct postSave
+[2021-09-06 19:04:26][DEBUG] : --------------------------------------
+[2021-09-06 19:04:32][DEBUG] : tree_risk : risque modéré
+[2021-09-06 19:04:32][DEBUG] : Value Risk for counter: 41
+[2021-09-06 19:04:32][DEBUG] : grass_risk : risque très haut
+[2021-09-06 19:04:32][DEBUG] : Value Risk for counter: 171
+[2021-09-06 19:04:32][DEBUG] : weed_risk : risque modéré
+[2021-09-06 19:04:32][DEBUG] : Value Risk for counter: 74
+[2021-09-06 19:07:19][DEBUG] : Function getPollenRisk for level : risque modéré
+[2021-09-06 19:07:19][DEBUG] : tree_risk : risque modéré
+[2021-09-06 19:07:19][DEBUG] : Value Risk for counter: 41
+[2021-09-06 19:07:19][DEBUG] : Function getPollenRisk for level : risque très haut
+[2021-09-06 19:07:19][DEBUG] : grass_risk : risque très haut
+[2021-09-06 19:07:19][DEBUG] : Value Risk for counter: 171
+[2021-09-06 19:07:19][DEBUG] : Function getPollenRisk for level : risque modéré
+[2021-09-06 19:07:19][DEBUG] : weed_risk : risque modéré
+[2021-09-06 19:07:19][DEBUG] : Value Risk for counter: 74
+[2021-09-06 19:08:06][DEBUG] : Function getPollenRisk for level : risque modéré
+[2021-09-06 19:08:06][DEBUG] : tree_risk : risque modéré
+[2021-09-06 19:08:06][DEBUG] : Value Risk for counter: 41
+[2021-09-06 19:08:06][DEBUG] : Function getPollenRisk for level : risque très haut
+[2021-09-06 19:08:06][DEBUG] : grass_risk : risque très haut
+[2021-09-06 19:08:06][DEBUG] : Value Risk for counter: 171
+[2021-09-06 19:08:06][DEBUG] : Function getPollenRisk for level : risque modéré
+[2021-09-06 19:08:06][DEBUG] : weed_risk : risque modéré
+[2021-09-06 19:08:06][DEBUG] : Value Risk for counter: 74
+[2021-09-06 19:08:21][DEBUG] : ---------------------------------------------------
+[2021-09-06 19:08:21][DEBUG] : Refresh equipement [Home][KakePopoUgd]
+[2021-09-06 19:08:21][DEBUG] : ----------------------------------------------------------------------
+[2021-09-06 19:08:21][DEBUG] : Check Intervale derniere Collecte pour [Home][KakePopoUgd][Herbes]  : 7 m 0 h et 0 jours
+[2021-09-06 19:08:21][DEBUG] : Interval > 2 min : Start Refresh Pollen latest
+[2021-09-06 19:08:21][DEBUG] : Get Current City : ILLKIRCH-GRAFFENSTADEN
+[2021-09-06 19:08:21][DEBUG] : Mode server_mode concerning [Home][KakePopoUgd]
+[2021-09-06 19:08:21][DEBUG] : [Home][KakePopoUgd] -> Start API getAmbee Calling for City : ILLKIRCH-GRAFFENSTADEN - Long :7.75 Lat :48.57
+[2021-09-06 19:08:21][DEBUG] : Call Pollen laltest For longitude: 7.75 / latitude: 48.57
+[2021-09-06 19:08:21][DEBUG] : URL Pollen Latest : https://api.ambeedata.com/latest/pollen/by-lat-lng?lat=48.57&lng=7.75
+[2021-09-06 19:08:23][DEBUG] : Pollen latest for Longitude: 7.75 & Latitude: 48.57
+[2021-09-06 19:08:23][DEBUG] : Data Ambee latest : {"message":"success","lat":48.57,"lng":7.75,"data":[{"Count":{"grass_pollen":0,"tree_pollen":0,"weed_pollen":50},"Risk":{"grass_pollen":"Low","tree_pollen":"Low","weed_pollen":"Moderate"},"Species":{"Grass":{"Grass \/ Poaceae":0},"Others":1,"Tree":{"Alder":0,"Birch":0,"Cypress":0,"Elm":0,"Hazel":0,"Oak":0,"Pine":0,"Plane":0,"Poplar \/ Cottonwood":0},"Weed":{"Chenopod":2,"Mugwort":4,"Nettle":34,"Ragweed":9}},"updatedAt":"2021-09-06T17:08:22.000Z"}]}
+[2021-09-06 19:08:23][DEBUG] : Get Current City : ILLKIRCH-GRAFFENSTADEN
+[2021-09-06 19:08:23][DEBUG] : Markdown Message Pollen["<b>Armoises<\/b> en baisse au niveau risque bas avec 4 part\/m\u00b3 "]
+[2021-09-06 19:08:23][DEBUG] : Set cron + 2 - 10 19 * * * to stop message alert for equipement KakePopoUgd
+[2021-09-06 19:08:24][DEBUG] : Function getPollenRisk for level : Low
+[2021-09-06 19:08:24][DEBUG] : tree_risk : Low
+[2021-09-06 19:08:24][DEBUG] : Value Risk for counter: 0
+[2021-09-06 19:08:24][DEBUG] : Function getPollenRisk for level : Low
+[2021-09-06 19:08:24][DEBUG] : grass_risk : Low
+[2021-09-06 19:08:24][DEBUG] : Value Risk for counter: 0
+[2021-09-06 19:08:24][DEBUG] : Function getPollenRisk for level : Moderate
+[2021-09-06 19:08:24][DEBUG] : weed_risk : Moderate
+[2021-09-06 19:08:24][DEBUG] : Value Risk for counter: 50

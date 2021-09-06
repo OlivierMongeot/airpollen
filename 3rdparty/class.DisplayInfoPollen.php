@@ -37,7 +37,7 @@ class DisplayInfoPollen
 
     public function getElementRiskPollen($color)
     {
-        log::add('pollen', 'debug', 'getElementRiskPollen for color '. $color);
+        // log::add('pollen', 'debug', 'getElementRiskPollen for color '. $color);
         switch ($color) {
             case '#00BD01':
                 return __("Risque bas", __FILE__);
@@ -61,15 +61,19 @@ class DisplayInfoPollen
         switch ($level) {
             case  'risque haut':
             case  'high risk':
+            case  'High':
                 return __("Risque haut", __FILE__);
             case 'risque modéré':
             case 'moderate risk':
+            case 'Moderate':
                 return __("Risque modéré", __FILE__);
             case 'risque bas':
             case 'low risk':
+            case 'Low':
                 return __("Risque bas", __FILE__);
             case 'risque très haut':
             case 'very high risk':
+            case 'Very high':
                 return __("Risque très haut", __FILE__);
             default:
                 return __("Risque inconnu", __FILE__);
@@ -311,7 +315,7 @@ class DisplayInfoPollen
             if (!empty($mess[0])) {
                 $message[] = $mess[0];
                 if (!empty($mess[2])) {
-                    log::add('airpollen', 'debug', 'Message High' . $mess[2]);
+                    // log::add('airpollen', 'debug', 'Message High' . $mess[2]);
                     $message[] = $mess[2];
                 }
             } else if (!empty($mess[1])) {
@@ -327,7 +331,7 @@ class DisplayInfoPollen
             if (!empty($mess[0])) {
                 $message[] = $mess[0];
                 if (!empty($mess[2])) {
-                    log::add('airpollen', 'debug', 'Message High' . $mess[2]);
+                    // log::add('airpollen', 'debug', 'Message High' . $mess[2]);
                     $message[] = $mess[2];
                 }
             } else if (!empty($mess[1])) {
@@ -358,7 +362,7 @@ class DisplayInfoPollen
             if (!empty($mess[0])) {
                 $message[] = $mess[0];
                 if (!empty($mess[2])) {
-                    log::add('airpollen', 'debug', 'Message High' . $mess[2]);
+                    // log::add('airpollen', 'debug', 'Message High' . $mess[2]);
                     $message[] = $mess[2];
                 }
             } else if (!empty($mess[1])) {   
