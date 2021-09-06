@@ -65,7 +65,9 @@
 
 - Debug affichage des photos de la documentation
 
+# 06/09/2021
 
+- adaptation V3
 
 
 

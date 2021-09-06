@@ -178,7 +178,11 @@
         "Moyenne":"Moyenne",
         "Aucune Détection":"Aucune Détection",
         "Pas d'alerte": "Pas d'alerte",
-        "Indices en alerte": "Indices en alerte"
+        "Indices en alerte": "Indices en alerte",
+        "Mini 10 jours": "Mini 10 jours",
+        "Maxi 10 jours": "Maxi 10 jours",
+        "Tendance 12h": "Tendance 12h",
+        "Moyenne 10 jours": "Moyenne 10 jours"
 
     },
     "plugins\/airpollen\/3rdparty\/class.DisplayInfoPollen.php": {

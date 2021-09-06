@@ -490,7 +490,6 @@ class airpollen extends eqLogic
             }
         }
 
-
         if (!$alert) {
             if ($activePollenCounter == 0) {
                 // Vérifier si pollen principaux présent dans la reponse API
@@ -543,7 +542,6 @@ class airpollen extends eqLogic
             $replace['#padding#'] = '0px';
         }
 
-
         $replace['#info-tooltips#'] = __("Cliquez pour + d'info", __FILE__);
 
         $arrayLayer = $elementHtml->getLayer();
@@ -573,7 +571,9 @@ class airpollen extends eqLogic
 
 
 
-
+    /**
+     * Fabrique un crontab pour stopper une action au bout de x min juste apres son déclenchement
+     */
     private function setMinutedAction($configName, $delay = 2)
     {
         $now = new \DateTime();
@@ -785,18 +785,15 @@ class airpollen extends eqLogic
             if (!empty($messagesPollens[0])) {
                 $this->setMinutedAction('alertPollenCronTwoMin', 2);
             }
-
             if ($this->getConfiguration('data_refresh') == 'fake_data') {
                 $this->updateForecastPollen();
             }
-
             $this->refreshWidget();
         }
         } else {
             log::add('airpollen', 'debug', 'Dernier Pollen latest Update < 5 min, veuillez patienter svp');
         }
     }
-
 
 
 

@@ -7,7 +7,7 @@
 	},
 	"licence" : "AGPL",
 	"author" : "Olivrius",
-	"require" : "4.1.0",
+	"require" : "3.3.0",
 	"category" : "weather",
 	"changelog" : "https://github.com/OlivierMongeot/airpollen/blob/Master/docs/changelog.md",
 	"documentation" : "https://oliviermongeot.github.io/airpollen/",
