@@ -16,9 +16,9 @@
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
 
-error_reporting(E_ALL);
-ini_set('ignore_repeated_errors', TRUE);
-ini_set('display_errors', TRUE);
+// error_reporting(E_ALL);
+// ini_set('ignore_repeated_errors', TRUE);
+// ini_set('display_errors', TRUE);
 
 require_once __DIR__  . '/../../../../core/php/core.inc.php';
 require dirname(__FILE__) . '/../../core/php/airpollen.inc.php';
@@ -199,7 +199,6 @@ class airpollen extends eqLogic
     {
         if ($this->getIsEnable()) {
 
-            log::add('airpollen', 'debug', 'Start function PostSave');
             // Latest pollen
             $cmdXCheckNull =  $this->getCmd(null, 'weed_pollen');
             if (is_object($cmdXCheckNull) && $cmdXCheckNull->execCmd() == null) {
@@ -222,7 +221,6 @@ class airpollen extends eqLogic
                     $cmd->execCmd();
                 }
             }
-            log::add('airpollen', 'debug', '--------------------------------------');
         }
     }
 
@@ -240,7 +238,6 @@ class airpollen extends eqLogic
 
     public function postUpdate()
     {
-        log::add('airpollen', 'debug', 'Start function PostUpdate');
         $refreshForecast = $this->getCmd(null, 'refresh_pollen_forecast');
         if (!is_object($refreshForecast)) {
             $refreshForecast = new airpollenCmd();
@@ -377,19 +374,17 @@ class airpollen extends eqLogic
                 $activePollenCounter = ($cmd->execCmd() > 0) ? $activePollenCounter + 1 : $activePollenCounter;
                 $valueCurrent = $isObjet ? $cmd->execCmd() : '';
                 $maxDisplayLevel = $this->getConfiguration('pollen_alert_level');
-                // Value > 0 && Value > Max Display && Cmd visible 
+                // Value > 0 && Value > Max Display && Commande visible 
                 if ($cmd->getIsVisible() == 1 && $maxDisplayLevel <= $valueCurrent && $valueCurrent > 0) {
      
                     $arrayTemplate = $this->makeOneSlide( $nameCmd, $iconePollen, $cmd, $isObjet, $display);
                     $tabUnitReplace[] = [template_replace($arrayTemplate[0], $elementTemplate), $arrayTemplate[1]];
-
+              
                 }
-
-
-                // Cas Pollen à ZERO 
+                // Cas Value == ZERO  et affiche 0
                 else if ($this->getConfiguration('pollen_alert_level') == 0 && $cmd->execCmd() == 0) {
 
-                    // log::add('airpollen', 'debug', 'Name Cmd Pollen ZERO : ' . $cmd->getName() . ' - ' .  $cmd->getLogicalId());
+                    log::add('airpollen', 'debug', 'Set Slide Pollen ZERO : ' . $cmd->getName() . ' - ' .  $cmd->getLogicalId());
                     $newIcon = $iconePollen->getIcon($nameCmd, $cmd->execCmd(), $cmd->getId());
                     $pollenZeroReplace['#icone#'] = $isObjet ? $newIcon : '';
                     $pollenZeroReplace['#id#'] = $isObjet ? $this->getId() : '';
@@ -409,7 +404,6 @@ class airpollen extends eqLogic
                 }
 
 
-
                 // Affichage central pour Others à la fin/(double passage boucle) car double affichage
                 if ($nameCmd == 'others') {
                     $headerReplace['#main_pollen_value#'] =  $isObjet && $cmd->execCmd() !== null ? $cmd->execCmd() : '';
@@ -426,21 +420,17 @@ class airpollen extends eqLogic
                     $value = $isObjet ? $cmd->execCmd() : '';
                     $tabHeaderOne = template_replace($headerReplace, $headerTemplate);
                     $tabHeader[] = [$tabHeaderOne, $value];
-                }
-               
+                }       
             }
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //Affichage central pour Grass à la fin/(double passage boucle) car double affichage dans cas pollen non complet
-                            
+           
+            //Affichage central pour Grass/Tree/Weed à la fin/(double passage boucle) car double affichage dans cas pollen non complet                 
             if ($dataSetPollen == 'simple_data' ) {
                 if ($nameCmd == 'grass_pollen' || $nameCmd == 'tree_pollen' || $nameCmd == 'weed_pollen') {
                                 $arrayTemplate = $this->makeOneSlide( $nameCmd, $iconePollen, $cmd, $isObjet, $display);
                                 $tabUnitReplace[] = [template_replace($arrayTemplate[0], $elementTemplate), $arrayTemplate[1]];
                             }
             }
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
+   
         }
         $tabUnityValue = array_column($tabUnitReplace, 1);
         $tabUnityHtml = array_column($tabUnitReplace, 0);
@@ -475,7 +465,8 @@ class airpollen extends eqLogic
                     $htmlActivePollen .= $active_pollen_label . '</div>';
                     $replace['#message_alert#'] = $htmlActivePollen;
                 }
-            } else {
+            }
+            else {
                 $active_pollen_label = __('Pollens actifs', __FILE__);
                 $htmlActivePollen = '<div title="' . $updatedAt . '" class="cmd noRefresh header-' . $this->getId() . '-mini ';
                 $htmlActivePollen .= 'active-pollen-' . $this->getId() . ' " data-type="info" data-subtype="string" data-cmd_id="' . $cmd->getId() . '">';
@@ -538,7 +529,9 @@ class airpollen extends eqLogic
     }
 
 
-
+    /**
+     * Retourne un slide complet avec les data
+     */
     private function makeOneSlide($nameCmd, $iconePollen, $cmd, $isObjet, $display){
 
             log::add('airpollen', 'debug', 'Set Slide Latest Cmd Pollen for : '.$nameCmd);
@@ -631,8 +624,9 @@ class airpollen extends eqLogic
     /**
      * Fabrique un crontab pour stopper une action au bout de x min juste apres son déclenchement
      */
-    private function setMinutedAction($configName, $delay = 2)
+    private function setMinutedAction()
     {
+        $delay = 2;
         $now = new \DateTime();
         $hour = $now->format('H');
         $minute = $now->format('i');
@@ -851,7 +845,7 @@ class airpollen extends eqLogic
             $this->checkAndUpdateCmd('markdownPollen', $markdownMessage);
             $this->refreshWidget();
             if (!empty($messagesPollens[0])) {
-                $this->setMinutedAction('alertPollenCronTwoMin', 2);
+                $this->setMinutedAction();
             }
         }
         } else {
@@ -866,7 +860,7 @@ class airpollen extends eqLogic
      */
     public function updateForecastPollen()
     {
-        $cmdXToTest = $this->getCmd(null, 'others_min');
+        $cmdXToTest = $this->getCmd(null, 'grass_pollen_min');
         $interval = $this->getIntervalLastRefresh($cmdXToTest);
         log::add('airpollen', 'debug', 'Forecast Pollen : Test Interval last refresh = ' . $interval . ' min');
         if ($interval >= 600 && $this->getConfiguration('data_refresh') == 'full' || $this->getConfiguration('data_refresh') == 'fake_data') {

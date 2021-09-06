@@ -122,7 +122,7 @@ class ApiPollen
         
         $pollens = [
             "Poaceae", "Alder", "Birch", "Cypress", "Elm", "Hazel", "Oak", "Pine", "Plane", "Poplar",
-            "Chenopod", "Mugwort", "Nettle", "Ragweed", "Others"
+            "Chenopod", "Mugwort", "Nettle", "Ragweed", "Others", "Grass", "Tree", "Weed"
         ];
         log::add('airpollen', 'debug', 'getForecastPollen Methode Start');
         $dataList = $this->callApiForecastPollen($longitude, $latitude);
@@ -277,6 +277,15 @@ class ApiPollen
                         break;
                     case "Others":
                         $newTabAqiDay[$element][$dayName][] = $hourCast->Species->$element;
+                        break;
+                    case "Grass":
+                        $newTabAqiDay[$element][$dayName][] = $hourCast->Count->grass_pollen;
+                        break;
+                    case "Tree":
+                        $newTabAqiDay[$element][$dayName][] = $hourCast->Count->tree_pollen;
+                        break;
+                    case "Weed":
+                        $newTabAqiDay[$element][$dayName][] = $hourCast->Count->weed_pollen;
                         break;
                 }
             }
