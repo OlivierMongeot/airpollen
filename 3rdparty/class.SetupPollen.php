@@ -4,12 +4,14 @@ class  SetupPollen
 {
 
     public static $setupPollen = [
+        //Main
         ['name' => 'grass_pollen', 'title' => 'Herbes', 'unit' => 'part/m3', 'subType' => 'numeric', 'order' => 58, 'display' => 'main'],
         ['name' => 'tree_pollen', 'title' => 'Arbres', 'unit' => 'part/m3', 'subType' => 'numeric', 'order' => 59, 'display' => 'main'],
         ['name' => 'weed_pollen', 'title' => 'Mauvaises Herbes', 'unit' => 'part/m3', 'subType' => 'numeric', 'order' => 54, 'display' => 'main'],
         ['name' => 'grass_risk', 'title' => 'Risque herbe', 'unit' => '', 'subType' => 'string', 'order' => 55, 'display' => 'main'],
         ['name' => 'weed_risk', 'title' => 'Risque mauvaise herbe', 'unit' => '', 'subType' => 'string', 'order' => 56, 'display' => 'main'],
         ['name' => 'tree_risk', 'title' => 'Risque arbres', 'unit' => '', 'subType' => 'string', 'order' => 57, 'display' => 'main'],
+        //  Species
         ['name' => 'poaceae', 'title' => 'Graminées', 'unit' => 'part/m3', 'subType' => 'numeric', 'order' => 6, 'display' => 'slide'],
         ['name' => 'alder', 'title' => 'Aulne', 'unit' => 'part/m3', 'subType' => 'numeric', 'order' => 19, 'display' => 'slide'],
         ['name' => 'birch', 'title' => 'Bouleau', 'unit' => 'part/m3', 'subType' => 'numeric', 'order' => 18, 'display' => 'slide'],
@@ -26,6 +28,7 @@ class  SetupPollen
         ['name' => 'ragweed', 'title' => 'Ambroisie', 'unit' => 'part/m3', 'subType' => 'numeric', 'order' => 7, 'display' => 'slide'],
         ['name' => 'others', 'title' => 'Autres', 'unit' => 'part/m3', 'subType' => 'numeric', 'order' => 22, 'display' => 'slide'],
         ['name' => 'updatedAt', 'title' => 'Update at', 'unit' => '', 'subType' => 'string', 'order' => 60, 'display' => 'main'],
+        //Forecast
         ['name' => 'daysPollen', 'title' => 'Forecast days Pollen', 'unit' => '', 'subType' => 'string', 'order' => 23, 'display' => 'chart'],
         ['name' => 'poaceae_min', 'title' => "Grass-Poaceae Mini prévision", 'unit' => 'part/m³', 'subType' => 'string', 'order' => 24, 'display' => 'chart'],
         ['name' => 'poaceae_max', 'title' => 'Grass-Poaceae Maxi prévision', 'unit' => 'part/m³', 'subType' => 'string', 'order' => 25, 'display' => 'chart'],
@@ -57,6 +60,13 @@ class  SetupPollen
         ['name' => 'ragweed_max', 'title' => 'Ragweed Maxi prévision', 'unit' => 'part/m³', 'subType' => 'string', 'order' => 51, 'display' => 'chart'],
         ['name' => 'others_min', 'title' => "Others Mini prévision", 'unit' => 'part/m³', 'subType' => 'string', 'order' => 52, 'display' => 'chart'],
         ['name' => 'others_max', 'title' => 'Others Maxi prévision', 'unit' => 'part/m³', 'subType' => 'string', 'order' => 53, 'display' => 'chart'],
+        ['name' => 'grass_pollen_min', 'title' => "Grass Mini prévision", 'unit' => 'part/m³', 'subType' => 'string', 'order' => 58, 'display' => 'chart'],
+        ['name' => 'grass_pollen_max', 'title' => 'Grass Maxi prévision', 'unit' => 'part/m³', 'subType' => 'string', 'order' => 59, 'display' => 'chart'],
+        ['name' => 'tree_pollen_max', 'title' => 'Tree Maxi prévision', 'unit' => 'part/m³', 'subType' => 'string', 'order' => 60, 'display' => 'chart'],
+        ['name' => 'tree_pollen_min', 'title' => "Tree Mini prévision", 'unit' => 'part/m³', 'subType' => 'string', 'order' => 61, 'display' => 'chart'],
+        ['name' => 'weed_pollen_max', 'title' => 'Weed Maxi prévision', 'unit' => 'part/m³', 'subType' => 'string', 'order' => 62, 'display' => 'chart'],
+        ['name' => 'weed_pollen_min', 'title' => "Weed Mini prévision", 'unit' => 'part/m³', 'subType' => 'string', 'order' => 63, 'display' => 'chart'],
+        // Alerte Message
         ['name' => 'messagePollen', 'title' => 'Alerte Pollen', 'unit' => '', 'subType' => 'string', 'order' => 54, 'display' => 'none'],
         ['name' => 'telegramPollen', 'title' => 'Telegram Pollen', 'unit' => '', 'subType' => 'string', 'order' => 55, 'display' => 'none'],
         ['name' => 'smsPollen', 'title' => 'SMS Pollen', 'unit' => '', 'subType' => 'string', 'order' => 56, 'display' => 'none'],

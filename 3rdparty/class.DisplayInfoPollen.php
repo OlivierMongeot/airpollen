@@ -37,11 +37,7 @@ class DisplayInfoPollen
 
     public function getElementRiskPollen($color)
     {
-<<<<<<< HEAD
-        log::add('airpollen', 'debug', 'getElementRiskPollen for color '. $color);
-=======
         // log::add('pollen', 'debug', 'getElementRiskPollen for color '. $color);
->>>>>>> 1aac89b00d294ee84e3a0df5eec454525bb866e2
         switch ($color) {
             case '#00BD01':
                 return __("Risque bas", __FILE__);
@@ -61,7 +57,7 @@ class DisplayInfoPollen
 
     public function getPollenRisk(string $level)
     {
-        log::add('airpollen', 'debug', 'Function getPollenRisk for level : ' . $level);
+        // log::add('airpollen', 'debug', 'Function getPollenRisk for level : ' . $level);
         switch ($level) {
             case  'risque haut':
             case  'high risk':

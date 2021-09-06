@@ -253,8 +253,9 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                
                                 <div class="col-sm-6">
                                     <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="data_forecast">
+                                         <option value="disable">{{Désactiver}}</option>
                                         <option value="actived">{{Activer}}</option>
-                                        <option value="disable">{{Désactiver}}</option>
+                                       
                                     </select>
                                 </div>
                             </div>
@@ -273,22 +274,13 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                     </div>
                                 </div>
                             </div>
-
-
-
-
-
                         </div>
                         <!-- Affiche l'icône du plugin par défaut mais vous pouvez y afficher les informations de votre choix -->
                         <div class="col-lg-6">
                             <br>
-
-
                             <legend><i class="fas fa-info"></i> {{Informations}}</legend>
-
                             <!--  -->
                             <div class="form-group">
-
 
                                 <div class="container">
                                     <h6>{{Code couleur pollen utilisé dans le plugin}}</h6>
@@ -312,8 +304,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                     <br>
                                 </div>
                             </div>
-                         
-
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">{{Rafraichissement des données}} <sup><i class="fa fa-question-circle tooltips" title="{{Toutes les possibilitées sont gratuites pendant 15 jours dans la limite de 100 appels/jours}}"></i></sup></label>
                                     <div class="col-sm-6">
@@ -324,14 +314,13 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                             <option value="oneByTwoHour">{{Auto : 6 X par jour (de 8h à 18h) environ 3.10€/mois}}</option>
                                             <option value="ThreeByDay">{{Auto : 3 X par jour (8h, 12h et 16h) environ 1.55€/mois}}</option>
                                             <option value="twoByDay">{{Auto : 2 X par jour  (8h et 15h) environ 1€/mois}}</option>
-                                            <option value="full">{{Auto : 1 X par heure + forecast 1X par jour, environs 1.20€/jour}}</option>
+                                            <option value="full">{{Auto : 1 X par heure + forecast 1X par jour, environ 1.20€/jour}}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <br>
                                 <br><br>
-                            
-
+                        
                             <!--  -->
                             <div class="form-group">
                                 <div class="text-center">
@@ -564,8 +553,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
                 <!-- </div> -->
             </div>
             <!--/.tabpanel-->
-
-
 
         </div><!-- /.tab-content -->
     </div><!-- /.eqLogic -->

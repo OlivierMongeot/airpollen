@@ -287,7 +287,7 @@ class ApiPollen
     
     public function getFakeData($apiName){
         if ($apiName == 'getForecastPollen') {
-        return $this->fakeForecastPollen();
+            return $this->fakeForecastPollen();
         } else {
             return json_decode($this->fakeDataPollen());
         }
@@ -316,18 +316,14 @@ class ApiPollen
         if($oak > 0) {
             $pine = 0;
         }
-
-
         $totalTree = $alder + $birch + $cypress + $elm + $hazel + $oak + $pine + $plane + $poplar;
         $others = rand(0, 4);
         $chenopod = rand(0, 50);
         $ragweed = rand(0, 3);
         $mugwort = rand(0, 10);
-         if ($ragweed > 0) {
+        if ($ragweed > 0) {
                $mugwort = 0;
-         }
-      
-        
+        }     
         $nettle = rand(10, 250);
         if ($nettle < 120) {
             $poaceae = rand(130, 180);
@@ -447,7 +443,19 @@ class ApiPollen
             "Others" => [
                 "min" => [rand(1, 5), rand(1, 5), rand(3, 5)],
                 "max" => [rand(5, 10), rand(5, 10), rand(5, 15)]
-            ]
+            ],
+            "Grass" => [
+                "min" => [rand(1, 50), rand(1, 50), rand(1, 50)],
+                "max" => [rand(50, 100), rand(50, 100), rand(50, 100)]
+            ],
+            "Tree" => [
+                "min" => [rand(1, 50), rand(1, 50), rand(1, 50)],
+                "max" => [rand(50, 100), rand(50, 100), rand(50, 100)]
+            ],
+            "Weed" => [
+                "min" => [rand(1, 50), rand(1, 50), rand(1, 50)],
+                "max" => [rand(50, 100), rand(50, 100), rand(50, 100)]
+            ],
             
         ];
         return $fakeData;
