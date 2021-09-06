@@ -386,9 +386,9 @@ class ApiPollen
         $afterTomorrow = $nameDay->getNameDay( date('N', time() + 2 * 86400));
         $fakeData = [
             "Alder" => [
-                "day" => [$today ,$tomorrow,$afterTomorrow],
-                "min"   => [rand(1, 5),rand(3, 5),rand(1, 5)],
-                "max"   => [rand(5, 10,),rand(5, 10),rand(5, 10)]
+                "day" => [$today, $tomorrow, $afterTomorrow],
+                "min"   => [rand(1, 5), rand(3, 5), rand(1, 5)],
+                "max"   => [rand(5, 10), rand(5, 10),rand(5, 10)]
             ],
             "Poaceae" => [          
                 "min"   => [rand(0, 3),rand(0, 5),rand(0, 5)],

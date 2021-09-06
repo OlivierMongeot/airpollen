@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
+
 error_reporting(E_ALL);
 ini_set('ignore_repeated_errors', TRUE);
 ini_set('display_errors', TRUE);
@@ -219,7 +220,7 @@ class airpollen extends eqLogic
     {
         $this->setDisplay("width", "265px");
         if ($this->getConfiguration('data_forecast') == 'disable') {
-            $this->setDisplay("height", "220px");
+            $this->setDisplay("height", "225px");
         } else {
             $this->setDisplay("height", "375px");
         }
@@ -260,8 +261,6 @@ class airpollen extends eqLogic
             ->setSubType('other')->save();
 
         $setup = SetupPollen::$setupPollen;
-
-
 
         foreach ($setup as $command) {
             $cmdInfo = $this->getCmd(null, $command['name']);
@@ -649,6 +648,7 @@ class airpollen extends eqLogic
     {
         $api = new ApiPollen();
         if ($this->getConfiguration('data_refresh') == 'fake_data') {
+            log::add('airpollen', 'debug', 'Make Fake data for ' . $this->getHumanName());
             return  $api->getFakeData($apiName);
         }
         $city = $this->getCurrentCityName();
@@ -741,8 +741,8 @@ class airpollen extends eqLogic
     public function updatePollen()
     {
         $iMinutes = $this->getIntervalLastRefresh($this->getCmd(null, 'grass_pollen'));
-        if ($iMinutes > 5) {
-        log::add('airpollen', 'debug', 'Interval > 5 min : Start Refresh Pollen latest');
+        if ($iMinutes > 15) {
+        log::add('airpollen', 'debug', 'Interval > 15 min : Start Refresh Pollen latest');
         $dataAll = $this->getApiData('getAmbee');
         if (isset($dataAll->data)) {
             $oldData = $this->getCurrentValues();

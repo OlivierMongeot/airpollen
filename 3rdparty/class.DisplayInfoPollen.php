@@ -37,17 +37,17 @@ class DisplayInfoPollen
 
     public function getElementRiskPollen($color)
     {
-        log::add('pollen', 'debug', 'getElementRiskPollen for color '. $color);
+        log::add('airpollen', 'debug', 'getElementRiskPollen for color '. $color);
         switch ($color) {
             case '#00BD01':
                 return __("Risque bas", __FILE__);
-                break;
+              
             case '#EFE800':
                 return  __("Risque modéré", __FILE__);
-                break;
+                
             case '#E79C00':
                 return __("Risque haut", __FILE__);
-                break;
+              
             default:
                 return  __("Risque très haut", __FILE__);
         }
@@ -84,13 +84,10 @@ class DisplayInfoPollen
             case 'tree_pollen':
                 return __('Aulne', __FILE__) . ' - ' . __('Bouleau', __FILE__) . ' - ' . __('Cyprès', __FILE__) . ' - ' . __('Chêne', __FILE__)
                     . ' - ' . __('Platane', __FILE__) . ' - ' . __('Noisetier', __FILE__) . ' - ' . __('Orme', __FILE__) . ' - ' . __('Pin', __FILE__);
-                break;
             case 'grass_pollen':
                 return __('Herbes', __FILE__) . ' - ' . __('Poacées', __FILE__) . ' - ' . __('Graminées', __FILE__);
-                break;
             case 'weed_pollen':
                 return __('Chenopod', __FILE__) . ' - ' . __('Armoise', __FILE__) . ' - ' . __('Ortie', __FILE__) . ' - ' . __('Ambroisie', __FILE__);
-                break;
             default:
                 return __("Autres pollens d'origine inconnue", __FILE__);
         }
