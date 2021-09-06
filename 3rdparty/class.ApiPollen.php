@@ -140,14 +140,6 @@ class ApiPollen
 
 
 
-    public function getFakeData($apiName){
-        if ($apiName == 'getForecastPollen') {
-        return $this->fakeForecastPollen();
-        } else {
-            return json_decode($this->fakeDataPollen());
-        }
-    }
-
 
 
     /**
@@ -292,6 +284,16 @@ class ApiPollen
         return $newTabAqiDay;
     }
 
+    
+    public function getFakeData($apiName){
+        if ($apiName == 'getForecastPollen') {
+        return $this->fakeForecastPollen();
+        } else {
+            return json_decode($this->fakeDataPollen());
+        }
+    }
+
+    
     private function fakeDataPollen()
     {
         $fakeData = [];
