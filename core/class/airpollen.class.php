@@ -423,7 +423,7 @@ class airpollen extends eqLogic
                 }       
             }
            
-            //Affichage central pour Grass/Tree/Weed à la fin/(double passage boucle) car double affichage dans cas pollen non complet                 
+            //Affichage central pour Grass/Tree/Weed à la fin/(double passage boucle) : double affichage dans cas pollen non complet                 
             if ($dataSetPollen == 'simple_data' ) {
                 if ($nameCmd == 'grass_pollen' || $nameCmd == 'tree_pollen' || $nameCmd == 'weed_pollen') {
                                 $arrayTemplate = $this->makeOneSlide( $nameCmd, $iconePollen, $cmd, $isObjet, $display);
@@ -863,18 +863,20 @@ class airpollen extends eqLogic
         $cmdXToTest = $this->getCmd(null, 'grass_pollen_min');
         $interval = $this->getIntervalLastRefresh($cmdXToTest);
         log::add('airpollen', 'debug', 'Forecast Pollen : Test Interval last refresh = ' . $interval . ' min');
-        if ($interval >= 600 && $this->getConfiguration('data_refresh') == 'full' || $this->getConfiguration('data_refresh') == 'fake_data') {
+     
+        if ($interval >= 600 && $this->getConfiguration('data_refresh') == 'full' 
+        || $this->getConfiguration('data_refresh') == 'fake_data'
+        || $interval >= 600 && $this->getConfiguration('data_refresh') == 'disable'
+        ) {
             log::add('airpollen', 'debug', 'Forecast Pollen : Interval refresh > 10h');
             $forecast =  $this->getApiData('getForecastPollen');
             log::add('airpollen', 'debug', 'Forecast Pollen parsed : ' . json_encode($forecast));
             if (is_array($forecast) && !empty($forecast)) {
 
                 $this->checkAndUpdateCmd('daysPollen', json_encode($forecast['Alder']['day']));
-                // log::add('airpollen', 'debug', 'Alder Pollen Days : ' . json_encode($forecast['Alder']['day']));
+                log::add('airpollen', 'debug', 'Pollen Days : ' . json_encode($forecast['Alder']['day']));
                 $this->checkAndUpdateCmd('poaceae_min', json_encode($forecast['Poaceae']['min']));
-                // log::add('airpollen', 'debug', 'Poaceae Pollen Min : ' . json_encode($forecast['Poaceae']['min']));
                 $this->checkAndUpdateCmd('poaceae_max', json_encode($forecast['Poaceae']['max']));
-                // log::add('airpollen', 'debug', 'Poaceae Pollen Max : ' . json_encode($forecast['Poaceae']['max']));
                 $this->checkAndUpdateCmd('alder_min', json_encode($forecast['Alder']['min']));
                 $this->checkAndUpdateCmd('alder_max', json_encode($forecast['Alder']['max']));
                 $this->checkAndUpdateCmd('birch_min', json_encode($forecast['Birch']['min']));
