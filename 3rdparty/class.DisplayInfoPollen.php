@@ -54,7 +54,6 @@ class DisplayInfoPollen
     }
 
 
-
     public function getPollenRisk(string $level)
     {
         log::add('airpollen', 'debug', 'Function getPollenRisk for level : ' . $level);
@@ -79,7 +78,6 @@ class DisplayInfoPollen
                 return __("Risque inconnu", __FILE__);
         }
     }
-
 
 
     public function getListPollen($category)
