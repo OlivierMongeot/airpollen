@@ -122,7 +122,7 @@ class ApiPollen
         
         $pollens = [
             "Poaceae", "Alder", "Birch", "Cypress", "Elm", "Hazel", "Oak", "Pine", "Plane", "Poplar",
-            "Chenopod", "Mugwort", "Nettle", "Ragweed", "Others"
+            "Chenopod", "Mugwort", "Nettle", "Ragweed", "Others", "Grass", "Tree", "Weed"
         ];
         log::add('airpollen', 'debug', 'getForecastPollen Methode Start');
         $dataList = $this->callApiForecastPollen($longitude, $latitude);
@@ -278,6 +278,15 @@ class ApiPollen
                     case "Others":
                         $newTabAqiDay[$element][$dayName][] = $hourCast->Species->$element;
                         break;
+                    case "Grass":
+                        $newTabAqiDay[$element][$dayName][] = $hourCast->Count->grass_pollen;
+                        break;
+                    case "Tree":
+                        $newTabAqiDay[$element][$dayName][] = $hourCast->Count->tree_pollen;
+                        break;
+                    case "Weed":
+                        $newTabAqiDay[$element][$dayName][] = $hourCast->Count->weed_pollen;
+                        break;
                 }
             }
         }
@@ -287,7 +296,7 @@ class ApiPollen
     
     public function getFakeData($apiName){
         if ($apiName == 'getForecastPollen') {
-        return $this->fakeForecastPollen();
+            return $this->fakeForecastPollen();
         } else {
             return json_decode($this->fakeDataPollen());
         }
@@ -316,18 +325,14 @@ class ApiPollen
         if($oak > 0) {
             $pine = 0;
         }
-
-
         $totalTree = $alder + $birch + $cypress + $elm + $hazel + $oak + $pine + $plane + $poplar;
         $others = rand(0, 4);
         $chenopod = rand(0, 50);
         $ragweed = rand(0, 3);
         $mugwort = rand(0, 10);
-         if ($ragweed > 0) {
+        if ($ragweed > 0) {
                $mugwort = 0;
-         }
-      
-        
+        }     
         $nettle = rand(10, 250);
         if ($nettle < 120) {
             $poaceae = rand(130, 180);
@@ -388,9 +393,9 @@ class ApiPollen
         $afterTomorrow = $nameDay->getNameDay( date('N', time() + 2 * 86400));
         $fakeData = [
             "Alder" => [
-                "day" => [$today ,$tomorrow,$afterTomorrow],
-                "min"   => [rand(1, 5),rand(3, 5),rand(1, 5)],
-                "max"   => [rand(5, 10,),rand(5, 10),rand(5, 10)]
+                "day" => [$today, $tomorrow, $afterTomorrow],
+                "min"   => [rand(1, 5), rand(3, 5), rand(1, 5)],
+                "max"   => [rand(5, 10), rand(5, 10),rand(5, 10)]
             ],
             "Poaceae" => [          
                 "min"   => [rand(0, 3),rand(0, 5),rand(0, 5)],
@@ -447,7 +452,19 @@ class ApiPollen
             "Others" => [
                 "min" => [rand(1, 5), rand(1, 5), rand(3, 5)],
                 "max" => [rand(5, 10), rand(5, 10), rand(5, 15)]
-            ]
+            ],
+            "Grass" => [
+                "min" => [rand(1, 50), rand(1, 50), rand(1, 50)],
+                "max" => [rand(50, 100), rand(50, 100), rand(50, 100)]
+            ],
+            "Tree" => [
+                "min" => [rand(1, 50), rand(1, 50), rand(1, 50)],
+                "max" => [rand(50, 100), rand(50, 100), rand(50, 100)]
+            ],
+            "Weed" => [
+                "min" => [rand(1, 50), rand(1, 50), rand(1, 50)],
+                "max" => [rand(50, 100), rand(50, 100), rand(50, 100)]
+            ],
             
         ];
         return $fakeData;
