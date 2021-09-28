@@ -2,7 +2,7 @@
 
 <img align="right" height="400" src="https://github.com/OlivierMongeot/airpollen/blob/Master/docs/photos/pollen_mo.JPG">Air Pollen plugin display pollens informations where you want in the world.  
 
-It works with the **Jeedom** soft and it's compatible with Version 4.
+It works with the **Jeedom** soft and it's compatible with Version 4 and > 3.3
 
 ### Built With
 
@@ -68,5 +68,4 @@ For all people sensitive, allergic, athletic, asthmatic you can provide your pla
 ## Contributing
 
 Any contributions you make are **greatly appreciated**.
-
 
