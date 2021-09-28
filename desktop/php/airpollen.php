@@ -310,12 +310,12 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                         <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="data_refresh">
                                             <option value="fake_data">{{Données aléatoires pour démo (gratuit)}}</option>
                                             <option value="manual">{{Manuel : 0.017€/appel}}</option>
-                                            <option value="full_manual">{{Manuel : 0.017€/appel + prévision 24h 0.80€/appel }}</option>
+                                            <option value="full_manual">{{Manuel : 0.017€/appel + prévision 48h 0.80€/appel}}</option>
                                             <option value="oneByHour">{{Auto : 12 X par jour (de 8h à 19h) environ 6.20€/mois}}</option>
                                             <option value="oneByTwoHour">{{Auto : 6 X par jour (de 8h à 18h) environ 3.10€/mois}}</option>
                                             <option value="ThreeByDay">{{Auto : 3 X par jour (8h, 12h et 16h) environ 1.55€/mois}}</option>
                                             <option value="twoByDay">{{Auto : 2 X par jour  (8h et 15h) environ 1€/mois}}</option>
-                                            <option value="full">{{Auto : 1 X par heure + forecast 1X par jour, environ 1.20€/jour}}</option>
+                                            <option value="full">{{Auto : 1 X par heure + prévision 1X par jour, environ 1.20€/jour}}</option>
                                         </select>
                                     </div>
                                 </div>

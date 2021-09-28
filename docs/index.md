@@ -92,6 +92,20 @@ Vous pouvez créer plusieurs équipement pour plusieurs villes pour les données
 
 Vous devrez alors choisir une version payante de l'API Ambee.
 
+# rafraichissement des données
+
+Il ya 8 modes de rafraichissment :
+
+Etant donnés que les données sont payantes, j'ai mis en place un bridage sur la fréquence des rafraichissments : 
+Delta de 5 min minimum pour les infos courantes et delta de 12h entre 2 refresh de prévisions(forecast) 
+
+Manuel : 0.017€/appel
+Manuel : 0.017€/appel + prévision 48h 0.80€/appel (Les prévisions se rafraichissent uniquement toutes les 24h)
+Auto : 12 X par jour (de 8h à 19h) environ 6.20€/mois
+Auto : 6 X par jour (de 8h à 18h) environ 3.10€/mois
+Auto : 3 X par jour (8h, 12h et 16h) environ 1.55€/mois
+Auto : 2 X par jour  (8h et 15h) environ 1€/mois
+Auto : 1 X par heure + prévision 1X par jour, environ 1.20€/jour
 
 ## Utilisation
 

@@ -27,7 +27,7 @@ class airpollen extends eqLogic
 
     public static function cron()
     {
-        // Assignation d'une minute de refresh aléatoire suite mail Ambee
+        
         foreach (self::byType('airpollen') as $pollen) {
 
             if ($pollen->getIsEnable() == 1) {
@@ -49,8 +49,7 @@ class airpollen extends eqLogic
 
 
                     // Pollen forecast 1x jours si enable en deux test
-                    if ( config::byKey('data_forecast', 'airpollen') == 'actived') {
-                    // if ($pollen->getConfiguration('data_forecast') == 'actived') {
+                    if (config::byKey('data_forecast', 'airpollen') == 'actived') {
                         try {
                             $cronForecast = "2,42 7 * * *";
                            
@@ -293,8 +292,7 @@ class airpollen extends eqLogic
         log::add('airpollen', 'debug', 'Pollen Display = '.$this->getConfiguration('data_refresh'));
       
         if (
-            // $this->getConfiguration('data_forecast') == 'disable' ||
-            $this->getConfiguration('data_refresh') == 'disable' ||
+            $this->getConfiguration('data_refresh') == 'manual' ||
             $this->getConfiguration('data_refresh') == 'twoByDay' ||
             $this->getConfiguration('data_refresh') == 'oneByDay' ||
             $this->getConfiguration('data_refresh') == 'oneByHour' ||
@@ -306,7 +304,6 @@ class airpollen extends eqLogic
             $this->setDisplay("height", "375px");
             config::save('data_forecast', 'actived' , 'airpollen');
         }
-
     }
 
 
@@ -414,8 +411,6 @@ class airpollen extends eqLogic
 
 
                     if ( config::byKey('data_forecast', 'airpollen') != 'disable') {
-                    // if ($this->getConfiguration('data_forecast') != 'disable') {
-
                         $pollenZeroReplace['#height#'] =  'min-height:75px;';
                     } else {
                         $pollenZeroReplace['#height#'] = '';
@@ -458,8 +453,7 @@ class airpollen extends eqLogic
 
         $counterPollenZero = 0;
         if (isset($tabZero)) {
-            if ( config::byKey('data_forecast', 'airpollen') != 'disable') {
-            // if ($this->getConfiguration('data_forecast') != 'disable') {
+            if (config::byKey('data_forecast', 'airpollen') != 'disable') {
                 $newArray = array_chunk($tabZero, 3);
             } else {
                 $newArray = array_chunk($tabZero, 1);
@@ -569,8 +563,8 @@ class airpollen extends eqLogic
             $unitreplace['#unity#'] =  $isObjet ? $cmd->getUnite() : '';
 
             // Forecast Display 
-            // if ($this->getConfiguration('data_forecast') != 'disable') {
-                if ( config::byKey('data_forecast', 'airpollen') != 'disable') {
+            log::add('airpollen', 'debug', 'Config data forcast : '.config::byKey('data_forecast', 'airpollen'));
+            if ( config::byKey('data_forecast', 'airpollen') != 'disable') {
                 $maxCmd = $this->getCmd(null, $nameCmd . '_max');
                 $unitreplace['#max#'] = (is_object($maxCmd) && !empty($maxCmd->execCmd())) ? $maxCmd->execCmd() : "[0,0,0]";
                 $minCmd = $this->getCmd(null, $nameCmd . '_min');
@@ -589,7 +583,6 @@ class airpollen extends eqLogic
                 $unitreplace['#hidden#'] = 'hidden';
             }
 
-            // $iconePollen->getIcon($nameCmd, $cmd->execCmd(), $cmd->getId());
             // recupere le vrai risque 
             switch ($nameCmd) {
                 case 'tree_pollen':
@@ -817,8 +810,8 @@ class airpollen extends eqLogic
     { 
         
         $iMinutes = $this->getIntervalLastRefresh($this->getCmd(null, 'grass_pollen'));
-        if ($iMinutes >= 2) {
-        log::add('airpollen', 'debug', 'Interval > 2 min : Start Refresh Pollen latest');
+        if ($iMinutes >= 5) {
+        log::add('airpollen', 'debug', 'Interval > 5 min : Start Refresh Pollen latest');
         $dataAll = $this->getApiData('getAmbee');
         if (isset($dataAll->data)) {
             $oldData = $this->getCurrentValues();
@@ -876,7 +869,7 @@ class airpollen extends eqLogic
             }
         }
         } else {
-            log::add('airpollen', 'debug', 'Dernier Pollen latest Update < 1 min, veuillez patienter svp');
+            log::add('airpollen', 'debug', 'Dernier Pollen latest Update < 5 min, veuillez patienter svp');
         }
     }
 
@@ -894,7 +887,7 @@ class airpollen extends eqLogic
         if (
             $interval >= 720 && $this->getConfiguration('data_refresh') == 'full' ||
             $this->getConfiguration('data_refresh') == 'fake_data'||
-            $interval >= 720 && $this->getConfiguration('data_refresh') == 'full_manual'
+            $interval >= 1400 && $this->getConfiguration('data_refresh') == 'full_manual'
         ) {
             log::add('airpollen', 'debug', 'Forecast Pollen : Interval refresh > 12h');
             $forecast =  $this->getApiData('getForecastPollen');
@@ -949,7 +942,7 @@ class airpollen extends eqLogic
                 log::add('airpollen', 'debug', 'Cas Forecast != [] ou [] vide : pas de refresh des data');
             }
         } else {
-            log::add('airpollen', 'debug', 'Test date de dernière collecte forecast Pollen < 720 min : pas de refresh');
+            log::add('airpollen', 'debug', 'Test date de dernière collecte forecast Pollen < 720 min (ou mode Manual avec Forecast avec collecte < 1440min): pas de refresh');
         }
     }
 
