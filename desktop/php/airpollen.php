@@ -247,7 +247,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                 </div>
                             </div>
                             <br>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label class="col-sm-3 control-label">{{Affichage des prévivsions}}
                                     <sup><i class="fa fa-question-circle tooltips" title="{{Consomme 48 appels d'API par jours}}"></i></sup></label>
                                
@@ -258,7 +258,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                        
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
                             <br>
                             <br/>
                             <div class="form-group elements pollen">
@@ -309,7 +309,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
                                     <div class="col-sm-6">
                                         <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="data_refresh">
                                             <option value="fake_data">{{Données aléatoires pour démo (gratuit)}}</option>
-                                            <option value="disable">{{Manuel : 0.017€/appel}}</option>
+                                            <option value="manual">{{Manuel : 0.017€/appel}}</option>
+                                            <option value="full_manual">{{Manuel : 0.017€/appel + prévision 24h 0.80€/appel }}</option>
                                             <option value="oneByHour">{{Auto : 12 X par jour (de 8h à 19h) environ 6.20€/mois}}</option>
                                             <option value="oneByTwoHour">{{Auto : 6 X par jour (de 8h à 18h) environ 3.10€/mois}}</option>
                                             <option value="ThreeByDay">{{Auto : 3 X par jour (8h, 12h et 16h) environ 1.55€/mois}}</option>

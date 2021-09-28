@@ -139,9 +139,6 @@ class ApiPollen
     }
 
 
-
-
-
     /**
      * Appel Pollen latest GetAmbee
      */
@@ -174,7 +171,7 @@ class ApiPollen
             log::add('airpollen', 'debug', 'Votre clef Ambee n\'a plus de permission, vous pouvez basculer sur une formule payante');
 
         } else {
-            throw new Exception('No data pollen server response - Http code : ' . $response[2]);
+            throw new Exception('Error Getambee API : No data pollen - Server response Http code : ' . $response[2]);
         }
 
         // Test
@@ -182,8 +179,6 @@ class ApiPollen
         // return json_decode($response);
 
     }
-
-
 
     /**
      * Appel Forecast Pollen Getambee

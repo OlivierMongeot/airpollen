@@ -16,9 +16,6 @@
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
 
-// error_reporting(E_ALL);
-// ini_set('ignore_repeated_errors', TRUE);
-// ini_set('display_errors', TRUE);
 
 require_once __DIR__  . '/../../../../core/php/core.inc.php';
 require dirname(__FILE__) . '/../../core/php/airpollen.inc.php';
@@ -52,7 +49,8 @@ class airpollen extends eqLogic
 
 
                     // Pollen forecast 1x jours si enable en deux test
-                    if ($pollen->getConfiguration('data_forecast') == 'actived') {
+                    if ( config::byKey('data_forecast', 'airpollen') == 'actived') {
+                    // if ($pollen->getConfiguration('data_forecast') == 'actived') {
                         try {
                             $cronForecast = "2,42 7 * * *";
                            
@@ -204,20 +202,19 @@ class airpollen extends eqLogic
             if (is_object($cmdXCheckNull) && $cmdXCheckNull->execCmd() == null) {
                 $cmd = $this->getCmd(null, 'refresh');
                 if (is_object($cmd)) {
-                    log::add('airpollen', 'debug', 'Pas de valeur dèjà présente poacae : Start function PostSave refresh');
+                    log::add('airpollen', 'debug', 'Pas de valeur dèjà présente weed_pollen : Start function PostSave refresh');
                     $cmd->execCmd();
                 }
             }
 
             // Forecast pollen
             $cmdXCheckNull =  $this->getCmd(null, 'poaceae_min');
-               
             if (is_object($cmdXCheckNull) && $cmdXCheckNull->execCmd() == null  || is_object($cmdXCheckNull) && $cmdXCheckNull->execCmd() == '') {
                 $cmd = $this->getCmd(null, 'refresh_pollen_forecast');
-                if (is_object($cmd)  && $this->getConfiguration('data_forecast') == 'actived' && $this->getConfiguration('data_refresh') == 'full'
-                || is_object($cmd)  && $this->getConfiguration('data_forecast') == 'actived' && $this->getConfiguration('data_refresh') == 'fake_data'
+                if (is_object($cmd)  && $this->getConfiguration('data_refresh') == 'full'
+                || is_object($cmd)  && $this->getConfiguration('data_refresh') == 'fake_data'
                 ) {
-                    log::add('airpollen', 'debug', 'Pas de value forecast déjà présente : Start function PostSave refresh pollen forecast in fct postSave');
+                    log::add('airpollen', 'debug', 'Pas de value forecast déjà présente poaceae_min : Start function PostSave refresh pollen forecast in fct postSave');
                     $cmd->execCmd();
                 }
             }
@@ -227,12 +224,9 @@ class airpollen extends eqLogic
 
     public function preSave()
     {
-        $this->setDisplay("width", "270px");
-        if ($this->getConfiguration('data_forecast') == 'disable') {
-            $this->setDisplay("height", "225px");
-        } else {
-            $this->setDisplay("height", "375px");
-        }
+
+        $this->setPollenDisplay();
+     
     }
 
 
@@ -291,6 +285,28 @@ class airpollen extends eqLogic
                 $cmdInfo->setIsHistorized(0)->save();
             }
         }
+    }
+
+
+    public function setPollenDisplay(){
+        $this->setDisplay("width", "270px");
+        log::add('airpollen', 'debug', 'Pollen Display = '.$this->getConfiguration('data_refresh'));
+      
+        if (
+            // $this->getConfiguration('data_forecast') == 'disable' ||
+            $this->getConfiguration('data_refresh') == 'disable' ||
+            $this->getConfiguration('data_refresh') == 'twoByDay' ||
+            $this->getConfiguration('data_refresh') == 'oneByDay' ||
+            $this->getConfiguration('data_refresh') == 'oneByHour' ||
+            $this->getConfiguration('data_refresh') == 'oneByTwoHour'
+        ) {
+            $this->setDisplay("height", "225px");
+            config::save('data_forecast', 'disable' , 'airpollen');
+        }else {
+            $this->setDisplay("height", "375px");
+            config::save('data_forecast', 'actived' , 'airpollen');
+        }
+
     }
 
 
@@ -395,7 +411,11 @@ class airpollen extends eqLogic
                     $pollenZeroReplace['#info-modalcmd#'] =  $isObjet ? 'info-modal' . $cmd->getLogicalId() . $this->getId() : '';
                     $pollenZeroReplace['#message#'] = __('Aucune Détection', __FILE__);
                     $templateZero = getTemplate('core', $version, 'elementPollenZero', 'airpollen');
-                    if ($this->getConfiguration('data_forecast') != 'disable') {
+
+
+                    if ( config::byKey('data_forecast', 'airpollen') != 'disable') {
+                    // if ($this->getConfiguration('data_forecast') != 'disable') {
+
                         $pollenZeroReplace['#height#'] =  'min-height:75px;';
                     } else {
                         $pollenZeroReplace['#height#'] = '';
@@ -438,7 +458,8 @@ class airpollen extends eqLogic
 
         $counterPollenZero = 0;
         if (isset($tabZero)) {
-            if ($this->getConfiguration('data_forecast') != 'disable') {
+            if ( config::byKey('data_forecast', 'airpollen') != 'disable') {
+            // if ($this->getConfiguration('data_forecast') != 'disable') {
                 $newArray = array_chunk($tabZero, 3);
             } else {
                 $newArray = array_chunk($tabZero, 1);
@@ -548,7 +569,8 @@ class airpollen extends eqLogic
             $unitreplace['#unity#'] =  $isObjet ? $cmd->getUnite() : '';
 
             // Forecast Display 
-            if ($this->getConfiguration('data_forecast') != 'disable') {
+            // if ($this->getConfiguration('data_forecast') != 'disable') {
+                if ( config::byKey('data_forecast', 'airpollen') != 'disable') {
                 $maxCmd = $this->getCmd(null, $nameCmd . '_max');
                 $unitreplace['#max#'] = (is_object($maxCmd) && !empty($maxCmd->execCmd())) ? $maxCmd->execCmd() : "[0,0,0]";
                 $minCmd = $this->getCmd(null, $nameCmd . '_min');
@@ -843,6 +865,11 @@ class airpollen extends eqLogic
             $this->checkAndUpdateCmd('smsPollen',  $smsMess);
             $markdownMessage = !empty($messagesPollens[0]) ? $messagesPollens[3] : '';
             $this->checkAndUpdateCmd('markdownPollen', $markdownMessage);
+            if($this->getConfiguration('data_refresh') == 'full_manual')
+                {
+                    // Seulement si timer refresh < 12h
+                    $this->updateForecastPollen('no_refresh_widget');
+                }
             $this->refreshWidget();
             if (!empty($messagesPollens[0])) {
                 $this->setMinutedAction();
@@ -858,17 +885,18 @@ class airpollen extends eqLogic
     /**
      * Appel API Forecast Pollens + Update des Commands 
      */
-    public function updateForecastPollen()
+    public function updateForecastPollen($refresh)
     {
         $cmdXToTest = $this->getCmd(null, 'grass_pollen_min');
         $interval = $this->getIntervalLastRefresh($cmdXToTest);
         log::add('airpollen', 'debug', 'Forecast Pollen : Test Interval last refresh = ' . $interval . ' min');
      
-        if ($interval >= 600 && $this->getConfiguration('data_refresh') == 'full' 
-        || $this->getConfiguration('data_refresh') == 'fake_data'
-        || $interval >= 600 && $this->getConfiguration('data_refresh') == 'disable'
+        if (
+            $interval >= 720 && $this->getConfiguration('data_refresh') == 'full' ||
+            $this->getConfiguration('data_refresh') == 'fake_data'||
+            $interval >= 720 && $this->getConfiguration('data_refresh') == 'full_manual'
         ) {
-            log::add('airpollen', 'debug', 'Forecast Pollen : Interval refresh > 10h');
+            log::add('airpollen', 'debug', 'Forecast Pollen : Interval refresh > 12h');
             $forecast =  $this->getApiData('getForecastPollen');
             log::add('airpollen', 'debug', 'Forecast Pollen parsed : ' . json_encode($forecast));
             if (is_array($forecast) && !empty($forecast)) {
@@ -905,21 +933,23 @@ class airpollen extends eqLogic
                 $this->checkAndUpdateCmd('ragweed_max', json_encode($forecast['Ragweed']['max']));
                 $this->checkAndUpdateCmd('others_min', json_encode($forecast['Others']['min']));
                 $this->checkAndUpdateCmd('others_max', json_encode($forecast['Others']['max']));
-               
                 $this->checkAndUpdateCmd('grass_pollen_min', json_encode($forecast['Grass']['min']));
                 $this->checkAndUpdateCmd('grass_pollen_max', json_encode($forecast['Grass']['max']));
                 $this->checkAndUpdateCmd('weed_pollen_min', json_encode($forecast['Weed']['min']));
                 $this->checkAndUpdateCmd('weed_pollen_max', json_encode($forecast['Weed']['max']));
                 $this->checkAndUpdateCmd('tree_pollen_min', json_encode($forecast['Tree']['min']));
                 $this->checkAndUpdateCmd('tree_pollen_max', json_encode($forecast['Tree']['max']));
-                $this->refreshWidget();
-            
+
+                if($refresh == 'refresh_widget'){
+                    $this->refreshWidget();
+                }
+         
                 log::add('airpollen', 'debug', 'Refresh Forecast Pollen finish');
             } else {
                 log::add('airpollen', 'debug', 'Cas Forecast != [] ou [] vide : pas de refresh des data');
             }
         } else {
-            log::add('airpollen', 'debug', 'Test date de dernière collecte forecast Pollen < 300 min test jour ou pas de Forecast : pas de refresh');
+            log::add('airpollen', 'debug', 'Test date de dernière collecte forecast Pollen < 720 min : pas de refresh');
         }
     }
 
@@ -953,7 +983,7 @@ class airpollenCmd extends cmd
         if ($this->getLogicalId() == 'refresh_pollen_forecast') {
             log::add('airpollen', 'debug', '---------------------------------------------------');
             log::add('airpollen', 'debug', 'Refresh Forecast Pollen equipement ' . $this->getEqLogic()->getHumanName());
-            $this->getEqLogic()->updateForecastPollen();
+            $this->getEqLogic()->updateForecastPollen('refresh_widget');
         }
 
         if ($this->getLogicalId() == 'refresh_alert_pollen') {
