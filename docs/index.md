@@ -50,9 +50,9 @@ Vous pouvez activer ou pas l'ensemble en activant le bouton ci-dessous dans les 
 
 Les données sont récupérées par trois API gratuites: Openwheather, Ambee et navigator.geolocation(HTML)
 
-Elles sont gratuites dans une certaine limite d'appels par jour. Dans l'applis, pour Ambee, le plugin est conçu pour être aux limites du gratuit, c'est à dire 100 appels/jour. Cepandant, certains utilisateurs on reçu un courrier de la Sté Ambee, leur stipulant que la version gratuite sera limité dans le temps.
+Elles sont gratuites dans une certaine limite d'appels par jour. Dans l'applis, pour Ambee, le plugin est conçu pour être aux limites du gratuit, c'est à dire 100 appels/jour. Cepandant, certains utilisateurs on reçu un courrier de la Sté Ambee, leur stipulant que la version gratuite sera limité dans le temps. Bien que pour l'instant (au 13/10/2021), il suffit de renouveler votre "Plan" gratuit tous les 15j et cela fonctionne. 
 
-Il faudrait alors basculer vers leur abonnement payant.  
+Il faudrait alors le cas écheant, basculer vers leur abonnement payant.  
 
 Les prévisons de pollens sont mises à jour une fois par jour seulement, j'ai choisi 7h du matin, car seulement 24h sont en fait disponibles. Ce qui veux dire que pour le troisième jour de prévision, les infos vont jusqu'a 7h00 du matin et donc sont suceptiblent dévoluer en s'affinant.
 
